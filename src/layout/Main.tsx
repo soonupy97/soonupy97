@@ -5,6 +5,10 @@ const Main = () => {
   return (
     <main className='main'>
         <Intro />
+        {/* <About /> */}
+        {/* <Skills /> */}
+        {/* <Projects /> */}
+        {/* <Career /> */}
     </main>
   )
 }

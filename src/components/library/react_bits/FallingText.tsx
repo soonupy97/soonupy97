@@ -3,7 +3,7 @@ import Matter from 'matter-js';
 import '@styles/component/fallingtext.css';
 
 interface FallingTextProps {
-  text: string;
+  text?: string;
   highlightWords?: string[];
   highlightClass?: string;
   trigger?: 'auto' | 'scroll' | 'click' | 'hover';
@@ -33,19 +33,13 @@ const FallingText: React.FC<FallingTextProps> = ({
 
   useEffect(() => {
     if (!textRef.current) return;
-    const lines = text.split('\n');
-    const newHTML = lines
-      .map(line => {
-        const words = line.split(' ').filter(Boolean);
-        const spans = words
-          .map(word => {
-            const isHighlighted = highlightWords.some(hw => word.startsWith(hw));
-            return `<span class="word ${isHighlighted ? highlightClass : ''}">${word}</span>`;
-          })
-          .join(' ');
-        return spans;
+    const words = text.split(' ');
+    const newHTML = words
+      .map(word => {
+        const isHighlighted = highlightWords.some(hw => word.startsWith(hw));
+        return `<span class="word ${isHighlighted ? highlightClass : ''}">${word}</span>`;
       })
-      .join('<br />');
+      .join(' ');
     textRef.current.innerHTML = newHTML;
   }, [text, highlightWords, highlightClass]);
 
@@ -76,13 +70,9 @@ const FallingText: React.FC<FallingTextProps> = ({
 
     const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } = Matter;
 
-    const container = containerRef.current;
-    const canvasContainer = canvasContainerRef.current;
-    const textElement = textRef.current;
+    if (!containerRef.current || !canvasContainerRef.current || !textRef.current) return;
 
-    if (!container || !canvasContainer || !textElement) return;
-
-    const containerRect = container.getBoundingClientRect();
+    const containerRect = containerRef.current.getBoundingClientRect();
     const width = containerRect.width;
     const height = containerRect.height;
 
@@ -94,7 +84,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     engine.world.gravity.y = gravity;
 
     const render = Render.create({
-      element: canvasContainer,
+      element: canvasContainerRef.current,
       engine,
       options: {
         width,
@@ -113,7 +103,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     const rightWall = Bodies.rectangle(width + 25, height / 2, 50, height, boundaryOptions);
     const ceiling = Bodies.rectangle(width / 2, -25, width, 50, boundaryOptions);
 
-    const wordSpans = textElement.querySelectorAll<HTMLSpanElement>('.word');
+    const wordSpans = textRef.current.querySelectorAll<HTMLSpanElement>('.word');
     const wordBodies = Array.from(wordSpans).map(elem => {
       const rect = elem.getBoundingClientRect();
 
@@ -142,7 +132,7 @@ const FallingText: React.FC<FallingTextProps> = ({
       elem.style.transform = 'none';
     });
 
-    const mouse = Mouse.create(container);
+    const mouse = Mouse.create(containerRef.current);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse,
       constraint: {
@@ -158,7 +148,6 @@ const FallingText: React.FC<FallingTextProps> = ({
     Runner.run(runner, engine);
     Render.run(render);
 
-    let animationFrameId: number;
     const updateLoop = () => {
       wordBodies.forEach(({ body, elem }) => {
         const { x, y } = body.position;
@@ -167,21 +156,20 @@ const FallingText: React.FC<FallingTextProps> = ({
         elem.style.transform = `translate(-50%, -50%) rotate(${body.angle}rad)`;
       });
       Matter.Engine.update(engine);
-      animationFrameId = requestAnimationFrame(updateLoop);
+      requestAnimationFrame(updateLoop);
     };
     updateLoop();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
       Render.stop(render);
       Runner.stop(runner);
-      if (render.canvas && canvasContainer) {
-        canvasContainer.removeChild(render.canvas);
+      if (render.canvas && canvasContainerRef.current) {
+        canvasContainerRef.current.removeChild(render.canvas);
       }
       World.clear(engine.world, false);
       Engine.clear(engine);
     };
-  }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness, text]);
+  }, [effectStarted, gravity, wireframes, backgroundColor, mouseConstraintStiffness]);
 
   const handleTrigger = () => {
     if (!effectStarted && (trigger === 'click' || trigger === 'hover')) {
@@ -197,8 +185,7 @@ const FallingText: React.FC<FallingTextProps> = ({
       onMouseEnter={trigger === 'hover' ? handleTrigger : undefined}
       style={{
         position: 'relative',
-        overflow: 'hidden',
-        minHeight: '200px'
+        overflow: 'hidden'
       }}
     >
       <div
@@ -206,8 +193,7 @@ const FallingText: React.FC<FallingTextProps> = ({
         className="falling-text-target"
         style={{
           fontSize: fontSize,
-          lineHeight: 1.4,
-          visibility: effectStarted || trigger !== 'hover' ? 'visible' : 'visible'
+          lineHeight: 1.4
         }}
       />
       <div ref={canvasContainerRef} className="falling-text-canvas" />
