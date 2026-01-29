@@ -1,0 +1,17 @@
+@use "@styles/base/_mixin.scss" as *;
+
+.intro-container {
+    .inner{
+        padding: 0 2rem;
+        @include mobile {
+            padding: 0 1rem;
+        }
+        h3{
+            text-align: center;
+            color: var(--color-gray-medium);
+            font-size: 1rem;
+            font-weight: 400;
+            margin-top: 1.25rem;
+        }
+    }
+}

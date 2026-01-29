@@ -9,13 +9,14 @@
 
 // Layout
 @use "@styles/layout/layout.scss";
-// @use "@styles/pages.scss";
+@use "@styles/layout/page.scss";
 // @use "@styles/search.scss";
 // @use "@styles/api.scss";
 
 html {
   line-height: 1.75;
   scroll-behavior: smooth;
+  font-family: "Pretendard", sans-serif;
 
   @include mobile {
     font-size: 14px;
@@ -23,7 +24,6 @@ html {
 }
 
 body {
-  font-family: "Pretendard", sans-serif;
   height: 100dvh;
   font-size: 100%;
   word-break: keep-all;

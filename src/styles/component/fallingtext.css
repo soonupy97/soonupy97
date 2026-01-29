@@ -1,11 +1,12 @@
-.falling-text-container {
+
+  .falling-text-container {
     position: relative;
     z-index: 1;
+    min-height: 15rem;
     width: 100%;
-    min-height: 200px;
     cursor: pointer;
     text-align: center;
-    padding: 2em 1em;
+    padding: 1rem;
   }
   
   .falling-text-target {
@@ -17,6 +18,13 @@
     margin: 0 2px;
     user-select: none;
     color: #666;
+    line-height: 1.75;
+    font-size: 2.5rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+      line-height: 1.5;
+    }
   }
   
   .highlighted {
