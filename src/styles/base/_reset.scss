@@ -1,0 +1,39 @@
+:where(*, *::before, *::after) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* 리스트, 헤딩, 링크 최소화 */
+  :where(ul, ol) {
+    list-style: none;
+  }
+  :where(p, h1, h2, h3, h4, h5, h6) {
+    font-weight: normal;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* 버튼/폼요소 공통 */
+  :where(input, button, textarea, select) {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+  }
+  :where(button, label) {
+    cursor: pointer;
+  }
+  
+  /* 테이블 */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  

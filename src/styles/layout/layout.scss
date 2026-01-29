@@ -1,0 +1,26 @@
+@use "@styles/base/_mixin.scss" as *;
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    height: 64px;
+    @include flex-center(space-between);
+    padding-inline: 2rem;
+
+    .header_logo {
+        @include flex-center;
+        width: 48px;
+    }
+
+    .header_nav {
+        margin: 0 auto;
+        background-color: #000;
+
+        ul{
+            display: flex;
+        }
+    }
+}

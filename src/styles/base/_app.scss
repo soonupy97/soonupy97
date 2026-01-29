@@ -1,0 +1,41 @@
+// Base
+@use "@styles/base/_icon.scss";
+@use "@styles/base/_reset.scss";
+@use "@styles/base/_variables.scss";
+@use "@styles/base/_mixin.scss" as *;
+
+// Components
+// @use "@styles/components.scss";
+
+// Layout
+@use "@styles/layout/layout.scss";
+// @use "@styles/pages.scss";
+// @use "@styles/search.scss";
+// @use "@styles/api.scss";
+
+html {
+  line-height: 1.75;
+  scroll-behavior: smooth;
+
+  @include mobile {
+    font-size: 14px;
+  }
+}
+
+body {
+  font-family: "Pretendard", sans-serif;
+  height: 100dvh;
+  font-size: 100%;
+  word-break: keep-all;
+  color: var(--color-white);
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-white) var(--color-primary);
+
+  :where(picture, video, canvas, img, svg) {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}

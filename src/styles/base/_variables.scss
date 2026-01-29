@@ -1,0 +1,22 @@
+:root {
+  --color-primary: #21252b; /* 다크 배경 */
+  --color-secondary: #282c34; /* 다크 배경 */
+  --color-brand: #e43d4f;
+
+  /* 기본 그레이스케일 컬러 */
+  --color-black: #1e1e1e; /* 검정 */
+  --color-white: #f4f4f4; /* 흰색 */
+  --color-gray-dark: #505050; /* 어두운 회색 */
+  --color-gray-medium: #909090; /* 중간 회색 */
+  --color-gray-light: #cfcfcf; /* 밝은 회색 */
+}
+
+.light-mode {
+  --color-primary: #ececef; /* 배경: 청회색 - 차분함 */
+  --color-text: #2a2a2e; /* 텍스트: 약간 청색 톤 */
+  --color-sub-text: #6a6a73; /* 보조 텍스트: 청회색 */
+  --color-secondary: #dfe0e3; /* 활성화 영역: 쿨 그레이 */
+  --color-select: #2a2a2e20; /* 선택: point 컬러 활용 */
+  --color-cadian: #e43d4f;
+  --color-point: #53b8f0;
+}

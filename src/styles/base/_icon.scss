@@ -1,0 +1,43 @@
+/* base/_icon.scss */
+
+.icon {
+    --ico-size: 1.5rem;
+    width: var(--ico-size);
+    aspect-ratio: 1 / 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ico-color, currentColor);
+  
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+    /* size modifiers */
+    &.ico-xs {
+      --ico-size: 0.75rem;
+    }
+    &.ico-sm {
+      --ico-size: 0.875rem;
+    }
+    &.ico-md {
+      --ico-size: 1rem;
+    }
+    &.ico-lg {
+      --ico-size: 1.25rem;
+    }
+    &.ico-xl {
+      --ico-size: 1.5rem;
+    }
+    &.ico-2xl {
+      --ico-size: 2rem;
+    }
+    &.ico-3xl {
+      --ico-size: 2.5rem;
+    }
+    &.ico--fixed {
+      --ico-size: 24px;
+    }
+  }
+  
