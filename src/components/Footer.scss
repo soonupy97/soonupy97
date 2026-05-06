@@ -1,0 +1,61 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.site-footer {
+  padding-block: 32px;
+  border-top: 1px solid $color-line;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    @media (max-width: $bp-md) {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    .mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: $color-blue;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .name {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  .copy {
+    color: $color-muted;
+    font-size: 13px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .top {
+    @include label;
+    color: $color-ink;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: $color-line-soft;
+    transition: background-color 0.2s $ease-out;
+
+    &:hover {
+      background: $color-line;
+    }
+  }
+}

@@ -1,0 +1,425 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.hero {
+  padding-top: 120px;
+  padding-bottom: 56px;
+
+  @media (max-width: $bp-md) {
+    padding-top: 96px;
+    padding-bottom: 40px;
+  }
+}
+
+.bento {
+  display: grid;
+  gap: 16px;
+
+  &--hero {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 140px;
+
+    .tile--hero {
+      grid-column: span 4;
+      grid-row: span 3;
+    }
+    .tile--avatar {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .tile--stats {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    .tile--clock {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    .tile--stack {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    .tile--focus {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .tile--git {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    @media (max-width: $bp-lg) {
+      grid-template-columns: repeat(4, 1fr);
+
+      .tile--hero {
+        grid-column: span 4;
+      }
+      .tile--avatar {
+        grid-column: span 2;
+      }
+      .tile--stats,
+      .tile--clock,
+      .tile--stack,
+      .tile--focus,
+      .tile--git {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: $bp-sm) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 120px;
+
+      .tile--hero {
+        grid-column: span 2;
+        grid-row: span 4;
+      }
+      .tile--avatar {
+        grid-column: span 1;
+        grid-row: span 2;
+      }
+      .tile--stats {
+        grid-column: span 1;
+        grid-row: span 2;
+      }
+      .tile--clock,
+      .tile--stack,
+      .tile--focus,
+      .tile--git {
+        grid-column: span 2;
+      }
+    }
+  }
+}
+
+.tile {
+  @include tile;
+  @include tile-hover;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__eyebrow {
+    @include label;
+    color: $color-blue;
+  }
+  &__label {
+    @include label;
+  }
+  &__hint {
+    @include label;
+    margin-top: auto;
+    color: $color-mint;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $color-mint;
+      box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.18);
+      animation: pulse 1.6s $ease-out infinite;
+    }
+  }
+  &__actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+}
+
+// 1) Hero name tile
+.tile--hero {
+  background:
+    radial-gradient(
+      circle 320px at var(--mx, 50%) var(--my, 50%),
+      rgba(49, 130, 246, 0.18),
+      transparent 60%
+    ),
+    linear-gradient(180deg, $color-card, $color-bg);
+  padding: 40px;
+
+  .spot {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle 240px at var(--mx, 50%) var(--my, 50%),
+      rgba(49, 130, 246, 0.1),
+      transparent 50%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    @include display-xl;
+    margin-block: 8px 4px;
+
+    em {
+      font-style: normal;
+      color: $color-blue;
+    }
+    .hl {
+      background: linear-gradient(180deg, transparent 60%, $color-yellow-soft 0);
+      padding: 0 4px;
+      border-radius: 6px;
+    }
+  }
+
+  @media (max-width: $bp-md) {
+    padding: 28px;
+  }
+}
+
+// 2) Avatar tile
+.tile--avatar {
+  background: linear-gradient(135deg, $color-pink-soft, $color-purple-soft);
+  perspective: 800px;
+  align-items: center;
+  justify-content: center;
+
+  .avatar {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(var(--tx, 0deg)) rotateX(var(--ty, 0deg));
+    transition: transform 0.2s $ease-out;
+
+    &__face {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffd6df 0%, #ffb4c2 100%);
+      display: grid;
+      place-items: center;
+      box-shadow:
+        0 8px 28px -8px rgba(255, 107, 138, 0.45),
+        inset 0 -8px 16px rgba(255, 107, 138, 0.18);
+      transform: translateZ(40px);
+
+      span {
+        font-size: 56px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.05em;
+      }
+    }
+
+    &__sticker {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: $shadow-md;
+    }
+    .s1 {
+      background: $color-yellow;
+      color: $color-ink;
+      top: -12px;
+      right: -8px;
+      transform: translateZ(60px) rotate(12deg);
+    }
+    .s2 {
+      background: $color-blue;
+      color: #fff;
+      bottom: -8px;
+      left: -16px;
+      transform: translateZ(60px) rotate(-15deg);
+    }
+  }
+
+  .tile__label {
+    position: absolute;
+    bottom: 16px;
+    left: 18px;
+    color: $color-ink-2;
+  }
+}
+
+// 3) Stats tile
+.tile--stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  padding: 0;
+
+  .stat {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-right: 1px solid $color-line-soft;
+
+    &:last-child {
+      border-right: 0;
+    }
+
+    strong {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: $color-ink;
+    }
+    span {
+      @include label;
+    }
+  }
+}
+
+// 4) Clock tile
+.tile--clock {
+  background: $color-ink;
+  color: #fff;
+
+  .tile__label {
+    color: $color-soft;
+  }
+  strong {
+    font-family: $font-mono;
+    font-size: 30px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+}
+
+// 5) Stack ticker tile
+.tile--stack {
+  padding: 0;
+  background: $color-blue-soft;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .tile__label {
+    padding: 18px 18px 8px;
+    color: $color-blue-dark;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 8px;
+    padding-bottom: 18px;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+
+    li {
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: $color-card;
+      color: $color-blue-dark;
+      font-size: 13px;
+      font-weight: 600;
+      animation: marquee 22s linear infinite;
+    }
+  }
+}
+
+// 6) Focus tile
+.tile--focus {
+  background: $color-yellow-soft;
+  cursor: pointer;
+  transition:
+    background-color 0.3s $ease-out,
+    transform 0.4s $ease-out,
+    box-shadow 0.4s $ease-out;
+
+  &:hover {
+    background: #fde68a;
+  }
+
+  p {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: $color-ink;
+
+    em {
+      font-style: normal;
+      color: $color-coral;
+    }
+  }
+
+  .more {
+    margin-top: auto;
+    @include label;
+    color: $color-ink;
+  }
+}
+
+// 7) Github tile
+.tile--git {
+  background: $color-mint-soft;
+
+  strong {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: $color-ink;
+  }
+
+  .grass {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+
+    li {
+      aspect-ratio: 1 / 1;
+      border-radius: 4px;
+      background: rgba(0, 200, 150, 0.18);
+
+      &[data-lvl='1'] {
+        background: rgba(0, 200, 150, 0.35);
+      }
+      &[data-lvl='2'] {
+        background: rgba(0, 200, 150, 0.55);
+      }
+      &[data-lvl='3'] {
+        background: rgba(0, 200, 150, 0.75);
+      }
+      &[data-lvl='4'] {
+        background: $color-mint;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(0, 200, 150, 0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

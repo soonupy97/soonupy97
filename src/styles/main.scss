@@ -1,0 +1,86 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'reset';
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.6;
+  color: $color-ink;
+  background: $color-bg;
+}
+
+.container {
+  @include container;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-radius: 14px;
+  transition:
+    background-color 0.2s $ease-out,
+    color 0.2s $ease-out,
+    transform 0.2s $ease-out,
+    box-shadow 0.25s $ease-out;
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &--primary {
+    background: $color-blue;
+    color: #fff;
+    box-shadow: 0 6px 18px -8px rgba(49, 130, 246, 0.6);
+
+    &:hover {
+      background: $color-blue-dark;
+      box-shadow: 0 10px 24px -10px rgba(49, 130, 246, 0.8);
+    }
+  }
+
+  &--ghost {
+    background: $color-card;
+    color: $color-ink;
+    border: 1px solid $color-line;
+
+    &:hover {
+      background: $color-line-soft;
+    }
+  }
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+
+  .eyebrow {
+    @include label;
+    color: $color-blue;
+  }
+
+  h2 {
+    @include display-lg;
+  }
+
+  p {
+    color: $color-muted;
+    max-width: 540px;
+    font-size: 17px;
+  }
+}

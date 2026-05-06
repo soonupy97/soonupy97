@@ -1,0 +1,314 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.projects {
+  @include section-padding;
+
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+
+    .chip {
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 999px;
+      background: $color-card;
+      color: $color-muted;
+      border: 1px solid $color-line;
+      transition:
+        color 0.2s $ease-out,
+        background-color 0.2s $ease-out,
+        border-color 0.2s $ease-out;
+
+      &:hover {
+        color: $color-ink;
+        border-color: $color-soft;
+      }
+
+      &.is-active {
+        background: $color-ink;
+        color: #fff;
+        border-color: $color-ink;
+      }
+    }
+  }
+
+  .bento--projects {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+
+    .pcard--lg {
+      grid-column: span 4;
+      grid-row: span 2;
+    }
+    .pcard--md {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .pcard--sm {
+      grid-column: span 3;
+      grid-row: span 2;
+    }
+
+    @media (max-width: $bp-lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      .pcard--lg,
+      .pcard--md,
+      .pcard--sm {
+        grid-column: span 1;
+        grid-row: auto;
+      }
+      .pcard--lg {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: $bp-sm) {
+      grid-template-columns: 1fr;
+
+      .pcard--lg,
+      .pcard--md,
+      .pcard--sm {
+        grid-column: span 1;
+      }
+    }
+  }
+}
+
+.pcard {
+  @include tile;
+  @include tile-hover;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  cursor: pointer;
+  padding: 0;
+
+  &--lg {
+    min-height: 460px;
+  }
+
+  &__cover {
+    position: relative;
+    flex: 1 1 auto;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--cover-a), var(--cover-b));
+    transition: background 0.4s $ease-out;
+
+    .spot {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle 200px at var(--mx, 50%) var(--my, 50%),
+        rgba(255, 255, 255, 0.55),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.4s $ease-out;
+      pointer-events: none;
+    }
+
+    .shape {
+      position: absolute;
+      transition: transform 0.6s $ease-spring;
+
+      &--echo {
+        opacity: 0.35;
+        filter: blur(6px);
+      }
+    }
+
+    .shape-a {
+      width: 60%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--shape-color);
+      top: 20%;
+      left: 20%;
+      &.shape--echo {
+        transform: translate(-12%, 12%);
+      }
+    }
+
+    .shape-b {
+      width: 70%;
+      height: 14px;
+      background: var(--shape-color);
+      border-radius: 999px;
+      top: 30%;
+      left: 15%;
+      box-shadow: 0 30px 0 var(--shape-color), 0 -30px 0 var(--shape-color);
+      &.shape--echo {
+        transform: translateY(8px);
+      }
+    }
+
+    .shape-c {
+      width: 70%;
+      aspect-ratio: 1;
+      background: var(--shape-color);
+      top: 18%;
+      left: 15%;
+      transform: rotate(45deg);
+      &.shape--echo {
+        transform: rotate(45deg) translate(8%, -8%);
+      }
+    }
+
+    .shape-d {
+      width: 0;
+      height: 0;
+      border-left: 70px solid transparent;
+      border-right: 70px solid transparent;
+      border-bottom: 120px solid var(--shape-color);
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      &.shape--echo {
+        transform: translateX(-30%) rotate(8deg);
+      }
+    }
+
+    .shape-e {
+      width: 60%;
+      aspect-ratio: 1;
+      background: var(--shape-color);
+      border-radius: 30% 70% 70% 30% / 50% 40% 60% 50%;
+      top: 22%;
+      left: 22%;
+      &.shape--echo {
+        transform: translate(8%, 6%) rotate(8deg);
+      }
+    }
+
+    .shape-f {
+      width: 60%;
+      height: 60%;
+      background:
+        radial-gradient(circle at 30% 30%, transparent 25%, var(--shape-color) 26%),
+        radial-gradient(circle at 70% 70%, transparent 25%, var(--shape-color) 26%);
+      top: 22%;
+      left: 22%;
+      mix-blend-mode: multiply;
+      &.shape--echo {
+        transform: translate(-6%, -6%);
+        opacity: 0.25;
+      }
+    }
+  }
+
+  &:hover {
+    .spot {
+      opacity: 1;
+    }
+    .shape {
+      transform: scale(1.06) rotate(2deg);
+    }
+    .shape-c,
+    .shape-c.shape--echo {
+      transform: rotate(54deg) scale(1.05);
+    }
+    .pcard__arrow {
+      background: $color-ink;
+      color: #fff;
+      transform: translate(0, 0) rotate(-12deg);
+    }
+  }
+
+  &__body {
+    padding: 24px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: $color-card;
+    border-top: 1px solid $color-line-soft;
+    position: relative;
+  }
+
+  &__meta {
+    @include label;
+    display: flex;
+    gap: 6px;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: $color-ink;
+  }
+
+  p {
+    color: $color-muted;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+
+    li {
+      @include chip;
+      padding: 4px 10px;
+      font-size: 11px;
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    top: -22px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: $color-card;
+    color: $color-ink;
+    display: grid;
+    place-items: center;
+    box-shadow: $shadow-md;
+    transform: rotate(-45deg);
+    transition:
+      transform 0.3s $ease-spring,
+      background-color 0.3s $ease-out,
+      color 0.3s $ease-out;
+  }
+
+  &--blue {
+    --cover-a: #{$color-blue-soft};
+    --cover-b: #d4e6ff;
+    --shape-color: #{$color-blue};
+  }
+  &--pink {
+    --cover-a: #{$color-pink-soft};
+    --cover-b: #ffd0db;
+    --shape-color: #{$color-pink};
+  }
+  &--mint {
+    --cover-a: #{$color-mint-soft};
+    --cover-b: #b8ecdc;
+    --shape-color: #{$color-mint};
+  }
+  &--yellow {
+    --cover-a: #{$color-yellow-soft};
+    --cover-b: #fde68a;
+    --shape-color: #{$color-yellow};
+  }
+  &--purple {
+    --cover-a: #{$color-purple-soft};
+    --cover-b: #ddd6fe;
+    --shape-color: #{$color-purple};
+  }
+  &--coral {
+    --cover-a: #{$color-coral-soft};
+    --cover-b: #ffd0bd;
+    --shape-color: #{$color-coral};
+  }
+}
