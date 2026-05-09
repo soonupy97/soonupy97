@@ -41,19 +41,19 @@
     flex-wrap: wrap;
     gap: 16px;
 
-    .pcard--lg {
-      flex: 1 1 calc(66.667% - 10.667px);
+    .pcard--lg,
+    .pcard--sm {
+      flex: 1 1 calc(33.333% - 10.667px);
     }
     .pcard--md {
-      flex: 1 1 calc(33.333% - 5.333px);
-    }
-    .pcard--sm {
       flex: 1 1 calc(50% - 8px);
+    }
+    .pcard--full {
+      flex: 1 1 100%;
     }
 
     @media (max-width: $bp-lg) {
       .pcard--lg,
-      .pcard--md,
       .pcard--sm {
         flex: 1 1 calc(50% - 8px);
       }
@@ -81,6 +81,15 @@
 
   &--lg {
     min-height: 480px;
+  }
+
+  &--static {
+    cursor: default;
+
+    &:hover {
+      transform: none;
+      box-shadow: $shadow-sm;
+    }
   }
 
   &__cover {
