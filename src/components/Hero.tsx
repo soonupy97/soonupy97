@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { profile } from '../data/portfolio'
 import { usePointerSpot } from '../hooks/usePointerSpot'
 import { useTilt } from '../hooks/useTilt'
+import soonupyLogo from '../assets/icons/soonupy.svg'
 import './Hero.scss'
 
 const TAGS = [
@@ -89,10 +90,10 @@ function AvatarTile() {
           ◆
         </div>
         <div className="avatar__face">
-          <span>김</span>
+          <img src={soonupyLogo} alt="soonupy" />
         </div>
       </div>
-      <span className="tile__label">Avatar.svg</span>
+      <span className="tile__label">AVATAR</span>
     </div>
   )
 }
@@ -133,11 +134,13 @@ function StackTile() {
   return (
     <div className="tile tile--stack">
       <span className="tile__label">Stack</span>
-      <ul className="ticker">
-        {[...TAGS, ...TAGS].map((t, i) => (
-          <li key={i}>{t}</li>
-        ))}
-      </ul>
+      <div className="ticker">
+        <ul className="ticker__track">
+          {[...TAGS, ...TAGS].map((t, i) => (
+            <li key={i}>{t}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
@@ -158,7 +161,7 @@ function GitTile() {
   return (
     <a className="tile tile--git" href={profile.github} target="_blank" rel="noreferrer">
       <span className="tile__label">GitHub</span>
-      <strong>@publisher</strong>
+      <strong>@soonupy</strong>
       <ul className="grass" aria-hidden="true">
         {Array.from({ length: 35 }).map((_, i) => {
           const lvl = [0, 1, 1, 2, 1, 3, 2, 2, 3, 4, 1][i % 11]
@@ -174,13 +177,21 @@ function Hero() {
     <section id="top" className="hero">
       <div className="container">
         <div className="bento bento--hero">
-          <NameTile />
-          <AvatarTile />
-          <StatsTile />
-          <ClockTile />
-          <StackTile />
-          <FocusTile />
-          <GitTile />
+          <div className="row row--main">
+            <NameTile />
+            <div className="col col--right">
+              <AvatarTile />
+              <StatsTile />
+            </div>
+          </div>
+          <div className="row row--secondary">
+            <FocusTile />
+            <GitTile />
+            <div className="col col--narrow">
+              <ClockTile />
+              <StackTile />
+            </div>
+          </div>
         </div>
       </div>
     </section>

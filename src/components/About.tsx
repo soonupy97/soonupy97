@@ -63,8 +63,10 @@ function About() {
       <div className="container">
         <div className="section-title">
           <span className="eyebrow">About</span>
-          <h2>마크업으로 사용자 경험을 설계합니다.</h2>
-          <p>{profile.intro}</p>
+          <div className="section-title__body">
+            <h2>마크업으로 사용자 경험을 설계합니다.</h2>
+            <p>{profile.intro}</p>
+          </div>
         </div>
 
         <ul className="bento bento--values">

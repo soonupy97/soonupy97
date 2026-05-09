@@ -73,8 +73,10 @@ function Skills() {
       <div className="container">
         <div className="section-title">
           <span className="eyebrow">Skills</span>
-          <h2>일하는 도구들.</h2>
-          <p>마크업부터 컴포넌트 시스템까지, 가장 자주 쓰는 스택입니다.</p>
+          <div className="section-title__body">
+            <h2>일하는 도구들.</h2>
+            <p>마크업부터 컴포넌트 시스템까지, 가장 자주 쓰는 스택입니다.</p>
+          </div>
         </div>
 
         <div className="bento bento--skills">

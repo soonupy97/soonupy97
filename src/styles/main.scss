@@ -12,7 +12,6 @@
 body {
   font-family: $font-sans;
   font-size: 16px;
-  line-height: 1.6;
   color: $color-ink;
   background: $color-bg;
 }
@@ -26,11 +25,11 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 22px;
-  font-size: 15px;
+  padding: 16px 24px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  border-radius: 14px;
+  border-radius: 16px;
   transition:
     background-color 0.2s $ease-out,
     color 0.2s $ease-out,
@@ -44,11 +43,11 @@ body {
   &--primary {
     background: $color-blue;
     color: #fff;
-    box-shadow: 0 6px 18px -8px rgba(49, 130, 246, 0.6);
+    box-shadow: 0 6px 18px -8px rgba(0, 122, 255, 0.6);
 
     &:hover {
       background: $color-blue-dark;
-      box-shadow: 0 10px 24px -10px rgba(49, 130, 246, 0.8);
+      box-shadow: 0 10px 24px -10px rgba(0, 122, 255, 0.8);
     }
   }
 
@@ -66,12 +65,18 @@ body {
 .section-title {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   margin-bottom: 32px;
 
   .eyebrow {
     @include label;
     color: $color-blue;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   h2 {
@@ -81,6 +86,6 @@ body {
   p {
     color: $color-muted;
     max-width: 540px;
-    font-size: 17px;
+    font-size: 16px;
   }
 }

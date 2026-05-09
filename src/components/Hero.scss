@@ -3,7 +3,7 @@
 
 .hero {
   padding-top: 120px;
-  padding-bottom: 56px;
+  padding-bottom: 48px;
 
   @media (max-width: $bp-md) {
     padding-top: 96px;
@@ -11,82 +11,138 @@
   }
 }
 
-.bento {
-  display: grid;
+.bento--hero {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 
-  &--hero {
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 140px;
+  .row {
+    display: flex;
+    gap: 16px;
+    min-width: 0;
+  }
 
-    .tile--hero {
-      grid-column: span 4;
-      grid-row: span 3;
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .row--main {
+    height: 452px;
+
+    > .tile--hero {
+      min-width: 0;
     }
-    .tile--avatar {
-      grid-column: span 2;
-      grid-row: span 2;
+    > .col--right {
+      flex: 1;
+
+      > .tile--avatar {
+        flex: 2;
+        min-height: 0;
+      }
+      > .tile--stats {
+        flex: 1;
+        min-height: 0;
+      }
     }
-    .tile--stats {
-      grid-column: span 2;
-      grid-row: span 1;
+  }
+
+  .row--secondary {
+    height: 296px;
+
+    > .tile--focus,
+    > .tile--git {
+      flex: 1;
+      min-width: 0;
     }
-    .tile--clock {
-      grid-column: span 2;
-      grid-row: span 1;
+    > .col--narrow {
+      flex: 1;
+
+      > .tile--clock {
+        flex: 1;
+        min-height: 0;
+      }
+      > .tile--stack {
+        min-height: 0;
+      }
     }
-    .tile--stack {
-      grid-column: span 2;
-      grid-row: span 1;
-    }
-    .tile--focus {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-    .tile--git {
-      grid-column: span 2;
-      grid-row: span 2;
+  }
+
+  @media (max-width: $bp-lg) {
+    .row--main {
+      flex-direction: column;
+      height: auto;
+
+      > .tile--hero {
+        min-height: 380px;
+      }
+      > .col--right {
+        flex-direction: row;
+
+        > .tile--avatar {
+          flex: 1;
+          min-height: 260px;
+        }
+        > .tile--stats {
+          flex: 1;
+          min-height: 260px;
+        }
+      }
     }
 
-    @media (max-width: $bp-lg) {
-      grid-template-columns: repeat(4, 1fr);
+    .row--secondary {
+      flex-wrap: wrap;
+      height: auto;
 
-      .tile--hero {
-        grid-column: span 4;
+      > .tile--focus,
+      > .tile--git {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 0;
+        min-height: 220px;
       }
-      .tile--avatar {
-        grid-column: span 2;
-      }
-      .tile--stats,
-      .tile--clock,
-      .tile--stack,
-      .tile--focus,
-      .tile--git {
-        grid-column: span 2;
+      > .col--narrow {
+        flex: 1 1 100%;
+        flex-direction: row;
+
+        > .tile--clock,
+        > .tile--stack {
+          flex: 1;
+          min-width: 0;
+          min-height: 140px;
+        }
       }
     }
+  }
 
-    @media (max-width: $bp-sm) {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 120px;
+  @media (max-width: $bp-sm) {
+    .row--main,
+    .row--secondary {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      height: auto;
 
-      .tile--hero {
-        grid-column: span 2;
-        grid-row: span 4;
+      > .tile--hero {
+        min-height: 360px;
       }
-      .tile--avatar {
-        grid-column: span 1;
-        grid-row: span 2;
+      > .tile--focus,
+      > .tile--git {
+        min-height: 200px;
       }
-      .tile--stats {
-        grid-column: span 1;
-        grid-row: span 2;
-      }
-      .tile--clock,
-      .tile--stack,
-      .tile--focus,
-      .tile--git {
-        grid-column: span 2;
+      > .col--right,
+      > .col--narrow {
+        flex-direction: column;
+
+        > .tile--avatar,
+        > .tile--stats,
+        > .tile--clock,
+        > .tile--stack {
+          min-height: 140px;
+        }
+        > .tile--avatar {
+          min-height: 240px;
+        }
       }
     }
   }
@@ -95,10 +151,10 @@
 .tile {
   @include tile;
   @include tile-hover;
-  padding: 28px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 
   &__eyebrow {
     @include label;
@@ -126,7 +182,7 @@
   }
   &__actions {
     display: flex;
-    gap: 10px;
+    gap: 16px;
     flex-wrap: wrap;
     margin-top: auto;
   }
@@ -137,7 +193,7 @@
   background:
     radial-gradient(
       circle 320px at var(--mx, 50%) var(--my, 50%),
-      rgba(49, 130, 246, 0.18),
+      rgba(0, 122, 255, 0.18),
       transparent 60%
     ),
     linear-gradient(180deg, $color-card, $color-bg);
@@ -148,7 +204,7 @@
     inset: 0;
     background: radial-gradient(
       circle 240px at var(--mx, 50%) var(--my, 50%),
-      rgba(49, 130, 246, 0.1),
+      rgba(0, 122, 255, 0.1),
       transparent 50%
     );
     pointer-events: none;
@@ -171,12 +227,12 @@
     .hl {
       background: linear-gradient(180deg, transparent 60%, $color-yellow-soft 0);
       padding: 0 4px;
-      border-radius: 6px;
+      border-radius: 8px;
     }
   }
 
   @media (max-width: $bp-md) {
-    padding: 28px;
+    padding: 32px;
   }
 }
 
@@ -200,16 +256,17 @@
       background: linear-gradient(135deg, #ffd6df 0%, #ffb4c2 100%);
       display: grid;
       place-items: center;
+      overflow: hidden;
       box-shadow:
         0 8px 28px -8px rgba(255, 107, 138, 0.45),
         inset 0 -8px 16px rgba(255, 107, 138, 0.18);
       transform: translateZ(40px);
 
-      span {
-        font-size: 56px;
-        font-weight: 800;
-        color: #fff;
-        letter-spacing: -0.05em;
+      img {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+        display: block;
       }
     }
 
@@ -219,8 +276,8 @@
       height: 36px;
       display: grid;
       place-items: center;
-      border-radius: 12px;
-      font-size: 18px;
+      border-radius: 8px;
+      font-size: 20px;
       font-weight: 800;
       box-shadow: $shadow-md;
     }
@@ -242,8 +299,8 @@
 
   .tile__label {
     position: absolute;
-    bottom: 16px;
-    left: 18px;
+    bottom: 24px;
+    left: 32px;
     color: $color-ink-2;
   }
 }
@@ -256,7 +313,7 @@
   padding: 0;
 
   .stat {
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -267,7 +324,7 @@
     }
 
     strong {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 800;
       letter-spacing: -0.03em;
       color: $color-ink;
@@ -280,6 +337,7 @@
 
 // 4) Clock tile
 .tile--clock {
+  padding: 24px;
   background: $color-ink;
   color: #fff;
 
@@ -288,7 +346,7 @@
   }
   strong {
     font-family: $font-mono;
-    font-size: 30px;
+    font-size: 32px;
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
     color: #fff;
@@ -297,21 +355,17 @@
 
 // 5) Stack ticker tile
 .tile--stack {
-  padding: 0;
+  padding: 24px;
   background: $color-blue-soft;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   .tile__label {
-    padding: 18px 18px 8px;
     color: $color-blue-dark;
   }
 
   .ticker {
-    display: flex;
-    gap: 8px;
-    padding-bottom: 18px;
     overflow: hidden;
     mask-image: linear-gradient(
       to right,
@@ -321,21 +375,28 @@
       transparent
     );
 
+    &__track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+    }
+
     li {
       flex-shrink: 0;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 999px;
       background: $color-card;
       color: $color-blue-dark;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      animation: marquee 22s linear infinite;
     }
   }
 }
 
 // 6) Focus tile
 .tile--focus {
+  padding: 24px;
   background: $color-yellow-soft;
   cursor: pointer;
   transition:
@@ -348,7 +409,7 @@
   }
 
   p {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.3;
@@ -369,10 +430,11 @@
 
 // 7) Github tile
 .tile--git {
+  padding: 24px;
   background: $color-mint-soft;
 
   strong {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 800;
     letter-spacing: -0.01em;
     color: $color-ink;
@@ -420,6 +482,6 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }

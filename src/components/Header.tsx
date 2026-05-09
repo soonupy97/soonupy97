@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import soonupyLogo from '../assets/icons/soonupy.svg'
 import './Header.scss'
 
 const NAV = [
@@ -24,9 +25,9 @@ function Header() {
       <div className="container site-header__inner">
         <a className="site-header__logo" href="#top" aria-label="홈">
           <span className="logo-mark" aria-hidden="true">
-            P
+            <img src={soonupyLogo} alt="" />
           </span>
-          <span className="logo-text">publisher</span>
+          <span className="logo-text">soonupy</span>
         </a>
 
         <nav

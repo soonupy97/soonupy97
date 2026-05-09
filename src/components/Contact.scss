@@ -5,42 +5,36 @@
   @include section-padding;
 
   .bento--contact {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px;
 
     .ctile--cta {
-      grid-column: span 6;
+      flex: 1 1 100%;
     }
     .ctile--git,
     .ctile--blog,
     .ctile--info {
-      grid-column: span 2;
+      flex: 1 1 calc(33.333% - 10.667px);
+      min-width: 0;
     }
 
     @media (max-width: $bp-lg) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-
-      .ctile--cta {
-        grid-column: span 2;
-      }
       .ctile--git,
       .ctile--blog {
-        grid-column: span 1;
+        flex: 1 1 calc(50% - 8px);
       }
       .ctile--info {
-        grid-column: span 2;
+        flex: 1 1 100%;
       }
     }
 
     @media (max-width: $bp-sm) {
-      grid-template-columns: 1fr;
-
       .ctile--cta,
       .ctile--git,
       .ctile--blog,
       .ctile--info {
-        grid-column: span 1;
+        flex: 1 1 100%;
       }
     }
   }
@@ -49,7 +43,7 @@
 .ctile {
   @include tile;
   @include tile-hover;
-  padding: 28px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -60,7 +54,7 @@
   }
 
   strong {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.01em;
     color: $color-ink;
@@ -68,7 +62,7 @@
   }
 
   &__sub {
-    font-size: 13px;
+    font-size: 14px;
     color: $color-muted;
   }
 
@@ -89,7 +83,7 @@
     align-items: center;
     gap: 8px;
     align-self: flex-start;
-    padding: 6px 12px;
+    padding: 8px 16px;
     border-radius: 999px;
     font-size: 12px;
     font-weight: 600;
@@ -118,17 +112,17 @@
       color: rgba(255, 255, 255, 0.7);
     }
     h2 {
-      font-size: clamp(32px, 5vw, 56px);
+      font-size: clamp(32px, 5vw, 64px);
       font-weight: 800;
       letter-spacing: -0.025em;
       line-height: 1.1;
       color: #fff;
-      margin-block: 8px;
+      margin-block: 1rem;
 
       .hl {
         background: linear-gradient(180deg, transparent 60%, $color-yellow 0);
-        padding: 0 6px;
-        border-radius: 6px;
+        padding: 0 8px;
+        border-radius: 8px;
         color: $color-ink;
       }
     }

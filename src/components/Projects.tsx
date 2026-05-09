@@ -7,7 +7,7 @@ const SHAPES = ['shape-a', 'shape-b', 'shape-c', 'shape-d', 'shape-e', 'shape-f'
 const ACCENTS = ['blue', 'pink', 'mint', 'yellow', 'purple', 'coral']
 
 type Size = 'lg' | 'md' | 'sm'
-const SIZE_PATTERN: Size[] = ['lg', 'md', 'md', 'sm', 'sm', 'md']
+const SIZE_PATTERN: Size[] = ['lg', 'md', 'sm', 'sm', 'sm', 'sm']
 
 function ProjectTile({
   project,
@@ -84,8 +84,10 @@ function Projects() {
       <div className="container">
         <div className="section-title">
           <span className="eyebrow">Projects</span>
-          <h2>최근 작업.</h2>
-          <p>마크업 품질, 접근성, 협업 효율을 끌어올린 작업들입니다.</p>
+          <div className="section-title__body">
+            <h2>최근 작업.</h2>
+            <p>마크업 품질, 접근성, 협업 효율을 끌어올린 작업들입니다.</p>
+          </div>
         </div>
 
         <div className="projects__filters" role="tablist" aria-label="필터">

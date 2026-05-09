@@ -29,7 +29,7 @@ function Contact() {
             rel="noreferrer"
           >
             <span className="ctile__label">GitHub</span>
-            <strong>@publisher</strong>
+            <strong>@soonupy</strong>
             <span className="ctile__cta">방문하기 →</span>
           </a>
 
@@ -40,7 +40,7 @@ function Contact() {
             rel="noreferrer"
           >
             <span className="ctile__label">Blog</span>
-            <strong>velog.io/@publisher</strong>
+            <strong>velog.io/@soonupy</strong>
             <span className="ctile__cta">읽으러 가기 →</span>
           </a>
 
