@@ -45,19 +45,19 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Script & Framework',
     items: [
-      { name: 'JavaScript (ES2022+)', level: 85 },
-      { name: 'TypeScript', level: 75 },
-      { name: 'React', level: 78 },
-      { name: 'Vue', level: 70 },
+      { name: 'JavaScript (ES2022+)', level: 88 },
+      { name: 'TypeScript', level: 80 },
+      { name: 'React', level: 88 },
+      { name: 'Next.js', level: 72 },
     ],
   },
   {
     title: 'Tooling & Workflow',
     items: [
-      { name: 'Vite / Webpack', level: 80 },
+      { name: 'Vite / Webpack', level: 82 },
       { name: 'Git / GitHub', level: 88 },
-      { name: 'Figma / Zeplin', level: 90 },
-      { name: 'Gulp / SCSS Architecture', level: 85 },
+      { name: 'Figma / Storybook', level: 90 },
+      { name: 'Design Tokens / SCSS Architecture', level: 85 },
     ],
   },
 ]

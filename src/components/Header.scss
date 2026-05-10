@@ -3,20 +3,13 @@
 
 .site-header {
   position: fixed;
-  inset: 16px 16px auto 16px;
+  inset: 16px auto auto 50%;
+  transform: translate(-50%);
   z-index: 50;
   margin-inline: auto;
   max-width: $container-max;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-  border: 1px solid rgba(229, 232, 235, 0.7);
-  transition:
-    box-shadow 0.3s $ease-out,
-    background-color 0.3s $ease-out;
 
-  &.is-scrolled {
+  &.is-scrolled &__inner {
     background: rgba(255, 255, 255, 0.92);
     box-shadow: $shadow-md;
   }
@@ -25,8 +18,17 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 8px 16px 8px 24px;
+    padding: 0 16px;
+    height: 64px;
     max-width: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    border: 1px solid rgba(229, 232, 235, 0.7);
+    transition:
+      box-shadow 0.3s $ease-out,
+      background-color 0.3s $ease-out;
   }
 
   &__logo {
@@ -81,16 +83,6 @@
     }
   }
 
-  &__cta {
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 999px;
-
-    @media (max-width: $bp-md) {
-      display: none;
-    }
-  }
-
   &__toggle {
     display: none;
     width: 40px;
@@ -126,7 +118,6 @@
   }
 
   @media (max-width: $bp-md) {
-    inset: 12px 12px auto 12px;
 
     &__nav {
       position: fixed;

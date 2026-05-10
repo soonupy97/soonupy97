@@ -21,8 +21,8 @@ function Header() {
   }, [])
 
   return (
-    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
-      <div className="container site-header__inner">
+    <header className={`container  site-header${scrolled ? ' is-scrolled' : ''}`}>
+      <div className="site-header__inner">
         <a className="site-header__logo" href="#top" aria-label="홈">
           <span className="logo-mark" aria-hidden="true">
             <img src={soonupyLogo} alt="" />
@@ -44,10 +44,6 @@ function Header() {
             ))}
           </ul>
         </nav>
-
-        <a href="#contact" className="btn btn--primary site-header__cta">
-          Hire me
-        </a>
 
         <button
           type="button"

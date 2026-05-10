@@ -43,7 +43,6 @@
         min-height: 0;
       }
       > .tile--stats {
-        flex: 1;
         min-height: 0;
       }
     }
@@ -160,9 +159,6 @@
     @include label;
     color: $color-blue;
   }
-  &__label {
-    @include label;
-  }
   &__hint {
     @include label;
     margin-top: auto;
@@ -197,7 +193,7 @@
       transparent 60%
     ),
     linear-gradient(180deg, $color-card, $color-bg);
-  padding: 40px;
+  padding: 32px;
 
   .spot {
     position: absolute;
@@ -218,6 +214,7 @@
 
   h1 {
     @include display-xl;
+    font-size: clamp(32px, 5vw, 64px);
     margin-block: 8px 4px;
 
     em {
@@ -296,13 +293,6 @@
       transform: translateZ(60px) rotate(-15deg);
     }
   }
-
-  .tile__label {
-    position: absolute;
-    bottom: 24px;
-    left: 32px;
-    color: $color-ink-2;
-  }
 }
 
 // 3) Stats tile
@@ -341,9 +331,6 @@
   background: $color-ink;
   color: #fff;
 
-  .tile__label {
-    color: $color-soft;
-  }
   strong {
     font-family: $font-mono;
     font-size: 32px;
@@ -360,10 +347,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  .tile__label {
-    color: $color-blue-dark;
-  }
 
   .ticker {
     overflow: hidden;
