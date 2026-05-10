@@ -1,0 +1,116 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.career {
+  @include section-padding;
+
+  .bento--career {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.ccard {
+  @include tile;
+  @include tile-hover;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: $color-card;
+
+  @media (max-width: $bp-md) {
+    padding: 24px;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__period {
+    @include label;
+    color: $color-soft;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: $color-blue-soft;
+    color: $color-blue-dark;
+  }
+
+  &__index {
+    @include label;
+    margin-inline-start: auto;
+    color: $color-soft;
+  }
+
+  &__company {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: $color-ink;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__dot {
+    color: $color-soft;
+  }
+
+  &__role {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-muted;
+  }
+
+  &__summary {
+    color: $color-muted;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  &__highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: $color-ink-2;
+    font-size: 14px;
+    line-height: 1.6;
+
+    li {
+      position: relative;
+      padding-left: 16px;
+
+      &::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: $color-blue;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+
+    li {
+      @include chip;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+  }
+}
