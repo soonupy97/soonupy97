@@ -1,79 +1,66 @@
 import { useMemo, useState } from 'react'
-import { projects, type Project } from '../data/portfolio'
-import { usePointerSpot } from '../hooks/usePointerSpot'
+import {
+  projects,
+  type Project,
+  type ProjectCategory,
+} from '../data/portfolio'
 import './Projects.scss'
 
-const SHAPES = ['shape-a', 'shape-b', 'shape-c', 'shape-d', 'shape-e', 'shape-f']
-const ACCENTS = ['blue', 'pink', 'mint', 'yellow', 'purple', 'coral']
-
-type Size = 'lg' | 'md' | 'sm' | 'full'
-
-function getSizes(n: number): Size[] {
-  if (n <= 0) return []
-  if (n === 1) return ['full']
-  if (n === 2) return ['md', 'md']
-
-  const sizes: Size[] = []
-  const triples = Math.floor(n / 3)
-  for (let i = 0; i < triples; i++) sizes.push('sm', 'sm', 'sm')
-
-  const rem = n % 3
-  if (rem === 1) sizes.push('full')
-  else if (rem === 2) sizes.push('md', 'md')
-  return sizes
+function splitDescription(desc: string): { summary: string; rest: string } {
+  const i = desc.indexOf('. ')
+  if (i === -1) return { summary: desc, rest: '' }
+  return {
+    summary: desc.slice(0, i + 1),
+    rest: desc.slice(i + 2),
+  }
 }
 
-function ProjectTile({
+function ProjectAccordionItem({
   project,
   index,
-  size,
+  isOpen,
+  onToggle,
 }: {
   project: Project
   index: number
-  size: Size
+  isOpen: boolean
+  onToggle: () => void
 }) {
-  const spot = usePointerSpot<HTMLAnchorElement>()
-  const accent = project.accent ?? ACCENTS[index % ACCENTS.length]
-  const shape = SHAPES[index % SHAPES.length]
-  const hasLink = Boolean(project.link)
+  const accent = project.accent ?? 'blue'
+  const headerId = `pacc-h-${index}`
+  const panelId = `pacc-p-${index}`
+  const { summary, rest } = splitDescription(project.description)
 
   return (
-    <a
-      ref={spot.ref}
-      {...spot.handlers}
-      style={spot.style}
-      href={project.link}
-      target={hasLink ? '_blank' : undefined}
-      rel={hasLink ? 'noopener noreferrer' : undefined}
-      aria-disabled={hasLink ? undefined : true}
-      className={`pcard pcard--${size} pcard--${accent}${hasLink ? '' : ' pcard--static'}`}
-    >
-      <div className="pcard__cover" aria-hidden="true">
-        <div className={`shape ${shape}`} />
-        <div className={`shape ${shape} shape--echo`} />
-        <div className="spot" />
-      </div>
-
-      <div className="pcard__body">
-        <div className="pcard__meta">
-          <span>{project.year}</span>
-          <span aria-hidden="true">·</span>
-          <span>{project.role}</span>
+    <li className={`pacc pacc--${accent}${isOpen ? ' is-open' : ''}`}>
+      <button
+        id={headerId}
+        type="button"
+        className="pacc__header"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={onToggle}
+      >
+        <span className="pacc__accent" aria-hidden="true" />
+        <div className="pacc__head-body">
+          <div className="pacc__title-row">
+            <h3 className="pacc__title">{project.title}</h3>
+            <span className="pacc__year">{project.year}</span>
+          </div>
+          <div className="pacc__meta-row">
+            <span className="pacc__role">{project.role}</span>
+            <ul className="pacc__cats">
+              {project.categories.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </div>
+          <p className="pacc__summary">{summary}</p>
         </div>
-        <h3>{project.title}</h3>
-        <p>{project.description}</p>
-        <ul className="tags">
-          {project.tags.slice(0, 4).map((t) => (
-            <li key={t}>{t}</li>
-          ))}
-        </ul>
-      </div>
-
-      {hasLink && (
-        <span className="pcard__arrow" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18">
+        <span className="pacc__chevron" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16">
             <path
-              d="M4 9h10M9 4l5 5-5 5"
+              d="M4 6l4 4 4-4"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -82,24 +69,98 @@ function ProjectTile({
             />
           </svg>
         </span>
-      )}
-    </a>
+      </button>
+
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={headerId}
+        className="pacc__panel"
+      >
+        <div className="pacc__panel-clip">
+          <div className="pacc__panel-content">
+            {rest && <p className="pacc__desc">{rest}</p>}
+
+          {project.highlights && project.highlights.length > 0 && (
+            <ul className="pacc__highlights">
+              {project.highlights.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+          )}
+
+          {project.stack && project.stack.length > 0 && (
+            <ul className="pacc__stack">
+              {project.stack.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
+            </ul>
+          )}
+
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pacc__visit"
+            >
+              방문하기
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                <path
+                  d="M5 3l4 4-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          )}
+          </div>
+        </div>
+      </div>
+    </li>
   )
 }
 
 function Projects() {
-  const allTags = useMemo(() => {
+  const allCategories = useMemo<string[]>(() => {
     const set = new Set<string>()
-    projects.forEach((p) => p.tags.forEach((t) => set.add(t)))
+    projects.forEach((p) => p.categories.forEach((c) => set.add(c)))
     return ['All', ...Array.from(set)]
   }, [])
 
-  const [filter, setFilter] = useState('All')
+  const [filter, setFilter] = useState<string>('All')
 
-  const filtered =
-    filter === 'All' ? projects : projects.filter((p) => p.tags.includes(filter))
+  const filtered = useMemo(
+    () =>
+      filter === 'All'
+        ? projects
+        : projects.filter((p) =>
+            p.categories.includes(filter as ProjectCategory),
+          ),
+    [filter],
+  )
 
-  const sizes = useMemo(() => getSizes(filtered.length), [filtered.length])
+  const [openTitle, setOpenTitle] = useState<string | null>(
+    projects[0]?.title ?? null,
+  )
+
+  const handleFilter = (next: string) => {
+    setFilter(next)
+    const upcoming =
+      next === 'All'
+        ? projects
+        : projects.filter((p) =>
+            p.categories.includes(next as ProjectCategory),
+          )
+    setOpenTitle(upcoming[0]?.title ?? null)
+  }
+
+  const handleToggle = (title: string) => {
+    setOpenTitle((prev) => (prev === title ? null : title))
+  }
 
   return (
     <section id="projects" className="projects">
@@ -113,30 +174,31 @@ function Projects() {
         </div>
 
         <div className="projects__filters" role="tablist" aria-label="필터">
-          {allTags.map((tag) => (
+          {allCategories.map((tag) => (
             <button
               key={tag}
               type="button"
               role="tab"
               aria-selected={filter === tag}
               className={`chip${filter === tag ? ' is-active' : ''}`}
-              onClick={() => setFilter(tag)}
+              onClick={() => handleFilter(tag)}
             >
               {tag}
             </button>
           ))}
         </div>
 
-        <div className="bento bento--projects">
-          {filtered.map((p, i) => (
-            <ProjectTile
+        <ol className="bento bento--projects">
+          {filtered.map((p) => (
+            <ProjectAccordionItem
               key={p.title}
               project={p}
               index={projects.indexOf(p)}
-              size={sizes[i]}
+              isOpen={openTitle === p.title}
+              onToggle={() => handleToggle(p.title)}
             />
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )
