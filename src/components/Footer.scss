@@ -64,16 +64,7 @@
   border: 1px solid $color-line;
   border-radius: 999px;
   box-shadow: $shadow-md;
-  transition:
-    background-color 0.2s $ease-out,
-    color 0.2s $ease-out,
-    transform 0.2s $ease-out;
-
-  &:hover {
-    background: $color-ink;
-    color: #fff;
-    transform: translateY(-4px);
-  }
+  transition: transform 0.2s $ease-out;
 
   &:hover &__tooltip {
     opacity: 1;

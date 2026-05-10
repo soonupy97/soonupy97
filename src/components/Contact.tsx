@@ -30,7 +30,19 @@ function Contact() {
           >
             <span className="ctile__label">GitHub</span>
             <strong>@soonupy</strong>
-            <span className="ctile__cta">방문하기 →</span>
+            <span className="ctile__cta">
+              방문하기
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M6 4l4 4-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </a>
 
           <a
@@ -41,18 +53,38 @@ function Contact() {
           >
             <span className="ctile__label">Blog</span>
             <strong>velog.io/@soonupy</strong>
-            <span className="ctile__cta">읽으러 가기 →</span>
+            <span className="ctile__cta">
+              읽으러 가기
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M6 4l4 4-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </a>
 
-          <div className="ctile ctile--info">
-            <span className="ctile__label">Where &amp; When</span>
-            <strong>{profile.location}</strong>
-            <span className="ctile__sub">Mon — Fri, 10:00 — 19:00 KST</span>
-            <span className="ctile__chip">
-              <span className="dot" aria-hidden="true" />
-              새 프로젝트 가능
+          <a className="ctile ctile--email" href={`mailto:${profile.email}`}>
+            <span className="ctile__label">Email</span>
+            <strong>{profile.email}</strong>
+            <span className="ctile__cta">
+              메일 보내기
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M6 4l4 4-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </span>
-          </div>
+          </a>
         </div>
       </div>
     </section>

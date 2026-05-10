@@ -14,7 +14,7 @@ function Footer() {
             <span className="name">soonupy.</span>
           </div>
           <p className="copy">
-            © {new Date().getFullYear()} {profile.name}. Crafted with HTML, SCSS,
+            © {new Date().getFullYear()} {profile.name}. Crafted with React, Scss, Claude
             and care.
           </p>
         </div>

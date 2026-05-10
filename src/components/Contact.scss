@@ -14,7 +14,7 @@
     }
     .ctile--git,
     .ctile--blog,
-    .ctile--info {
+    .ctile--email {
       flex: 1 1 calc(33.333% - 10.667px);
       min-width: 0;
     }
@@ -24,7 +24,7 @@
       .ctile--blog {
         flex: 1 1 calc(50% - 8px);
       }
-      .ctile--info {
+      .ctile--email {
         flex: 1 1 100%;
       }
     }
@@ -33,7 +33,7 @@
       .ctile--cta,
       .ctile--git,
       .ctile--blog,
-      .ctile--info {
+      .ctile--email {
         flex: 1 1 100%;
       }
     }
@@ -46,7 +46,6 @@
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   min-height: 180px;
 
   &__label {
@@ -61,43 +60,24 @@
     word-break: break-all;
   }
 
-  &__sub {
-    font-size: 14px;
-    color: $color-muted;
-  }
-
   &__cta {
     margin-top: auto;
-    @include label;
-    color: $color-blue;
-    transition: transform 0.3s $ease-out;
-  }
-
-  &:hover &__cta {
-    transform: translateX(4px);
-  }
-
-  &__chip {
-    margin-top: auto;
+    align-self: flex-start;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    align-self: flex-start;
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    background: $color-mint-soft;
-    color: $color-mint;
+    color: $color-ink;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: $color-mint;
-      box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.18);
-      animation: pulse 1.6s $ease-out infinite;
+    svg {
+      transition: transform 0.25s $ease-out;
     }
+  }
+
+  &:hover &__cta svg {
+    transform: translateX(4px);
   }
 
   &--cta {
@@ -106,6 +86,7 @@
     overflow: hidden;
     padding: 48px;
     min-height: 280px;
+    gap: 0;
 
     .eyebrow {
       @include label;
@@ -117,7 +98,7 @@
       letter-spacing: -0.025em;
       line-height: 1.1;
       color: #fff;
-      margin-block: 1rem;
+      margin-block: 2rem;
 
       .hl {
         background: linear-gradient(180deg, transparent 60%, $color-yellow 0);
@@ -128,7 +109,6 @@
     }
     p {
       color: rgba(255, 255, 255, 0.85);
-      max-width: 560px;
       font-size: 16px;
     }
 
@@ -146,23 +126,14 @@
 
   &--git {
     background: $color-mint-soft;
-    .ctile__cta {
-      color: $color-mint;
-    }
   }
 
   &--blog {
     background: $color-pink-soft;
-    .ctile__cta {
-      color: $color-pink;
-    }
   }
 
-  &--info {
-    background: $color-blue-soft;
-    .ctile__cta {
-      color: $color-blue-dark;
-    }
+  &--email {
+    background: $color-yellow-soft;
   }
 }
 
