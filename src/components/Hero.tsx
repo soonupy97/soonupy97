@@ -75,7 +75,7 @@ function NameTile() {
 }
 
 function AvatarTile() {
-  const tilt = useTilt<HTMLDivElement>(10)
+  const tilt = useTilt<HTMLDivElement>(5)
   return (
     <div
       ref={tilt.ref}
@@ -93,7 +93,6 @@ function AvatarTile() {
           <img src={soonupyLogo} alt="soonupy" />
         </div>
       </div>
-      <span className="tile__label">AVATAR</span>
     </div>
   )
 }
@@ -121,7 +120,6 @@ function ClockTile() {
   const time = useSeoulClock()
   return (
     <div className="tile tile--clock">
-      <span className="tile__label">Seoul, Korea</span>
       <strong>{time}</strong>
       <span className="tile__hint">
         <span className="dot" /> Available for briefs
@@ -133,7 +131,6 @@ function ClockTile() {
 function StackTile() {
   return (
     <div className="tile tile--stack">
-      <span className="tile__label">Stack</span>
       <div className="ticker">
         <ul className="ticker__track">
           {[...TAGS, ...TAGS].map((t, i) => (
@@ -148,7 +145,6 @@ function StackTile() {
 function FocusTile() {
   return (
     <a className="tile tile--focus" href="#about">
-      <span className="tile__label">Now</span>
       <p>
         디자인 시스템과 <em>마크업 품질</em>을 함께 끌어올리는 일에 몰입중.
       </p>
@@ -160,7 +156,6 @@ function FocusTile() {
 function GitTile() {
   return (
     <a className="tile tile--git" href={profile.github} target="_blank" rel="noreferrer">
-      <span className="tile__label">GitHub</span>
       <strong>@soonupy</strong>
       <ul className="grass" aria-hidden="true">
         {Array.from({ length: 35 }).map((_, i) => {

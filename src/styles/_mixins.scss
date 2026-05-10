@@ -26,14 +26,14 @@
   box-shadow: $shadow-sm;
   overflow: hidden;
   transition:
-    transform 0.4s $ease-out,
-    box-shadow 0.4s $ease-out;
+    transform 0.2s $ease-out,
+    box-shadow 0.2s $ease-out;
   isolation: isolate;
 }
 
 @mixin tile-hover {
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: $shadow-md;
   }
 }

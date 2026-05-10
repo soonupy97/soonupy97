@@ -2,7 +2,7 @@
 @use '../styles/mixins' as *;
 
 .site-footer {
-  padding-block: 32px;
+  padding-block: 16px;
   border-top: 1px solid $color-line;
 
   &__inner {
@@ -46,17 +46,61 @@
     flex: 1;
     min-width: 0;
   }
+}
 
-  .top {
-    @include label;
-    color: $color-ink;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: $color-line-soft;
-    transition: background-color 0.2s $ease-out;
+.top {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 40;
 
-    &:hover {
-      background: $color-line;
-    }
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+
+  background: $color-card;
+  color: $color-ink;
+  border: 1px solid $color-line;
+  border-radius: 999px;
+  box-shadow: $shadow-md;
+  transition:
+    background-color 0.2s $ease-out,
+    color 0.2s $ease-out,
+    transform 0.2s $ease-out;
+
+  &:hover {
+    background: $color-ink;
+    color: #fff;
+    transform: translateY(-4px);
+  }
+
+  &:hover &__tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &__tooltip {
+    position: absolute;
+    right: calc(100% + 8px);
+    top: 50%;
+
+    padding: 4px 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    color: #fff;
+    background: $color-ink;
+    border-radius: 8px;
+
+    opacity: 0;
+    transform: translateY(-50%) translateX(4px);
+    pointer-events: none;
+    transition:
+      opacity 0.2s $ease-out,
+      transform 0.2s $ease-out;
   }
 }

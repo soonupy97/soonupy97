@@ -6,8 +6,22 @@ import './Projects.scss'
 const SHAPES = ['shape-a', 'shape-b', 'shape-c', 'shape-d', 'shape-e', 'shape-f']
 const ACCENTS = ['blue', 'pink', 'mint', 'yellow', 'purple', 'coral']
 
-type Size = 'lg' | 'md' | 'sm'
-const SIZE_PATTERN: Size[] = ['lg', 'md', 'sm', 'sm', 'sm', 'sm']
+type Size = 'lg' | 'md' | 'sm' | 'full'
+
+function getSizes(n: number): Size[] {
+  if (n <= 0) return []
+  if (n === 1) return ['full']
+  if (n === 2) return ['md', 'md']
+
+  const sizes: Size[] = []
+  const triples = Math.floor(n / 3)
+  for (let i = 0; i < triples; i++) sizes.push('sm', 'sm', 'sm')
+
+  const rem = n % 3
+  if (rem === 1) sizes.push('full')
+  else if (rem === 2) sizes.push('md', 'md')
+  return sizes
+}
 
 function ProjectTile({
   project,
@@ -19,16 +33,20 @@ function ProjectTile({
   size: Size
 }) {
   const spot = usePointerSpot<HTMLAnchorElement>()
-  const accent = ACCENTS[index % ACCENTS.length]
+  const accent = project.accent ?? ACCENTS[index % ACCENTS.length]
   const shape = SHAPES[index % SHAPES.length]
+  const hasLink = Boolean(project.link)
 
   return (
     <a
       ref={spot.ref}
       {...spot.handlers}
       style={spot.style}
-      href={project.link ?? '#'}
-      className={`pcard pcard--${size} pcard--${accent}`}
+      href={project.link}
+      target={hasLink ? '_blank' : undefined}
+      rel={hasLink ? 'noopener noreferrer' : undefined}
+      aria-disabled={hasLink ? undefined : true}
+      className={`pcard pcard--${size} pcard--${accent}${hasLink ? '' : ' pcard--static'}`}
     >
       <div className="pcard__cover" aria-hidden="true">
         <div className={`shape ${shape}`} />
@@ -51,18 +69,20 @@ function ProjectTile({
         </ul>
       </div>
 
-      <span className="pcard__arrow" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 18 18">
-          <path
-            d="M4 9h10M9 4l5 5-5 5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
+      {hasLink && (
+        <span className="pcard__arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18">
+            <path
+              d="M4 9h10M9 4l5 5-5 5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      )}
     </a>
   )
 }
@@ -78,6 +98,8 @@ function Projects() {
 
   const filtered =
     filter === 'All' ? projects : projects.filter((p) => p.tags.includes(filter))
+
+  const sizes = useMemo(() => getSizes(filtered.length), [filtered.length])
 
   return (
     <section id="projects" className="projects">
@@ -111,7 +133,7 @@ function Projects() {
               key={p.title}
               project={p}
               index={projects.indexOf(p)}
-              size={SIZE_PATTERN[i % SIZE_PATTERN.length]}
+              size={sizes[i]}
             />
           ))}
         </div>
