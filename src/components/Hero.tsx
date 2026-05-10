@@ -45,7 +45,7 @@ function NameTile() {
       className="tile tile--hero"
     >
       <div className="spot" aria-hidden="true" />
-      <span className="tile__eyebrow">Web Publisher · Frontend</span>
+      <span className="tile__eyebrow">Design · Web Publisher · Frontend</span>
       <h1>
         Hi, I'm <em>{profile.name}</em>.
         <br />I craft <span className="hl">accessible</span>
@@ -57,7 +57,7 @@ function NameTile() {
           See projects
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
             <path
-              d="M3 8h10M9 4l4 4-4 4"
+              d="M6 4l4 4-4 4"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.8"
@@ -83,15 +83,7 @@ function AvatarTile() {
       className="tile tile--avatar"
     >
       <div className="avatar">
-        <div className="avatar__sticker s1" aria-hidden="true">
-          ✦
-        </div>
-        <div className="avatar__sticker s2" aria-hidden="true">
-          ◆
-        </div>
-        <div className="avatar__face">
-          <img src={soonupyLogo} alt="soonupy" />
-        </div>
+        <img src={soonupyLogo} alt="soonupy" />
       </div>
     </div>
   )
@@ -131,6 +123,7 @@ function ClockTile() {
 function StackTile() {
   return (
     <div className="tile tile--stack">
+      <span className="tile__label">Stack</span>
       <div className="ticker">
         <ul className="ticker__track">
           {[...TAGS, ...TAGS].map((t, i) => (
@@ -146,9 +139,24 @@ function FocusTile() {
   return (
     <a className="tile tile--focus" href="#about">
       <p>
-        디자인 시스템과 <em>마크업 품질</em>을 함께 끌어올리는 일에 몰입중.
+        디자인과 코드 사이, <em>간극을 좁히는</em> 일에 몰입 중.
       </p>
-      <span className="more">자세히 →</span>
+      <span className="tile__subtitle">
+        토큰 기반 디자인 시스템과 마크업 품질로 두 세계를 잇습니다.
+      </span>
+      <span className="more">
+        자세히
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path
+            d="M5 3l4 4-4 4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
     </a>
   )
 }
@@ -158,7 +166,7 @@ function GitTile() {
     <a className="tile tile--git" href={profile.github} target="_blank" rel="noreferrer">
       <strong>@soonupy</strong>
       <ul className="grass" aria-hidden="true">
-        {Array.from({ length: 35 }).map((_, i) => {
+        {Array.from({ length: 21 }).map((_, i) => {
           const lvl = [0, 1, 1, 2, 1, 3, 2, 2, 3, 4, 1][i % 11]
           return <li key={i} data-lvl={lvl} />
         })}

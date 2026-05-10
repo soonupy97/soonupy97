@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../styles/variables' as *;
 @use '../styles/mixins' as *;
 
@@ -33,6 +34,7 @@
     height: 452px;
 
     > .tile--hero {
+      flex: 1.5;
       min-width: 0;
     }
     > .col--right {
@@ -49,8 +51,6 @@
   }
 
   .row--secondary {
-    height: 296px;
-
     > .tile--focus,
     > .tile--git {
       flex: 1;
@@ -159,6 +159,9 @@
     @include label;
     color: $color-blue;
   }
+  &__label {
+    @include label;
+  }
   &__hint {
     @include label;
     margin-top: auto;
@@ -235,62 +238,22 @@
 
 // 2) Avatar tile
 .tile--avatar {
-  background: linear-gradient(135deg, $color-pink-soft, $color-purple-soft);
+  background: linear-gradient(135deg, #fff, $color-blue-soft);
   perspective: 800px;
   align-items: center;
   justify-content: center;
 
   .avatar {
-    position: relative;
     transform-style: preserve-3d;
     transform: rotateY(var(--tx, 0deg)) rotateX(var(--ty, 0deg));
     transition: transform 0.2s $ease-out;
 
-    &__face {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ffd6df 0%, #ffb4c2 100%);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      box-shadow:
-        0 8px 28px -8px rgba(255, 107, 138, 0.45),
-        inset 0 -8px 16px rgba(255, 107, 138, 0.18);
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      display: block;
       transform: translateZ(40px);
-
-      img {
-        width: 72px;
-        height: 72px;
-        object-fit: contain;
-        display: block;
-      }
-    }
-
-    &__sticker {
-      position: absolute;
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      font-size: 20px;
-      font-weight: 800;
-      box-shadow: $shadow-md;
-    }
-    .s1 {
-      background: $color-yellow;
-      color: $color-ink;
-      top: -12px;
-      right: -8px;
-      transform: translateZ(60px) rotate(12deg);
-    }
-    .s2 {
-      background: $color-blue;
-      color: #fff;
-      bottom: -8px;
-      left: -16px;
-      transform: translateZ(60px) rotate(-15deg);
     }
   }
 }
@@ -314,7 +277,7 @@
     }
 
     strong {
-      font-size: 32px;
+      font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.03em;
       color: $color-ink;
@@ -348,6 +311,10 @@
   flex-direction: column;
   justify-content: space-between;
 
+  .tile__label {
+    color: $color-blue-dark;
+  }
+
   .ticker {
     overflow: hidden;
     mask-image: linear-gradient(
@@ -380,7 +347,7 @@
 // 6) Focus tile
 .tile--focus {
   padding: 24px;
-  background: $color-yellow-soft;
+  background: $color-blue-soft;
   cursor: pointer;
   transition:
     background-color 0.3s $ease-out,
@@ -388,7 +355,7 @@
     box-shadow 0.4s $ease-out;
 
   &:hover {
-    background: #fde68a;
+    background: color.mix($color-blue, $color-blue-soft, 16%);
   }
 
   p {
@@ -404,10 +371,45 @@
     }
   }
 
+  .tile__subtitle {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: $color-muted;
+  }
+
   .more {
     margin-top: auto;
-    @include label;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+
+    background: $color-card;
     color: $color-ink;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+
+    transition:
+      background-color 0.25s $ease-out,
+      color 0.25s $ease-out;
+
+    svg {
+      transition: transform 0.3s $ease-out;
+    }
+  }
+
+  &:hover .more {
+    background: $color-ink;
+    color: #fff;
+
+    svg {
+      transform: translateX(2px);
+    }
   }
 }
 
@@ -432,19 +434,19 @@
     li {
       aspect-ratio: 1 / 1;
       border-radius: 4px;
-      background: rgba(0, 200, 150, 0.18);
+      background: rgba($color-blue, 0.18);
 
       &[data-lvl='1'] {
-        background: rgba(0, 200, 150, 0.35);
+        background: rgba($color-blue, 0.35);
       }
       &[data-lvl='2'] {
-        background: rgba(0, 200, 150, 0.55);
+        background: rgba($color-blue, 0.55);
       }
       &[data-lvl='3'] {
-        background: rgba(0, 200, 150, 0.75);
+        background: rgba($color-blue, 0.75);
       }
       &[data-lvl='4'] {
-        background: $color-mint;
+        background: $color-blue;
       }
     }
   }
