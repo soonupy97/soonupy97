@@ -35,291 +35,283 @@
       }
     }
   }
-
-  .bento--projects {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-
-    .pcard--lg,
-    .pcard--sm {
-      flex: 1 1 calc(33.333% - 10.667px);
-    }
-    .pcard--md {
-      flex: 1 1 calc(50% - 8px);
-    }
-    .pcard--full {
-      flex: 1 1 100%;
-    }
-
-    @media (max-width: $bp-lg) {
-      .pcard--lg,
-      .pcard--sm {
-        flex: 1 1 calc(50% - 8px);
-      }
-    }
-
-    @media (max-width: $bp-sm) {
-      .pcard--lg,
-      .pcard--md,
-      .pcard--sm {
-        flex: 1 1 100%;
-      }
-    }
-  }
 }
 
-.pcard {
-  @include tile;
-  @include tile-hover;
+.bento--projects {
   display: flex;
   flex-direction: column;
-  min-height: 360px;
-  min-width: 0;
-  cursor: pointer;
+  gap: 16px;
+  list-style: none;
   padding: 0;
+  margin: 0;
+}
 
-  &--lg {
-    min-height: 480px;
+.pacc {
+  --accent: #{$color-blue};
+  --accent-soft: #{$color-blue-soft};
+
+  @include tile;
+  background: $color-card;
+  transition:
+    background-color 0.32s $ease-out,
+    box-shadow 0.25s $ease-out;
+
+  &.is-open {
+    background: var(--accent-soft);
   }
 
-  &--static {
-    cursor: default;
+  &--blue {
+    --accent: #{$color-blue};
+    --accent-soft: #{$color-blue-soft};
+  }
+  &--pink {
+    --accent: #{$color-pink};
+    --accent-soft: #{$color-pink-soft};
+  }
+  &--mint {
+    --accent: #{$color-mint};
+    --accent-soft: #{$color-mint-soft};
+  }
+  &--yellow {
+    --accent: #{$color-yellow};
+    --accent-soft: #{$color-yellow-soft};
+  }
+  &--purple {
+    --accent: #{$color-purple};
+    --accent-soft: #{$color-purple-soft};
+  }
+  &--coral {
+    --accent: #{$color-coral};
+    --accent-soft: #{$color-coral-soft};
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 32px;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    color: $color-ink;
+    cursor: pointer;
+    transition: background-color 0.2s $ease-out;
+
+    @media (max-width: $bp-md) {
+      padding: 16px 24px;
+      gap: 12px;
+    }
 
     &:hover {
-      transform: none;
-      box-shadow: $shadow-sm;
+      background: $color-line-soft;
     }
   }
 
-  &__cover {
-    position: relative;
+  &.is-open &__header,
+  &.is-open &__header:hover {
+    background: transparent;
+  }
+
+  &__accent {
+    width: 4px;
+    align-self: stretch;
+    border-radius: 999px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  &__head-body {
     flex: 1;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--cover-a), var(--cover-b));
-    transition: background 0.4s $ease-out;
-
-    .spot {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        circle 200px at var(--mx, 50%) var(--my, 50%),
-        rgba(255, 255, 255, 0.55),
-        transparent 60%
-      );
-      opacity: 0;
-      transition: opacity 0.4s $ease-out;
-      pointer-events: none;
-    }
-
-    .shape {
-      position: absolute;
-      transition: transform 0.6s $ease-spring;
-
-      &--echo {
-        opacity: 0.35;
-        filter: blur(6px);
-      }
-    }
-
-    .shape-a {
-      width: 60%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: var(--shape-color);
-      top: 20%;
-      left: 20%;
-      &.shape--echo {
-        transform: translate(-12%, 12%);
-      }
-    }
-
-    .shape-b {
-      width: 70%;
-      height: 14px;
-      background: var(--shape-color);
-      border-radius: 999px;
-      top: 30%;
-      left: 15%;
-      box-shadow: 0 30px 0 var(--shape-color), 0 -30px 0 var(--shape-color);
-      &.shape--echo {
-        transform: translateY(8px);
-      }
-    }
-
-    .shape-c {
-      width: 70%;
-      aspect-ratio: 1;
-      background: var(--shape-color);
-      top: 18%;
-      left: 15%;
-      transform: rotate(45deg);
-      &.shape--echo {
-        transform: rotate(45deg) translate(8%, -8%);
-      }
-    }
-
-    .shape-d {
-      width: 0;
-      height: 0;
-      border-left: 70px solid transparent;
-      border-right: 70px solid transparent;
-      border-bottom: 120px solid var(--shape-color);
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
-      &.shape--echo {
-        transform: translateX(-30%) rotate(8deg);
-      }
-    }
-
-    .shape-e {
-      width: 60%;
-      aspect-ratio: 1;
-      background: var(--shape-color);
-      border-radius: 30% 70% 70% 30% / 50% 40% 60% 50%;
-      top: 22%;
-      left: 22%;
-      &.shape--echo {
-        transform: translate(8%, 6%) rotate(8deg);
-      }
-    }
-
-    .shape-f {
-      width: 60%;
-      height: 60%;
-      background:
-        radial-gradient(circle at 30% 30%, transparent 25%, var(--shape-color) 26%),
-        radial-gradient(circle at 70% 70%, transparent 25%, var(--shape-color) 26%);
-      top: 22%;
-      left: 22%;
-      mix-blend-mode: multiply;
-      &.shape--echo {
-        transform: translate(-6%, -6%);
-        opacity: 0.25;
-      }
-    }
-  }
-
-  &:hover {
-    .spot {
-      opacity: 1;
-    }
-    .shape {
-      transform: scale(1.06) rotate(2deg);
-    }
-    .shape-c,
-    .shape-c.shape--echo {
-      transform: rotate(54deg) scale(1.05);
-    }
-    .pcard__arrow {
-      background: $color-ink;
-      color: #fff;
-      transform: translate(0, 0) rotate(-12deg);
-    }
-  }
-
-  &__body {
-    flex: 0 0 220px;
-    padding: 24px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    background: $color-card;
-    border-top: 1px solid $color-line-soft;
-    position: relative;
-    overflow: hidden;
   }
 
-  &__meta {
-    @include label;
+  &__title-row {
     display: flex;
-    gap: 8px;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
-  h3 {
-    font-size: 24px;
+  &__title {
+    font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.02em;
     color: $color-ink;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    margin: 0;
   }
 
-  p {
+  &__year {
+    @include label;
+    color: $color-soft;
+  }
+
+  &__meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__role {
+    font-size: 14px;
     color: $color-muted;
+  }
+
+  &__summary {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $color-ink-2;
+  }
+
+  &__cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: $color-line-soft;
+      color: $color-muted;
+      transition: background-color 0.25s $ease-out;
+    }
+  }
+
+  &.is-open &__cats li {
+    background: $color-card;
+  }
+
+  &__chevron {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: $color-soft;
+    transition:
+      transform 0.25s $ease-out,
+      color 0.25s $ease-out;
+  }
+
+  &.is-open &__chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  &__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s $ease-out;
+  }
+
+  &.is-open &__panel {
+    grid-template-rows: 1fr;
+  }
+
+  &__panel-clip {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  &__panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 32px 24px 52px;
+
+    @media (max-width: $bp-md) {
+      padding: 0 24px 24px 40px;
+    }
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $color-ink-2;
+  }
+
+  &__highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: $color-ink-2;
     font-size: 14px;
     line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+
+    li {
+      position: relative;
+      padding-left: 16px;
+
+      &::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: 700;
+      }
+    }
   }
 
-  .tags {
+  &__stack {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 4px;
-    margin-top: auto;
-    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     li {
       @include chip;
       padding: 4px 8px;
       font-size: 12px;
-      flex: 0 0 auto;
     }
   }
 
-  &__arrow {
-    position: absolute;
-    top: -22px;
-    right: 20px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
+  &__visit {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-top: 8px;
+    border-radius: 999px;
     background: $color-card;
     color: $color-ink;
-    display: grid;
-    place-items: center;
-    box-shadow: $shadow-md;
-    transform: rotate(-45deg);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    box-shadow: $shadow-sm;
     transition:
-      transform 0.3s $ease-spring,
-      background-color 0.3s $ease-out,
-      color 0.3s $ease-out;
-  }
+      background-color 0.2s $ease-out,
+      color 0.2s $ease-out,
+      box-shadow 0.2s $ease-out;
 
-  &--blue {
-    --cover-a: #{$color-blue-soft};
-    --cover-b: #d4e6ff;
-    --shape-color: #{$color-blue};
-  }
-  &--pink {
-    --cover-a: #{$color-pink-soft};
-    --cover-b: #ffd0db;
-    --shape-color: #{$color-pink};
-  }
-  &--mint {
-    --cover-a: #{$color-mint-soft};
-    --cover-b: #b8ecdc;
-    --shape-color: #{$color-mint};
-  }
-  &--yellow {
-    --cover-a: #{$color-yellow-soft};
-    --cover-b: #fde68a;
-    --shape-color: #{$color-yellow};
-  }
-  &--purple {
-    --cover-a: #{$color-purple-soft};
-    --cover-b: #ddd6fe;
-    --shape-color: #{$color-purple};
-  }
-  &--coral {
-    --cover-a: #{$color-coral-soft};
-    --cover-b: #ffd0bd;
-    --shape-color: #{$color-coral};
+    svg {
+      transition: transform 0.3s $ease-out;
+    }
+
+    &:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: $shadow-md;
+
+      svg {
+        transform: translateX(2px);
+      }
+    }
   }
 }

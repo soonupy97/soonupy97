@@ -4,98 +4,102 @@
 .skills {
   @include section-padding;
 
-  .bento--skills {
+  &__filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 8px;
+    margin-bottom: 32px;
+
+    .chip {
+      min-width: 64px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      background: $color-card;
+      color: $color-muted;
+      border: 1px solid $color-line;
+      transition:
+        color 0.2s $ease-out,
+        background-color 0.2s $ease-out,
+        border-color 0.2s $ease-out;
+
+      &:hover {
+        color: $color-ink;
+        border-color: $color-soft;
+      }
+
+      &.is-active {
+        background: $color-ink;
+        color: #fff;
+        border-color: $color-ink;
+      }
+    }
   }
 }
 
-.skill-card {
-  @include tile;
-  @include tile-hover;
-  padding: 32px;
-  flex: 1 1 calc(33.333% - 11px);
-  min-width: 0;
+.skill-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 
-  @media (max-width: $bp-lg) {
-    flex: 1 1 100%;
-  }
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 16px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid $color-line-soft;
-
-    h3 {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    span {
-      @include label;
-    }
-  }
-
-  ul {
+  &__item {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    gap: 8px;
+
+    animation: skill-fade-in 0.4s $ease-out both;
   }
 
-  .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 8px;
+  &__logo {
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    background: $color-card;
+    border: 1px solid $color-line-soft;
+    border-radius: 16px;
+    transition:
+      transform 0.3s $ease-spring,
+      border-color 0.25s $ease-out,
+      box-shadow 0.25s $ease-out;
 
-    .name {
-      font-size: 14px;
-      font-weight: 600;
-      color: $color-ink-2;
-    }
-    .pct {
-      font-family: $font-mono;
-      font-size: 12px;
-      color: $color-soft;
-    }
-  }
-
-  .bar {
-    width: 100%;
-    height: 8px;
-    border-radius: 999px;
-    background: $color-line-soft;
-    overflow: hidden;
-
-    span {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      transition: width 1.4s $ease-out;
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
     }
   }
 
-  &--blue {
-    background: linear-gradient(180deg, $color-blue-soft 0%, $color-card 60%);
-    .bar span {
-      background: $color-blue;
+  &__item:hover &__logo {
+    transform: translateY(-4px);
+    border-color: $color-line;
+    box-shadow: $shadow-md;
+  }
+
+  &__name {
+    font-size: 12px;
+    font-weight: 600;
+    color: $color-muted;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  @for $i from 1 through 20 {
+    &__item:nth-child(#{$i}) {
+      animation-delay: #{$i * 40}ms;
     }
   }
-  &--pink {
-    background: linear-gradient(180deg, $color-pink-soft 0%, $color-card 60%);
-    .bar span {
-      background: $color-pink;
-    }
+}
+
+@keyframes skill-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-  &--mint {
-    background: linear-gradient(180deg, $color-mint-soft 0%, $color-card 60%);
-    .bar span {
-      background: $color-mint;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
