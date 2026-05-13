@@ -51,8 +51,8 @@
   }
 
   .row--secondary {
-    > .tile--focus,
-    > .tile--git {
+    > .tile--career,
+    > .tile--certs {
       flex: 1;
       min-width: 0;
     }
@@ -96,8 +96,8 @@
       flex-wrap: wrap;
       height: auto;
 
-      > .tile--focus,
-      > .tile--git {
+      > .tile--career,
+      > .tile--certs {
         flex: 1 1 calc(50% - 8px);
         min-width: 0;
         min-height: 220px;
@@ -126,8 +126,8 @@
       > .tile--hero {
         min-height: 360px;
       }
-      > .tile--focus,
-      > .tile--git {
+      > .tile--career,
+      > .tile--certs {
         min-height: 200px;
       }
       > .col--right,
@@ -456,8 +456,8 @@
   }
 }
 
-// 6) Focus tile
-.tile--focus {
+// 6) Career tile
+.tile--career {
   padding: 24px;
   background: $color-blue-soft;
   cursor: pointer;
@@ -470,25 +470,74 @@
     background: color.mix($color-blue, $color-blue-soft, 16%);
   }
 
-  p {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.3;
-    color: $color-ink;
-
-    em {
-      font-style: normal;
-      color: $color-coral;
-    }
+  .tile__eyebrow {
+    color: $color-blue-dark;
   }
 
-  .tile__subtitle {
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.6;
-    color: $color-muted;
+  .career-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: rgba($color-blue, 0.3);
+    }
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      position: relative;
+
+      .dot {
+        flex-shrink: 0;
+        width: 11px;
+        height: 11px;
+        margin-top: 4px;
+        border-radius: 50%;
+        background: $color-card;
+        border: 2px solid rgba($color-blue, 0.45);
+        z-index: 1;
+      }
+
+      &.is-current .dot {
+        background: $color-blue;
+        border-color: $color-blue;
+        box-shadow: 0 0 0 4px rgba($color-blue, 0.18);
+      }
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+      }
+
+      strong {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        color: $color-ink;
+      }
+
+      span {
+        font-size: 12px;
+        font-weight: 500;
+        color: $color-muted;
+        font-variant-numeric: tabular-nums;
+      }
+    }
   }
 
   .more {
@@ -525,40 +574,48 @@
   }
 }
 
-// 7) Github tile
-.tile--git {
+// 7) Certifications tile
+.tile--certs {
   padding: 24px;
   background: $color-mint-soft;
 
-  strong {
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    color: $color-ink;
+  .tile__eyebrow {
+    color: $color-mint;
   }
 
-  .grass {
-    margin-top: auto;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+  .cert-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
     li {
-      aspect-ratio: 1 / 1;
-      border-radius: 4px;
-      background: rgba($color-blue, 0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba($color-mint, 0.24);
 
-      &[data-lvl='1'] {
-        background: rgba($color-blue, 0.35);
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
       }
-      &[data-lvl='2'] {
-        background: rgba($color-blue, 0.55);
+
+      strong {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        color: $color-ink;
       }
-      &[data-lvl='3'] {
-        background: rgba($color-blue, 0.75);
-      }
-      &[data-lvl='4'] {
-        background: $color-blue;
+
+      span {
+        font-size: 12px;
+        font-weight: 500;
+        color: $color-muted;
+        font-variant-numeric: tabular-nums;
       }
     }
   }

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { profile } from '../data/portfolio'
+import { careers } from '../data/career'
+import { certs } from '../data/certs'
 import { skillGroups } from '../data/skills'
 import { usePointerSpot } from '../hooks/usePointerSpot'
 import { useTilt } from '../hooks/useTilt'
@@ -135,17 +137,25 @@ function StackTile() {
   )
 }
 
-function FocusTile() {
+function CareerTile() {
   return (
-    <a className="tile tile--focus" href="#about">
-      <p>
-        디자인과 코드 사이, <em>간극을 좁히는</em> 일에 몰입 중.
-      </p>
-      <span className="tile__subtitle">
-        토큰 기반 디자인 시스템과 마크업 품질로 두 세계를 잇습니다.
-      </span>
+    <a className="tile tile--career" href="#career">
+      <span className="tile__eyebrow">Career</span>
+      <ol className="career-list">
+        {careers.map((c) => (
+          <li key={c.company} className={c.current ? 'is-current' : undefined}>
+            <span className="dot" aria-hidden="true" />
+            <div>
+              <strong>{c.company}</strong>
+              <span>
+                {c.role} · {c.period}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ol>
       <span className="more">
-        자세히
+        커리어 보기
         <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
           <path
             d="M5 3l4 4-4 4"
@@ -161,17 +171,21 @@ function FocusTile() {
   )
 }
 
-function GitTile() {
+function CertsTile() {
   return (
-    <a className="tile tile--git" href={profile.github} target="_blank" rel="noreferrer">
-      <strong>@soonupy</strong>
-      <ul className="grass" aria-hidden="true">
-        {Array.from({ length: 21 }).map((_, i) => {
-          const lvl = [0, 1, 1, 2, 1, 3, 2, 2, 3, 4, 1][i % 11]
-          return <li key={i} data-lvl={lvl} />
-        })}
+    <div className="tile tile--certs">
+      <span className="tile__eyebrow">Certifications</span>
+      <ul className="cert-list">
+        {certs.map((c) => (
+          <li key={c.name}>
+            <strong>{c.name}</strong>
+            <span>
+              {c.issuer} · {c.year}
+            </span>
+          </li>
+        ))}
       </ul>
-    </a>
+    </div>
   )
 }
 
@@ -188,8 +202,8 @@ function Hero() {
             </div>
           </div>
           <div className="row row--secondary">
-            <FocusTile />
-            <GitTile />
+            <CareerTile />
+            <CertsTile />
             <div className="col col--narrow">
               <ClockTile />
               <StackTile />
