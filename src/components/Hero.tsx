@@ -71,8 +71,19 @@ function AvatarTile() {
       {...tilt.handlers}
       className="tile tile--avatar"
     >
+      <div className="orbit" aria-hidden="true">
+        <span className="orbit__ring orbit__ring--outer" />
+        <span className="orbit__ring orbit__ring--inner" />
+        <span className="orbit__dot orbit__dot--1" />
+        <span className="orbit__dot orbit__dot--2" />
+        <span className="orbit__dot orbit__dot--3" />
+      </div>
       <div className="avatar">
         <img src={soonupyLogo} alt="soonupy" />
+      </div>
+      <div className="tile__caption">
+        <strong>@soonupy</strong>
+        <span>Seoul · Web Publisher</span>
       </div>
     </div>
   )

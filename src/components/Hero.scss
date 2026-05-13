@@ -244,7 +244,63 @@
   align-items: center;
   justify-content: center;
 
+  .orbit {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .orbit__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+
+    &--outer {
+      width: 280px;
+      height: 280px;
+      margin: -140px 0 0 -140px;
+      border: 1px dashed rgba($color-blue, 0.22);
+      animation: orbit-spin 90s linear infinite;
+    }
+    &--inner {
+      width: 200px;
+      height: 200px;
+      margin: -100px 0 0 -100px;
+      border: 1px solid rgba($color-blue, 0.14);
+      animation: orbit-spin 60s linear infinite reverse;
+    }
+  }
+
+  .orbit__dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 50%;
+
+    &--1 {
+      background: $color-blue;
+      box-shadow: 0 0 0 4px rgba($color-blue, 0.16);
+      animation: orbit-1 22s linear infinite;
+    }
+    &--2 {
+      background: $color-mint;
+      box-shadow: 0 0 0 4px rgba($color-mint, 0.16);
+      animation: orbit-2 34s linear infinite reverse;
+    }
+    &--3 {
+      background: $color-yellow;
+      box-shadow: 0 0 0 4px rgba($color-yellow, 0.16);
+      animation: orbit-3 28s linear infinite;
+    }
+  }
+
   .avatar {
+    position: relative;
+    z-index: 1;
     transform-style: preserve-3d;
     transform: rotateY(var(--tx, 0deg)) rotateX(var(--ty, 0deg));
     transition: transform 0.2s $ease-out;
@@ -256,6 +312,61 @@
       display: block;
       transform: translateZ(40px);
     }
+  }
+
+  .tile__caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    strong {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: $color-ink;
+    }
+    span {
+      @include label;
+    }
+  }
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-1 {
+  from {
+    transform: rotate(0deg) translateX(140px);
+  }
+  to {
+    transform: rotate(360deg) translateX(140px);
+  }
+}
+
+@keyframes orbit-2 {
+  from {
+    transform: rotate(120deg) translateX(100px);
+  }
+  to {
+    transform: rotate(480deg) translateX(100px);
+  }
+}
+
+@keyframes orbit-3 {
+  from {
+    transform: rotate(240deg) translateX(132px);
+  }
+  to {
+    transform: rotate(600deg) translateX(132px);
   }
 }
 
