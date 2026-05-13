@@ -64,6 +64,7 @@
         min-height: 0;
       }
       > .tile--stack {
+        flex: 1;
         min-height: 0;
       }
     }
@@ -329,7 +330,7 @@
       display: flex;
       gap: 8px;
       width: max-content;
-      animation: marquee 22s linear infinite;
+      animation: marquee 37s linear infinite;
     }
 
     li {

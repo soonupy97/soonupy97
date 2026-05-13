@@ -1,23 +1,12 @@
 import { useEffect, useState } from 'react'
 import { profile } from '../data/portfolio'
+import { skillGroups } from '../data/skills'
 import { usePointerSpot } from '../hooks/usePointerSpot'
 import { useTilt } from '../hooks/useTilt'
 import soonupyLogo from '../assets/icons/soonupy.svg'
 import './Hero.scss'
 
-const TAGS = [
-  'HTML',
-  'SCSS',
-  'TypeScript',
-  'React',
-  'Vue',
-  'A11y',
-  'Vite',
-  'Storybook',
-  'Figma',
-  'BEM',
-  'Tailwind',
-]
+const TAGS = skillGroups.flatMap((g) => g.items.map((i) => i.name))
 
 function useSeoulClock() {
   const [time, setTime] = useState(() => new Date())
@@ -123,7 +112,7 @@ function ClockTile() {
 function StackTile() {
   return (
     <div className="tile tile--stack">
-      <span className="tile__label">Stack</span>
+      <span className="tile__label">Skills</span>
       <div className="ticker">
         <ul className="ticker__track">
           {[...TAGS, ...TAGS].map((t, i) => (
