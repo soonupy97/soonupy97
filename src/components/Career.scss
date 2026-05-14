@@ -4,10 +4,85 @@
 .career {
   @include section-padding;
 
-  .bento--career {
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+
+    .chip {
+      min-width: 64px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      background: $color-card;
+      color: $color-muted;
+      border: 1px solid $color-line;
+      transition:
+        color 0.2s $ease-out,
+        background-color 0.2s $ease-out,
+        border-color 0.2s $ease-out;
+
+      &:hover {
+        color: $color-ink;
+        border-color: $color-soft;
+      }
+
+      &.is-active {
+        background: $color-blue;
+        color: #fff;
+        border-color: $color-blue;
+      }
+    }
+  }
+
+  .bento--career,
+  .bento--certs {
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+
+  .bento--certs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    @media (max-width: $bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: $bp-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.ccert {
+  @include tile;
+  @include tile-hover;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: $color-card;
+
+  &__index {
+    @include label;
+    color: $color-soft;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: $color-ink;
+  }
+
+  &__meta {
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-muted;
   }
 }
 
