@@ -29,9 +29,9 @@
       }
 
       &.is-active {
-        background: $color-ink;
+        background: $color-blue;
         color: #fff;
-        border-color: $color-ink;
+        border-color: $color-blue;
       }
     }
   }
@@ -104,21 +104,13 @@
     }
 
     &:hover {
-      background: $color-line-soft;
+      background: var(--accent-soft);
     }
   }
 
   &.is-open &__header,
   &.is-open &__header:hover {
     background: transparent;
-  }
-
-  &__accent {
-    width: 4px;
-    align-self: stretch;
-    border-radius: 999px;
-    background: var(--accent);
-    flex-shrink: 0;
   }
 
   &__head-body {

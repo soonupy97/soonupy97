@@ -41,7 +41,6 @@ function ProjectAccordionItem({
         aria-controls={panelId}
         onClick={onToggle}
       >
-        <span className="pacc__accent" aria-hidden="true" />
         <div className="pacc__head-body">
           <div className="pacc__title-row">
             <h3 className="pacc__title">{project.title}</h3>
