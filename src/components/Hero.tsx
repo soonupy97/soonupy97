@@ -85,7 +85,7 @@ function AvatarTile() {
       </div>
       <div className="tile__caption">
         <strong>@soonupy</strong>
-        <span>Seoul · Web Publisher</span>
+        <span>Between design &amp; code</span>
       </div>
     </div>
   )
@@ -95,16 +95,16 @@ function StatsTile() {
   return (
     <div className="tile tile--stats">
       <div className="stat">
-        <strong>6+</strong>
-        <span>Years</span>
+        <strong>Figma</strong>
+        <span>Design</span>
       </div>
       <div className="stat">
-        <strong>40+</strong>
-        <span>Projects</span>
+        <strong>SCSS</strong>
+        <span>Style</span>
       </div>
       <div className="stat">
-        <strong>AA</strong>
-        <span>WCAG 2.1</span>
+        <strong>React</strong>
+        <span>Component</span>
       </div>
     </div>
   )
@@ -124,7 +124,7 @@ function ClockTile() {
 
 function StackTile() {
   return (
-    <div className="tile tile--stack">
+    <a className="tile tile--stack" href="#skills">
       <span className="tile__label">Skills</span>
       <div className="ticker">
         <ul className="ticker__track">
@@ -133,7 +133,7 @@ function StackTile() {
           ))}
         </ul>
       </div>
-    </div>
+    </a>
   )
 }
 
@@ -142,7 +142,7 @@ function CareerTile() {
     <a className="tile tile--career" href="#career">
       <span className="tile__eyebrow">Career</span>
       <ol className="career-list">
-        {careers.map((c) => (
+        {careers.slice(0, 3).map((c) => (
           <li key={c.company} className={c.current ? 'is-current' : undefined}>
             <span className="dot" aria-hidden="true" />
             <div>
@@ -154,29 +154,34 @@ function CareerTile() {
           </li>
         ))}
       </ol>
-      <span className="more">
-        커리어 보기
-        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-          <path
-            d="M5 3l4 4-4 4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
     </a>
   )
 }
 
+const FEATURED_CERTS = [
+  '컴퓨터그래픽스운용기능사',
+  'GTQ 포토샵 1급',
+  'GTQ 일러스트 1급',
+]
+
 function CertsTile() {
+  const featured = FEATURED_CERTS.map((name) =>
+    certs.find((c) => c.name === name),
+  ).filter((c): c is (typeof certs)[number] => Boolean(c))
+
   return (
-    <div className="tile tile--certs">
+    <a
+      className="tile tile--certs"
+      href="#career"
+      onClick={() =>
+        window.dispatchEvent(
+          new CustomEvent('career:tab', { detail: 'certs' }),
+        )
+      }
+    >
       <span className="tile__eyebrow">Certifications</span>
       <ul className="cert-list">
-        {certs.map((c) => (
+        {featured.map((c) => (
           <li key={c.name}>
             <strong>{c.name}</strong>
             <span>
@@ -185,7 +190,7 @@ function CertsTile() {
           </li>
         ))}
       </ul>
-    </div>
+    </a>
   )
 }
 

@@ -155,6 +155,10 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  transition:
+    transform 0.3s $ease-out,
+    box-shadow 0.3s $ease-out,
+    background 0.3s $ease-out;
 
   &__eyebrow {
     @include label;
@@ -239,7 +243,7 @@
 
 // 2) Avatar tile
 .tile--avatar {
-  background: linear-gradient(135deg, #fff, $color-blue-soft);
+  background: linear-gradient(180deg, $color-blue-soft, $color-card);
   perspective: 800px;
   align-items: center;
   justify-content: center;
@@ -413,18 +417,46 @@
     letter-spacing: -0.01em;
     color: #fff;
   }
+
+  .tile__hint {
+    color: rgba(#fff, 0.72);
+
+    .dot {
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(#fff, 0.2);
+      animation: pulse-white 1.6s $ease-out infinite;
+    }
+  }
+}
+
+@keyframes pulse-white {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
 }
 
 // 5) Stack ticker tile
 .tile--stack {
   padding: 24px;
-  background: $color-blue-soft;
+  background: linear-gradient(180deg, $color-mint-soft, $color-card);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
+  &:hover {
+    background: linear-gradient(
+      180deg,
+      color.mix($color-mint, $color-mint-soft, 16%),
+      $color-card
+    );
+  }
+
   .tile__label {
-    color: $color-blue-dark;
+    color: $color-ink;
   }
 
   .ticker {
@@ -449,7 +481,7 @@
       padding: 8px 16px;
       border-radius: 999px;
       background: $color-card;
-      color: $color-blue-dark;
+      color: $color-ink;
       font-size: 14px;
       font-weight: 600;
     }
@@ -459,19 +491,19 @@
 // 6) Career tile
 .tile--career {
   padding: 24px;
-  background: $color-blue-soft;
+  background: linear-gradient(180deg, $color-coral-soft, $color-card);
   cursor: pointer;
-  transition:
-    background-color 0.3s $ease-out,
-    transform 0.4s $ease-out,
-    box-shadow 0.4s $ease-out;
 
   &:hover {
-    background: color.mix($color-blue, $color-blue-soft, 16%);
+    background: linear-gradient(
+      180deg,
+      color.mix($color-coral, $color-coral-soft, 16%),
+      $color-card
+    );
   }
 
   .tile__eyebrow {
-    color: $color-blue-dark;
+    color: $color-coral;
   }
 
   .career-list {
@@ -490,7 +522,7 @@
       top: 8px;
       bottom: 8px;
       width: 1px;
-      background: rgba($color-blue, 0.3);
+      background: rgba($color-coral, 0.3);
     }
 
     li {
@@ -506,14 +538,14 @@
         margin-top: 4px;
         border-radius: 50%;
         background: $color-card;
-        border: 2px solid rgba($color-blue, 0.45);
+        border: 2px solid rgba($color-coral, 0.45);
         z-index: 1;
       }
 
       &.is-current .dot {
-        background: $color-blue;
-        border-color: $color-blue;
-        box-shadow: 0 0 0 4px rgba($color-blue, 0.18);
+        background: $color-coral;
+        border-color: $color-coral;
+        box-shadow: 0 0 0 4px rgba($color-coral, 0.18);
       }
 
       > div {
@@ -540,47 +572,23 @@
     }
   }
 
-  .more {
-    margin-top: auto;
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 999px;
-
-    background: $color-card;
-    color: $color-ink;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-
-    transition:
-      background-color 0.25s $ease-out,
-      color 0.25s $ease-out;
-
-    svg {
-      transition: transform 0.3s $ease-out;
-    }
-  }
-
-  &:hover .more {
-    background: $color-ink;
-    color: #fff;
-
-    svg {
-      transform: translateX(2px);
-    }
-  }
 }
 
 // 7) Certifications tile
 .tile--certs {
   padding: 24px;
-  background: $color-mint-soft;
+  background: linear-gradient(180deg, $color-yellow-soft, $color-card);
+
+  &:hover {
+    background: linear-gradient(
+      180deg,
+      color.mix($color-yellow, $color-yellow-soft, 16%),
+      $color-card
+    );
+  }
 
   .tile__eyebrow {
-    color: $color-mint;
+    color: $color-ink;
   }
 
   .cert-list {
@@ -596,7 +604,7 @@
       flex-direction: column;
       gap: 4px;
       padding-bottom: 16px;
-      border-bottom: 1px solid rgba($color-mint, 0.24);
+      border-bottom: 1px solid rgba($color-yellow, 0.32);
 
       &:last-child {
         padding-bottom: 0;
