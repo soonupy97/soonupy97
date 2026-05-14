@@ -10,9 +10,9 @@ export type CareerEntry = {
 
 export const careers: CareerEntry[] = [
   {
-    company: 'Cadian (캐디안)',
-    role: '웹 퍼블리셔',
-    period: '2024 — 현재',
+    company: '캐디안 (Cadian)',
+    role: '클라우드플랫폼팀 · 주임연구원',
+    period: '2024.04 — 현재',
     current: true,
     summary:
       '약 2년간 8개 서비스의 UI 구현·유지보수와 사내 디자인 시스템(cadian-ui)을 단독 설계·구현. 개발 환경 표준화도 주도.',
@@ -25,31 +25,30 @@ export const careers: CareerEntry[] = [
     stack: ['React', 'TypeScript', 'SCSS', 'BEM', 'Figma', 'Storybook'],
   },
   {
-    company: 'Studio Onestep (가상)',
-    role: '프론트엔드 퍼블리셔',
-    period: '2022 — 2024',
-    summary:
-      'SaaS 스타트업의 마케팅 사이트와 어드민 콘솔 UI를 담당. 디자이너 1인·개발자 2인 소규모 팀에서 마크업·스타일·간단한 컴포넌트 개발 전반을 책임짐.',
-    highlights: [
-      '랜딩페이지 5종·이메일 템플릿 12종 제작 — 다국어(한/영/일) 대응',
-      'Sass 토큰·믹스인 라이브러리 정리로 디자인 변경 반영 시간 60% 단축',
-      'Storybook 도입과 컴포넌트 문서화로 신규 합류 개발자 온보딩 시간 단축',
-      'GA4 이벤트 트래킹 마크업 가이드 정립',
-    ],
-    stack: ['HTML', 'Sass', 'JavaScript', 'GSAP', 'Storybook'],
+    company: '삼안 (SAMAN)',
+    role: '경영지원본부 디자인팀 · 사원',
+    period: '2022.10 — 2023.10',
+    summary: '경영지원본부 디자인팀에서 사내 디자인 업무 수행.',
+    highlights: ['사내 디자인 가이드·인쇄물 보조 작업'],
+    stack: ['Photoshop', 'Illustrator'],
   },
   {
-    company: '(주)노블픽셀 (가상)',
-    role: '웹 퍼블리셔',
-    period: '2020 — 2022',
-    summary:
-      '에이전시 환경에서 이커머스·교육·F&B 등 다양한 산업군 클라이언트 사이트 퍼블리싱. 반응형·크로스브라우저·SEO 마크업 기본기를 다짐.',
+    company: '구랩 (GOOLAB)',
+    role: '웹디자인팀 · 주임',
+    period: '2021.03 — 2022.09',
+    summary: '웹디자인팀에서 클라이언트 웹사이트 디자인과 퍼블리싱을 담당.',
     highlights: [
-      '이커머스 PDP·체크아웃 플로우 마크업 — IE11 포함 크로스브라우저 대응',
-      '교육 플랫폼 LMS UI — 시맨틱 마크업과 키보드 접근성 가이드라인 적용',
-      'Gulp 기반 빌드 파이프라인 구성 (Sass 컴파일·이미지 압축·자동 새로고침)',
-      'Zeplin·Figma 시안을 픽셀 단위 정합성으로 핸드오프 받아 구현',
+      '반응형 웹사이트 디자인·퍼블리싱',
+      '디자인 시안과 마크업 일관성 관리',
     ],
-    stack: ['HTML', 'Sass', 'JavaScript', 'Gulp', 'Zeplin'],
+    stack: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Photoshop'],
+  },
+  {
+    company: '하나컴퓨터학원',
+    role: 'GTQ 자격증 강사',
+    period: '2019.12 — 2021.02',
+    summary: 'GTQ 그래픽 자격증 과정 강사로 수강생 실기·이론 지도.',
+    highlights: ['포토샵·일러스트레이터 실기 강의'],
+    stack: ['Photoshop', 'Illustrator'],
   },
 ]
