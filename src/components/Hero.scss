@@ -1,4 +1,3 @@
-@use 'sass:color';
 @use '../styles/variables' as *;
 @use '../styles/mixins' as *;
 
@@ -40,7 +39,7 @@
     > .col--right {
       flex: 1;
 
-      > .tile--avatar {
+      > .tile--github {
         flex: 2;
         min-height: 0;
       }
@@ -81,7 +80,7 @@
       > .col--right {
         flex-direction: row;
 
-        > .tile--avatar {
+        > .tile--github {
           flex: 1;
           min-height: 260px;
         }
@@ -134,13 +133,13 @@
       > .col--narrow {
         flex-direction: column;
 
-        > .tile--avatar,
+        > .tile--github,
         > .tile--stats,
         > .tile--clock,
         > .tile--stack {
           min-height: 140px;
         }
-        > .tile--avatar {
+        > .tile--github {
           min-height: 240px;
         }
       }
@@ -163,9 +162,6 @@
   &__eyebrow {
     @include label;
     color: $color-blue;
-  }
-  &__label {
-    @include label;
   }
   &__hint {
     @include label;
@@ -230,7 +226,7 @@
       color: $color-blue;
     }
     .hl {
-      background: linear-gradient(180deg, transparent 60%, $color-yellow-soft 0);
+      background: linear-gradient(180deg, transparent 60%, $color-yellow 0);
       padding: 0 4px;
       border-radius: 8px;
     }
@@ -241,8 +237,8 @@
   }
 }
 
-// 2) Avatar tile
-.tile--avatar {
+// 2) GitHub tile
+.tile--github {
   background: linear-gradient(180deg, $color-blue-soft, $color-card);
   perspective: 800px;
   align-items: center;
@@ -337,6 +333,33 @@
     }
     span {
       @include label;
+      position: relative;
+      transition: color 0.2s $ease-out;
+
+      &::after {
+        content: 'GitHub ↗';
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $color-blue;
+        opacity: 0;
+        transform: translateX(-4px);
+        transition:
+          opacity 0.2s $ease-out,
+          transform 0.2s $ease-out;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &:hover .tile__caption span {
+    color: transparent;
+
+    &::after {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 }
@@ -397,9 +420,18 @@
       font-weight: 800;
       letter-spacing: -0.03em;
       color: $color-ink;
+      transition: color 0.2s $ease-out;
     }
     span {
       @include label;
+      transition: color 0.2s $ease-out;
+    }
+
+    &:hover strong {
+      color: $color-blue;
+    }
+    &:hover span {
+      color: $color-ink;
     }
   }
 }
@@ -407,7 +439,7 @@
 // 4) Clock tile
 .tile--clock {
   padding: 24px;
-  background: $color-ink;
+  background: $color-blue;
   color: #fff;
 
   strong {
@@ -423,40 +455,39 @@
 
     .dot {
       background: #fff;
-      box-shadow: 0 0 0 4px rgba(#fff, 0.2);
-      animation: pulse-white 1.6s $ease-out infinite;
+      box-shadow: 0 0 0 3px rgba(#fff, 0.22);
+      animation: pulse-white 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
     }
   }
 }
 
 @keyframes pulse-white {
-  0%,
-  100% {
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+  0% {
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.22),
+      0 0 0 3px rgba(255, 255, 255, 0.5);
   }
-  50% {
-    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  60% {
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.22),
+      0 0 0 8px rgba(255, 255, 255, 0.06);
+  }
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.22),
+      0 0 0 9px rgba(255, 255, 255, 0);
   }
 }
 
 // 5) Stack ticker tile
 .tile--stack {
   padding: 24px;
-  background: linear-gradient(180deg, $color-mint-soft, $color-card);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   &:hover {
-    background: linear-gradient(
-      180deg,
-      color.mix($color-mint, $color-mint-soft, 16%),
-      $color-card
-    );
-  }
-
-  .tile__label {
-    color: $color-ink;
+    background: linear-gradient(180deg, $color-blue-soft, $color-card);
   }
 
   .ticker {
@@ -480,7 +511,7 @@
       flex-shrink: 0;
       padding: 8px 16px;
       border-radius: 999px;
-      background: $color-card;
+      background: $color-line-soft;
       color: $color-ink;
       font-size: 14px;
       font-weight: 600;
@@ -491,19 +522,10 @@
 // 6) Career tile
 .tile--career {
   padding: 24px;
-  background: linear-gradient(180deg, $color-coral-soft, $color-card);
   cursor: pointer;
 
   &:hover {
-    background: linear-gradient(
-      180deg,
-      color.mix($color-coral, $color-coral-soft, 16%),
-      $color-card
-    );
-  }
-
-  .tile__eyebrow {
-    color: $color-coral;
+    background: linear-gradient(180deg, $color-blue-soft, $color-card);
   }
 
   .career-list {
@@ -522,7 +544,7 @@
       top: 8px;
       bottom: 8px;
       width: 1px;
-      background: rgba($color-coral, 0.3);
+      background: rgba($color-blue, 0.3);
     }
 
     li {
@@ -538,14 +560,14 @@
         margin-top: 4px;
         border-radius: 50%;
         background: $color-card;
-        border: 2px solid rgba($color-coral, 0.45);
+        border: 2px solid rgba($color-blue, 0.45);
         z-index: 1;
       }
 
       &.is-current .dot {
-        background: $color-coral;
-        border-color: $color-coral;
-        box-shadow: 0 0 0 4px rgba($color-coral, 0.18);
+        background: $color-blue;
+        border-color: $color-blue;
+        box-shadow: 0 0 0 4px rgba($color-blue, 0.18);
       }
 
       > div {
@@ -577,18 +599,9 @@
 // 7) Certifications tile
 .tile--certs {
   padding: 24px;
-  background: linear-gradient(180deg, $color-yellow-soft, $color-card);
 
   &:hover {
-    background: linear-gradient(
-      180deg,
-      color.mix($color-yellow, $color-yellow-soft, 16%),
-      $color-card
-    );
-  }
-
-  .tile__eyebrow {
-    color: $color-ink;
+    background: linear-gradient(180deg, $color-blue-soft, $color-card);
   }
 
   .cert-list {
@@ -604,7 +617,7 @@
       flex-direction: column;
       gap: 4px;
       padding-bottom: 16px;
-      border-bottom: 1px solid rgba($color-yellow, 0.32);
+      border-bottom: 1px solid $color-line;
 
       &:last-child {
         padding-bottom: 0;

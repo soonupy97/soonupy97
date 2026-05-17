@@ -97,14 +97,14 @@
 |프로젝트|프로젝트설명|기간|소속|비고|
 |:---:|:---:|:---:|:---:|:---:|
 |<strong>[DDUI-DDUI](https://www.dduiddui.kr/)<strong>|반려견 산책 지수 기반 날씨 제공 웹서비스|2025.06 ~ 2025.08|DDUI-DDUI|<strong>사이드 프로젝트<strong>|
-|<strong>[Developers](https://demo-viewer.cadian.com/API.html)<strong>| 개발자센터 SDK&API 레퍼런스 제공 서비스 |2025.06 ~ 현재|캐디안|<strong>사내 프로젝트<strong>|
-|<strong>[WebCAD](https://help.cadian.com/ko/)<strong>|클라우드 기반 WebCAD 서비스|2025.04 ~ 현재|캐디안|<strong>사내 프로젝트<strong>|
+|<strong>[Developers](https://demo-viewer.cadian.com/API.html)<strong>| 개발자센터 SDK&API 레퍼런스 제공 서비스 |2025.06 ~ 현재|위즈코어|<strong>사내 프로젝트<strong>|
+|<strong>[WebCAD](https://help.cadian.com/ko/)<strong>|클라우드 기반 WebCAD 서비스|2025.04 ~ 현재|위즈코어|<strong>사내 프로젝트<strong>|
 |<strong>[sd_haru_camping](https://haru-auto-camping.imweb.me/)<strong>|캠핑장 소개 및 예약 안내 서비스|2025.05 ~ 2025.09|Soonupy|<strong>아웃소싱<strong>|
-|<strong>[Help Center](https://help.cadian.com/ko/)<strong>|도움말과 FAQ를 포함한 사용자 지원 서비스|2024.11 ~ 2025.01|캐디안|<strong>사내 프로젝트<strong>|
-|<strong>[File Converter](https://converter.cadian.com/)<strong>|캐드파일 → PNG, JPG, PDF 변환 서비스|2024.12 ~ 2025.03|캐디안|<strong>사내 프로젝트<strong>|
-|<strong>[File Manager](https://file.cadian.com/)<strong>|클라우드 파일관리자|2024.10 ~ 2025.02|캐디안|<strong>사내 프로젝트<strong>|
+|<strong>[Help Center](https://help.cadian.com/ko/)<strong>|도움말과 FAQ를 포함한 사용자 지원 서비스|2024.11 ~ 2025.01|위즈코어|<strong>사내 프로젝트<strong>|
+|<strong>[File Converter](https://converter.cadian.com/)<strong>|캐드파일 → PNG, JPG, PDF 변환 서비스|2024.12 ~ 2025.03|위즈코어|<strong>사내 프로젝트<strong>|
+|<strong>[File Manager](https://file.cadian.com/)<strong>|클라우드 파일관리자|2024.10 ~ 2025.02|위즈코어|<strong>사내 프로젝트<strong>|
 |<strong>[Waggle Waggle](https://wagglewaggle.netlify.app/)<strong>|한글날 맞이 순우리말 방명록 서비스|2024.06 ~ 2024.10|Waggle Waggle|<strong>사이드 프로젝트</strong>|
-|<strong>[CADian Renewal](https://converter.cadian.com/)<strong>|홈페이지 리뉴얼|2024.04 ~ 2024.07|캐디안|<strong>사내 프로젝트<strong>|
+|<strong>[CADian Renewal](https://converter.cadian.com/)<strong>|홈페이지 리뉴얼|2024.04 ~ 2024.07|위즈코어|<strong>사내 프로젝트<strong>|
 
 <!-- 사용 기술 스택 -->
 <!--
@@ -125,7 +125,7 @@
 <!-- 경험 -->
 ## 🏃 Work Experience
 <ul>
-  <li>2024.04 ~ 현재 <strong>· ㈜캐디안 연구소 (클라우드플랫폼팀 / 주임연구원)</strong></li>
+  <li>2024.04 ~ 현재 <strong>· ㈜위즈코어 연구소 (클라우드플랫폼팀 / 주임연구원)</strong></li>
   <li>2022.10 ~ 2023.10 <strong>· ㈜삼안 경영지원본부 ( 디자인팀 / 사원)</strong></li>
   <li>2021.03 ~ 2022.09 <strong>· ㈜구랩 (웹디자인팀 / 주임)</strong></li>
   <li>2019.12 ~ 2021.02 <strong>· 하나컴퓨터학원 GTQ자격증 강사</strong></li>

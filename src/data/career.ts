@@ -10,7 +10,7 @@ export type CareerEntry = {
 
 export const careers: CareerEntry[] = [
   {
-    company: '캐디안 (Cadian)',
+    company: '위즈코어 (Wizcore)',
     role: '클라우드플랫폼팀 · 주임연구원',
     period: '2024.04 — 현재',
     current: true,

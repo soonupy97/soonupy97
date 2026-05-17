@@ -63,14 +63,11 @@ function Career() {
             role="tabpanel"
             className="bento bento--career"
           >
-            {careers.map((c, i) => (
+            {careers.map((c) => (
               <li key={c.company} className="ccard">
                 <div className="ccard__head">
                   <span className="ccard__period">{c.period}</span>
                   {c.current && <span className="ccard__badge">재직 중</span>}
-                  <span className="ccard__index" aria-hidden="true">
-                    0{i + 1}
-                  </span>
                 </div>
 
                 <h3 className="ccard__company">
@@ -103,11 +100,8 @@ function Career() {
             role="tabpanel"
             className="bento bento--certs"
           >
-            {certs.map((c, i) => (
+            {certs.map((c) => (
               <li key={c.name} className="ccert">
-                <span className="ccert__index" aria-hidden="true">
-                  0{i + 1}
-                </span>
                 <strong className="ccert__name">{c.name}</strong>
                 <span className="ccert__meta">
                   {c.issuer} · {c.year}

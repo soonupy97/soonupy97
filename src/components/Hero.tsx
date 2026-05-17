@@ -65,13 +65,17 @@ function NameTile() {
   )
 }
 
-function AvatarTile() {
-  const tilt = useTilt<HTMLDivElement>(5)
+function GithubTile() {
+  const tilt = useTilt<HTMLAnchorElement>(5)
   return (
-    <div
+    <a
       ref={tilt.ref}
       {...tilt.handlers}
-      className="tile tile--avatar"
+      className="tile tile--github"
+      href={profile.github}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="GitHub @soonupy"
     >
       <div className="orbit" aria-hidden="true">
         <span className="orbit__ring orbit__ring--outer" />
@@ -87,7 +91,7 @@ function AvatarTile() {
         <strong>@soonupy</strong>
         <span>Between design &amp; code</span>
       </div>
-    </div>
+    </a>
   )
 }
 
@@ -125,7 +129,7 @@ function ClockTile() {
 function StackTile() {
   return (
     <a className="tile tile--stack" href="#skills">
-      <span className="tile__label">Skills</span>
+      <span className="tile__eyebrow">Skills</span>
       <div className="ticker">
         <ul className="ticker__track">
           {[...TAGS, ...TAGS].map((t, i) => (
@@ -202,7 +206,7 @@ function Hero() {
           <div className="row row--main">
             <NameTile />
             <div className="col col--right">
-              <AvatarTile />
+              <GithubTile />
               <StatsTile />
             </div>
           </div>

@@ -43,6 +43,7 @@ body {
   &--primary {
     background: $color-blue;
     color: #fff;
+    font-family: $font-mono;
     box-shadow: 0 6px 18px -8px rgba(0, 122, 255, 0.6);
 
     &:hover {
@@ -54,6 +55,7 @@ body {
   &--ghost {
     background: $color-card;
     color: $color-ink;
+    font-family: $font-mono;
     border: 1px solid $color-line;
 
     &:hover {
