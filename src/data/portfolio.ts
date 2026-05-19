@@ -25,9 +25,11 @@ export const profile = {
   role: 'Web Publisher / Frontend',
   tagline: '시맨틱 마크업과 반응형 UI로 브랜드를 짓습니다.',
   intro:
-    '6년차 웹 퍼블리셔로 시맨틱 HTML, 모듈화된 SCSS, 그리고 웹 접근성을 기반으로 견고한 프론트엔드를 구축합니다. 디자이너와 개발자 사이의 흐름을 매끄럽게 잇는 일을 좋아합니다.',
-  email: 'hello@soonupy.dev',
+    '시맨틱·SCSS·접근성을 기본기로, 디자인과 개발 사이의 빈틈을 메웁니다.',
+  email: 'soonupy97@naver.com',
   github: 'https://github.com/',
+  notion: 'https://www.notion.so/226d8b3c5b6e803780e9f5e769a06f8d',
+  instagram: 'https://www.instagram.com/soonupy',
   location: 'Seoul, Korea',
 }
 

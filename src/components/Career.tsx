@@ -26,7 +26,7 @@ function Career() {
           <span className="eyebrow">Career</span>
           <div className="section-title__body">
             <h2>지나온 시간.</h2>
-            <p>웹 퍼블리셔로서의 재직 이력과 받은 자격을 정리합니다.</p>
+            <p>디자이너 · 웹퍼블리셔의 재직 이력과 받은 자격을 정리합니다.</p>
           </div>
         </div>
 
@@ -72,9 +72,6 @@ function Career() {
 
                 <h3 className="ccard__company">
                   {c.company}
-                  <span className="ccard__dot" aria-hidden="true">
-                    ·
-                  </span>
                   <span className="ccard__role">{c.role}</span>
                 </h3>
 

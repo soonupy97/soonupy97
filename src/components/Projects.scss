@@ -57,7 +57,9 @@
     box-shadow 0.25s $ease-out;
 
   &.is-open {
-    background: var(--accent-soft);
+    --accent: #{$color-blue};
+    --accent-soft: #{$color-blue-soft};
+    background: linear-gradient(180deg, $color-blue-soft, $color-card);
   }
 
   &--blue {
@@ -104,7 +106,7 @@
     }
 
     &:hover {
-      background: var(--accent-soft);
+      background: linear-gradient(180deg, $color-blue-soft, $color-card);
     }
   }
 

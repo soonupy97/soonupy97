@@ -13,12 +13,37 @@ const NAV = [
 function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [activeHref, setActiveHref] = useState<string>('')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const update = () => {
+      const threshold = window.innerHeight * 0.3
+      let current = ''
+      for (const item of NAV) {
+        const el = document.querySelector<HTMLElement>(item.href)
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= threshold && rect.bottom > threshold) {
+          current = item.href
+          break
+        }
+      }
+      setActiveHref(current)
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
   }, [])
 
   return (
@@ -37,7 +62,10 @@ function Header() {
         >
           <ul>
             {NAV.map((item) => (
-              <li key={item.href}>
+              <li
+                key={item.href}
+                className={activeHref === item.href ? 'is-active' : undefined}
+              >
                 <a href={item.href} onClick={() => setOpen(false)}>
                   {item.label}
                 </a>

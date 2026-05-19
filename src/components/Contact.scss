@@ -13,26 +13,27 @@
       flex: 1 1 100%;
     }
     .ctile--git,
-    .ctile--blog,
+    .ctile--notion,
+    .ctile--instagram,
     .ctile--email {
-      flex: 1 1 calc(33.333% - 10.667px);
+      flex: 1 1 calc(25% - 12px);
       min-width: 0;
     }
 
     @media (max-width: $bp-lg) {
       .ctile--git,
-      .ctile--blog {
-        flex: 1 1 calc(50% - 8px);
-      }
+      .ctile--notion,
+      .ctile--instagram,
       .ctile--email {
-        flex: 1 1 100%;
+        flex: 1 1 calc(50% - 8px);
       }
     }
 
     @media (max-width: $bp-sm) {
       .ctile--cta,
       .ctile--git,
-      .ctile--blog,
+      .ctile--notion,
+      .ctile--instagram,
       .ctile--email {
         flex: 1 1 100%;
       }
@@ -47,6 +48,10 @@
   display: flex;
   flex-direction: column;
   min-height: 180px;
+  transition:
+    transform 0.2s $ease-out,
+    box-shadow 0.2s $ease-out,
+    background 0.3s $ease-out;
 
   &__label {
     @include label;
@@ -101,7 +106,7 @@
       margin-block: 2rem;
 
       .hl {
-        background: linear-gradient(180deg, transparent 60%, $color-yellow 0);
+        background: linear-gradient(180deg, transparent 60%, rgba(251, 191, 36) 0);
         padding: 0 8px;
         border-radius: 8px;
         color: $color-ink;
@@ -116,24 +121,21 @@
       position: absolute;
       bottom: -40px;
       right: -20px;
-      font-size: 320px;
-      line-height: 1;
-      opacity: 0.16;
+      width: 320px;
+      height: 320px;
+      object-fit: contain;
+      opacity: 0.26;
+      filter: brightness(0) invert(1);
       transform: rotate(-12deg);
       pointer-events: none;
     }
   }
 
-  &--git {
-    background: $color-mint-soft;
-  }
-
-  &--blog {
-    background: $color-pink-soft;
-  }
-
-  &--email {
-    background: $color-yellow-soft;
+  &--git:hover,
+  &--notion:hover,
+  &--instagram:hover,
+  &--email:hover {
+    background: linear-gradient(180deg, $color-blue-soft, $color-card);
   }
 }
 

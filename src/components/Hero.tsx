@@ -98,15 +98,15 @@ function GithubTile() {
 function StatsTile() {
   return (
     <div className="tile tile--stats">
-      <div className="stat">
+      <div className="stat stat--figma">
         <strong>Figma</strong>
         <span>Design</span>
       </div>
-      <div className="stat">
+      <div className="stat stat--scss">
         <strong>SCSS</strong>
         <span>Style</span>
       </div>
-      <div className="stat">
+      <div className="stat stat--react">
         <strong>React</strong>
         <span>Component</span>
       </div>
@@ -146,7 +146,7 @@ function CareerTile() {
     <a className="tile tile--career" href="#career">
       <span className="tile__eyebrow">Career</span>
       <ol className="career-list">
-        {careers.slice(0, 3).map((c) => (
+        {careers.slice(0, 4).map((c) => (
           <li key={c.company} className={c.current ? 'is-current' : undefined}>
             <span className="dot" aria-hidden="true" />
             <div>
