@@ -86,7 +86,7 @@
     line-height: 1.2;
   }
 
-  @for $i from 1 through 20 {
+  @for $i from 1 through 24 {
     &__item:nth-child(#{$i}) {
       animation-delay: #{$i * 40}ms;
     }

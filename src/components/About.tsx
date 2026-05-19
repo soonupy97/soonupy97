@@ -61,7 +61,7 @@ function About() {
         <div className="section-title">
           <span className="eyebrow">About</span>
           <div className="section-title__body">
-            <h2>마크업으로 사용자 경험을 설계합니다.</h2>
+            <h2>사용자 경험을 설계합니다.</h2>
             <p>{profile.intro}</p>
           </div>
         </div>

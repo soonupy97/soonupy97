@@ -159,6 +159,10 @@
     box-shadow 0.3s $ease-out,
     background 0.3s $ease-out;
 
+  @media (max-width: $bp-sm) {
+    padding: 24px;
+  }
+
   &__eyebrow {
     @include label;
     color: $color-blue;
@@ -226,14 +230,14 @@
       color: $color-blue;
     }
     .hl {
-      background: linear-gradient(180deg, transparent 60%, $color-yellow 0);
+      background: linear-gradient(180deg, transparent 60%, rgba(251, 191, 36) 0);
       padding: 0 4px;
       border-radius: 8px;
     }
   }
 
-  @media (max-width: $bp-md) {
-    padding: 32px;
+  @media (max-width: $bp-sm) {
+    padding: 24px;
   }
 }
 
@@ -427,11 +431,18 @@
       transition: color 0.2s $ease-out;
     }
 
-    &:hover strong {
-      color: $color-blue;
-    }
     &:hover span {
       color: $color-ink;
+    }
+
+    &--figma:hover strong {
+      color: #f24e1e;
+    }
+    &--scss:hover strong {
+      color: #cc6699;
+    }
+    &--react:hover strong {
+      color: #61dafb;
     }
   }
 }
