@@ -11,8 +11,8 @@
     margin-bottom: 24px;
 
     .chip {
-      padding: 8px 16px;
-      font-size: 14px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
       font-weight: 600;
       border-radius: 999px;
       background: $color-card;
@@ -92,7 +92,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 24px 32px;
+    padding: 1.5rem 2rem;
     text-align: left;
     background: transparent;
     border: 0;
@@ -100,8 +100,8 @@
     cursor: pointer;
     transition: background-color 0.2s $ease-out;
 
-    @media (max-width: $bp-md) {
-      padding: 16px 24px;
+    @media (max-width: $breakpoint-mobile) {
+      padding: 1rem 1.5rem;
       gap: 12px;
     }
 
@@ -131,7 +131,7 @@
   }
 
   &__title {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: -0.02em;
     color: $color-ink;
@@ -151,13 +151,13 @@
   }
 
   &__role {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: $color-muted;
   }
 
   &__summary {
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.5;
     color: $color-ink-2;
   }
@@ -171,9 +171,9 @@
     padding: 0;
 
     li {
-      padding: 4px 8px;
+      padding: 0.25rem 0.5rem;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 600;
       background: $color-line-soft;
       color: $color-muted;
@@ -186,8 +186,8 @@
   }
 
   &__chevron {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -221,16 +221,16 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 0 32px 24px;
+    padding: 0 2rem 1.5rem;
 
-    @media (max-width: $bp-md) {
-      padding: 0 24px 24px;
+    @media (max-width: $breakpoint-mobile) {
+      padding: 0 1.5rem 1.5rem;
     }
   }
 
   &__desc {
     margin: 0;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.6;
     color: $color-ink-2;
   }
@@ -243,12 +243,12 @@
     margin: 0;
     padding: 0;
     color: $color-ink-2;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.6;
 
     li {
       position: relative;
-      padding-left: 16px;
+      padding-left: 1rem;
 
       &::before {
         content: '•';
@@ -270,8 +270,8 @@
 
     li {
       @include chip;
-      padding: 4px 8px;
-      font-size: 12px;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
     }
   }
 
@@ -280,12 +280,12 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
+    padding: 0.5rem 1rem;
     margin-top: 8px;
     border-radius: 999px;
     background: $color-card;
     color: $color-ink;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     box-shadow: $shadow-sm;

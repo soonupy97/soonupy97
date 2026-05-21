@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import soonupyLogo from '../assets/icons/soonupy.svg'
 import './Header.scss'
 
@@ -14,6 +14,8 @@ function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [activeHref, setActiveHref] = useState<string>('')
+  const navRef = useRef<HTMLElement | null>(null)
+  const toggleRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -21,6 +23,19 @@ function Header() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    if (!open) return
+    const onPointerDown = (e: PointerEvent) => {
+      const target = e.target as Node | null
+      if (!target) return
+      if (navRef.current?.contains(target)) return
+      if (toggleRef.current?.contains(target)) return
+      setOpen(false)
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => document.removeEventListener('pointerdown', onPointerDown)
+  }, [open])
 
   useEffect(() => {
     const update = () => {
@@ -57,6 +72,7 @@ function Header() {
         </a>
 
         <nav
+          ref={navRef}
           className={`site-header__nav${open ? ' is-open' : ''}`}
           aria-label="주요 메뉴"
         >
@@ -75,6 +91,7 @@ function Header() {
         </nav>
 
         <button
+          ref={toggleRef}
           type="button"
           className={`site-header__toggle${open ? ' is-open' : ''}`}
           aria-expanded={open}
