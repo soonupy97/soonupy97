@@ -2,7 +2,7 @@
 @use '../styles/mixins' as *;
 
 .site-footer {
-  padding-block: 16px;
+  padding-block: 1rem;
   border-top: 1px solid $color-line;
 
   &__inner {
@@ -11,7 +11,7 @@
     gap: 24px;
     flex-wrap: wrap;
 
-    @media (max-width: $bp-md) {
+    @media (max-width: $breakpoint-mobile) {
       justify-content: center;
       text-align: center;
     }
@@ -19,7 +19,7 @@
 
   .copy {
     color: $color-muted;
-    font-size: 14px;
+    font-size: 0.875rem;
     flex: 1;
     min-width: 0;
   }
@@ -31,8 +31,8 @@
   bottom: 16px;
   z-index: 40;
 
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   display: grid;
   place-items: center;
 
@@ -57,12 +57,12 @@
     right: calc(100% + 8px);
     top: 50%;
 
-    padding: 4px 8px;
-    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
     white-space: nowrap;
     color: #fff;
     background: $color-ink;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 
     opacity: 0;
     transform: translateY(-50%) translateX(4px);

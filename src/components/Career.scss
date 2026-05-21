@@ -11,9 +11,9 @@
     margin-bottom: 32px;
 
     .chip {
-      min-width: 64px;
-      padding: 8px 16px;
-      font-size: 14px;
+      min-width: 4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
       font-weight: 600;
       border-radius: 999px;
       background: $color-card;
@@ -49,10 +49,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 
-    @media (max-width: $bp-md) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @media (max-width: $bp-sm) {
+    @media (max-width: $breakpoint-mobile) {
       grid-template-columns: 1fr;
     }
   }
@@ -61,21 +58,21 @@
 .ccert {
   @include tile;
   @include tile-hover;
-  padding: 24px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 8px;
   background: $color-card;
 
   &__name {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: -0.02em;
     color: $color-ink;
   }
 
   &__meta {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
     color: $color-muted;
   }
@@ -84,14 +81,14 @@
 .ccard {
   @include tile;
   @include tile-hover;
-  padding: 32px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 16px;
   background: $color-card;
 
-  @media (max-width: $bp-md) {
-    padding: 24px;
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1.5rem;
   }
 
   &__head {
@@ -108,9 +105,9 @@
   &__badge {
     display: inline-flex;
     align-items: center;
-    padding: 4px 8px;
+    padding: 0.25rem 0.5rem;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 600;
     background: $color-blue-soft;
     color: $color-blue-dark;
@@ -123,7 +120,7 @@
   }
 
   &__company {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.02em;
     color: $color-ink;
@@ -138,14 +135,14 @@
   }
 
   &__role {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     color: $color-muted;
   }
 
   &__summary {
     color: $color-muted;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.6;
   }
 
@@ -154,12 +151,12 @@
     flex-direction: column;
     gap: 8px;
     color: $color-ink-2;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.6;
 
     li {
       position: relative;
-      padding-left: 16px;
+      padding-left: 1rem;
 
       &::before {
         content: '•';
@@ -179,8 +176,8 @@
 
     li {
       @include chip;
-      padding: 4px 8px;
-      font-size: 12px;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
     }
   }
 }

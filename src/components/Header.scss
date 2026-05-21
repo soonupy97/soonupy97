@@ -18,8 +18,8 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 0 16px;
-    height: 64px;
+    padding: 0 1rem;
+    height: 4rem;
     max-width: none;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.7);
@@ -39,8 +39,8 @@
     letter-spacing: -0.02em;
 
     .logo-mark {
-      width: 32px;
-      height: 32px;
+      width: 2rem;
+      height: 2rem;
       display: grid;
       place-items: center;
 
@@ -52,7 +52,7 @@
     }
 
     .logo-text {
-      font-size: 16px;
+      font-size: 1rem;
       color: $color-ink;
     }
   }
@@ -69,15 +69,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 16px;
+      padding: 0.5rem 1rem;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 600;
       color: $color-muted;
       transition:
         color 0.2s $ease-out,
         background-color 0.2s $ease-out;
-      height: 40px;
+      height: 2.5rem;
 
 
       &:hover {
@@ -96,20 +96,19 @@
 
   &__toggle {
     display: none;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 4px;
-    border-radius: 8px;
-    background: $color-line-soft;
+    border-radius: 0.5rem;
 
     span {
-      width: 16px;
-      height: 2px;
+      width: 1rem;
+      height: 0.125rem;
       background: $color-ink;
-      border-radius: 4px;
+      border-radius: 0.25rem;
       transition:
         transform 0.3s $ease-out,
         opacity 0.3s $ease-out;
@@ -128,16 +127,17 @@
     }
   }
 
-  @media (max-width: $bp-md) {
+  @media (max-width: $breakpoint-mobile) {
 
     &__nav {
       position: fixed;
-      inset: 76px 16px auto auto;
-      width: min(280px, calc(100vw - 32px));
+      left: 0;
+      top: 4.5rem;
+      width: 100%;
       background: $color-card;
       border: 1px solid $color-line;
-      border-radius: $radius-lg;
-      padding: 16px;
+      border-radius: 1rem;
+      padding: 1rem;
       box-shadow: $shadow-lg;
       transform: translateY(-12px);
       opacity: 0;
@@ -155,10 +155,6 @@
       ul {
         flex-direction: column;
         gap: 4px;
-      }
-      a {
-        display: block;
-        padding: 16px;
       }
     }
 

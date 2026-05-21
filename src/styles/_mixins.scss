@@ -4,18 +4,18 @@
   width: 100%;
   max-width: $container-max;
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: 1.5rem;
 
-  @media (max-width: $bp-md) {
-    padding-inline: 16px;
+  @media (max-width: $breakpoint-mobile) {
+    padding-inline: 1rem;
   }
 }
 
 @mixin section-padding {
-  padding-block: 96px;
+  padding-block: 6rem;
 
-  @media (max-width: $bp-md) {
-    padding-block: 48px;
+  @media (max-width: $breakpoint-mobile) {
+    padding-block: 3rem;
   }
 }
 
@@ -40,7 +40,7 @@
 
 @mixin label {
   font-family: $font-mono;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -48,21 +48,21 @@
 }
 
 @mixin display-xl {
-  font-size: clamp(40px, 6vw, 80px);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.05;
 }
 
 @mixin display-lg {
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
 @mixin display-md {
-  font-size: clamp(24px, 2.6vw, 32px);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -72,8 +72,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
-  font-size: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
   font-weight: 600;
   border-radius: 999px;
   background: $color-line-soft;
