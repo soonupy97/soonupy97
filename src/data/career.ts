@@ -36,10 +36,10 @@ export const careers: CareerEntry[] = [
     company: '구랩 (GOOLAB)',
     role: '웹디자인팀 · 주임',
     period: '2021.03 — 2022.09',
-    summary: '웹디자인팀에서 클라이언트 웹사이트 디자인과 퍼블리싱을 담당.',
+    summary: '웹디자인팀에서 쇼핑몰 상세페이지 콘텐츠 디자인 시안을 마크업으로 옮기는 퍼블리싱 작업을 담당.',
     highlights: [
-      '반응형 웹사이트 디자인·퍼블리싱',
-      '디자인 시안과 마크업 일관성 관리',
+      '쇼핑몰 상세페이지 콘텐츠 디자인 시안의 반응형 마크업 퍼블리싱',
+      '디자인 시안과 마크업 사이의 시각 일관성 유지',
     ],
     stack: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Photoshop'],
   },
