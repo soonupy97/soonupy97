@@ -34,13 +34,18 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Development',
     items: [
-      { name: 'JavaScript', slug: 'javascript' },
-      { name: 'TypeScript', slug: 'typescript' },
+      {
+        name: 'HTML',
+        slug: 'html5',
+        url: 'https://api.iconify.design/logos:html-5.svg',
+      },
       {
         name: 'CSS',
         slug: 'css3',
         url: 'https://api.iconify.design/logos:css-3.svg',
       },
+      { name: 'JavaScript', slug: 'javascript' },
+      { name: 'TypeScript', slug: 'typescript' },
       { name: 'Sass', slug: 'sass' },
       { name: 'React', slug: 'react' },
       {

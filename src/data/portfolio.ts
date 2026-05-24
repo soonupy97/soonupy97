@@ -52,7 +52,7 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'SCSS', 'BEM', 'Storybook', 'Figma'],
   },
   {
-    title: 'organization.cadian.com — 조직 관리 콘솔',
+    title: 'organization — 조직 관리 콘솔',
     description:
       'Cadian 조직 관리 콘솔의 프론트엔드를 처음부터 구축. 그룹·멤버 관리, SSO 인증, 시리얼·활동 로그, i18n까지 전 기능을 단일 SPA로 구현.',
     categories: ['Design', 'Publishing', 'Frontend'],
@@ -66,10 +66,10 @@ export const projects: Project[] = [
       'rolecode 기반 Owner / Admin / Member 권한 UX 차별화',
       'QA 테스트 케이스 100건 이상 수정·반영',
     ],
-    stack: ['React', 'TypeScript', 'SCSS', 'SSO', 'REST API', 'i18n'],
+    stack: ['React', 'TypeScript', 'SCSS', 'i18n'],
   },
   {
-    title: 'developers.cadian.com',
+    title: 'developers — SDK 개발자 문서',
     description:
       'Web CAD SDK인 ViewQ의 공식 개발자 문서 사이트 구축. WASM 연동 환경 위에 API 예제 25종을 인터랙티브하게 퍼블리싱하고, ESLint·Prettier·Husky 사내 표준을 자동화.',
     categories: ['Design', 'Publishing', 'Frontend'],
@@ -83,10 +83,10 @@ export const projects: Project[] = [
       'Anchor Navigation 컴포넌트 — 스크롤 위치 실시간 하이라이팅',
       'ESLint · Prettier · Husky 사내 표준 + Git Hooks 자동화 도입',
     ],
-    stack: ['React', 'TypeScript', 'WASM', 'Vite', 'ESLint', 'Husky'],
+    stack: ['React', 'TypeScript', 'SCSS'],
   },
   {
-    title: 'converter.cadian.com',
+    title: 'converter — 파일 컨버터',
     description:
       'Cadian 파일 컨버터 서비스의 UI 퍼블리싱과 기능 개선. 업로드 UX·글로벌 네비게이션·다국어 텍스트와 아이콘 정비로 한/영 서비스 일관성 확보.',
     categories: ['Publishing'],
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     stack: ['HTML', 'SCSS', 'JavaScript', '다국어'],
   },
   {
-    title: 'mypage.cadian.com — 조직 관리',
+    title: 'mypage — 조직 관리',
     description:
       '마이페이지 조직 생성·초대·권한 관리 UI 구현 및 API 연동. 3단계 위자드, 도메인 debounce 검증, rolecode 권한 표기, SSO authorize 연동까지 담당.',
     categories: ['Publishing', 'Frontend'],
@@ -117,10 +117,10 @@ export const projects: Project[] = [
       'rolecode 기반 권한 표기 + 조직 초대 수락·에러 처리 UI',
       'SSO authorize 연동 + token 미전달 버그 수정',
     ],
-    stack: ['React', 'TypeScript', 'SSO', 'REST API'],
+    stack: ['React', 'TypeScript', 'SCSS'],
   },
   {
-    title: 'file.cadian.com — 문서 뷰어 연동',
+    title: 'file drive — 문서 뷰어 연동',
     description:
       'Cadian 드라이브 서비스에 Polaris Office 기반 문서 뷰어를 연동. 드라이브 내 뷰어 환경 초기 구축 완료, 현재 Polaris 뷰어 통합 작업 진행 중.',
     categories: ['Frontend', 'Publishing'],
@@ -132,10 +132,10 @@ export const projects: Project[] = [
       '드라이브 시스템 내 문서 뷰어 연동 프로젝트 초기 구축 (완료)',
       'Polaris Office 뷰어 통합 작업 진행 중',
     ],
-    stack: ['React', 'TypeScript', 'Polaris Office'],
+    stack: ['React', 'TypeScript', 'SCSS'],
   },
   {
-    title: 'www.cadian.com — 공식 홈페이지',
+    title: 'cadian — 공식 홈페이지',
     description:
       '캐디안 공식 홈페이지의 콘텐츠 업데이트와 UI 유지보수. GNB·CEO 인사말·제품 비교표 등 다국어 콘텐츠 정비와 모바일 햄버거 메뉴 버그 대응.',
     categories: ['Publishing'],
@@ -151,7 +151,7 @@ export const projects: Project[] = [
     stack: ['HTML', 'CSS', '다국어'],
   },
   {
-    title: 'web.cadian.com — 웹 CAD 뷰어',
+    title: 'web cad — 웹 CAD 뷰어',
     description:
       'Cadian 웹 CAD 뷰어의 UI 개선과 다국어 번역 정비. 리본 메뉴(스케치) 항목 추가·아이콘 디자인, MTEXT 영역 디자인 수정, 한/영 번역 오류 수정 담당.',
     categories: ['Publishing', 'Design'],
@@ -167,12 +167,12 @@ export const projects: Project[] = [
     stack: ['HTML', 'CSS', 'SVG', '다국어'],
   },
   {
-    title: '뉴스레터 EDM 페이지',
+    title: 'News Letter Edm — 이메일 마크업',
     description:
       '이메일/뉴스레터·이벤트 프로모션용 EDM 페이지를 단독 제작. Figma 레이아웃을 이메일 클라이언트 호환 마크업으로 구현하고, cadian-ui 디자인 토큰과 일관성 유지.',
     categories: ['Design', 'Publishing'],
     role: '웹 퍼블리셔 (단독)',
-    year: '2026 ~',
+    year: '2024 ~',
     accent: 'coral',
     highlights: [
       '이메일/뉴스레터 · 이벤트 프로모션용 EDM 페이지 단독 제작',
