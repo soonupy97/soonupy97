@@ -1,9 +1,5 @@
-import { useMemo, useState } from 'react'
-import {
-  projects,
-  type Project,
-  type ProjectCategory,
-} from '../data/portfolio'
+import { useEffect, useState } from 'react'
+import { projects, type Project } from '../data/portfolio'
 import './Projects.scss'
 
 function splitDescription(desc: string): { summary: string; rest: string } {
@@ -15,73 +11,123 @@ function splitDescription(desc: string): { summary: string; rest: string } {
   }
 }
 
-function ProjectAccordionItem({
+function splitTitle(title: string): { main: string; subtitle: string } {
+  const i = title.indexOf(' — ')
+  if (i === -1) return { main: title, subtitle: '' }
+  return {
+    main: title.slice(0, i),
+    subtitle: title.slice(i + 3),
+  }
+}
+
+function ProjectCard({
   project,
-  index,
-  isOpen,
-  onToggle,
+  onOpen,
 }: {
   project: Project
-  index: number
-  isOpen: boolean
-  onToggle: () => void
+  onOpen: (title: string) => void
 }) {
   const accent = project.accent ?? 'blue'
-  const headerId = `pacc-h-${index}`
-  const panelId = `pacc-p-${index}`
-  const { summary, rest } = splitDescription(project.description)
+  const { summary } = splitDescription(project.description)
+  const { main: titleMain, subtitle } = splitTitle(project.title)
 
   return (
-    <li className={`pacc pacc--${accent}${isOpen ? ' is-open' : ''}`}>
+    <li>
       <button
-        id={headerId}
         type="button"
-        className="pacc__header"
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        onClick={onToggle}
+        className={`pacc pacc--${accent}`}
+        onClick={() => onOpen(project.title)}
       >
         <div className="pacc__head-body">
           <div className="pacc__title-row">
-            <h3 className="pacc__title">{project.title}</h3>
+            <h3 className="pacc__title">{titleMain}</h3>
             <span className="pacc__year">{project.year}</span>
           </div>
-          <div className="pacc__meta-row">
-            <span className="pacc__role">{project.role}</span>
-            <ul className="pacc__cats">
-              {project.categories.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-          </div>
+          {subtitle && (
+            <div className="pacc__meta-row">
+              <span className="pacc__subtitle">{subtitle}</span>
+            </div>
+          )}
           <p className="pacc__summary">{summary}</p>
         </div>
-        <span className="pacc__chevron" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 16 16">
-            <path
-              d="M4 6l4 4 4-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
       </button>
+    </li>
+  )
+}
 
+function ProjectDialog({
+  project,
+  onClose,
+}: {
+  project: Project
+  onClose: () => void
+}) {
+  const accent = project.accent ?? 'blue'
+  const { summary, rest } = splitDescription(project.description)
+  const { main: titleMain, subtitle } = splitTitle(project.title)
+  const titleId = 'pdialog-title'
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [onClose])
+
+  return (
+    <div
+      className={`pdialog pdialog--${accent}`}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
+    >
       <div
-        id={panelId}
-        role="region"
-        aria-labelledby={headerId}
-        className="pacc__panel"
-      >
-        <div className="pacc__panel-clip">
-          <div className="pacc__panel-content">
-            {rest && <p className="pacc__desc">{rest}</p>}
+        className="pdialog__backdrop"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      <div className="pdialog__panel">
+        <header className="pdialog__header">
+          <div className="pdialog__head-body">
+            <span className="pdialog__year">{project.year}</span>
+            <h3 id={titleId} className="pdialog__title">
+              {titleMain}
+              {subtitle && (
+                <span className="pdialog__subtitle">{subtitle}</span>
+              )}
+            </h3>
+          </div>
+          <button
+            type="button"
+            className="pdialog__close"
+            onClick={onClose}
+            aria-label="닫기"
+            autoFocus
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+              <path
+                d="M5 5l10 10M15 5l-10 10"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </header>
+
+        <div className="pdialog__body">
+          {summary && <p className="pdialog__summary">{summary}</p>}
+          {rest && <p className="pdialog__desc">{rest}</p>}
 
           {project.highlights && project.highlights.length > 0 && (
-            <ul className="pacc__highlights">
+            <ul className="pdialog__highlights">
               {project.highlights.map((h) => (
                 <li key={h}>{h}</li>
               ))}
@@ -89,7 +135,7 @@ function ProjectAccordionItem({
           )}
 
           {project.stack && project.stack.length > 0 && (
-            <ul className="pacc__stack">
+            <ul className="pdialog__stack">
               {project.stack.map((s) => (
                 <li key={s}>{s}</li>
               ))}
@@ -101,7 +147,7 @@ function ProjectAccordionItem({
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="pacc__visit"
+              className="pdialog__visit"
             >
               방문하기
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
@@ -116,50 +162,15 @@ function ProjectAccordionItem({
               </svg>
             </a>
           )}
-          </div>
         </div>
       </div>
-    </li>
+    </div>
   )
 }
 
 function Projects() {
-  const allCategories = useMemo<string[]>(() => {
-    const set = new Set<string>()
-    projects.forEach((p) => p.categories.forEach((c) => set.add(c)))
-    return ['All', ...Array.from(set)]
-  }, [])
-
-  const [filter, setFilter] = useState<string>('All')
-
-  const filtered = useMemo(
-    () =>
-      filter === 'All'
-        ? projects
-        : projects.filter((p) =>
-            p.categories.includes(filter as ProjectCategory),
-          ),
-    [filter],
-  )
-
-  const [openTitle, setOpenTitle] = useState<string | null>(
-    projects[0]?.title ?? null,
-  )
-
-  const handleFilter = (next: string) => {
-    setFilter(next)
-    const upcoming =
-      next === 'All'
-        ? projects
-        : projects.filter((p) =>
-            p.categories.includes(next as ProjectCategory),
-          )
-    setOpenTitle(upcoming[0]?.title ?? null)
-  }
-
-  const handleToggle = (title: string) => {
-    setOpenTitle((prev) => (prev === title ? null : title))
-  }
+  const [selectedTitle, setSelectedTitle] = useState<string | null>(null)
+  const selected = projects.find((p) => p.title === selectedTitle) ?? null
 
   return (
     <section id="projects" className="projects">
@@ -172,33 +183,23 @@ function Projects() {
           </div>
         </div>
 
-        <div className="projects__filters" role="tablist" aria-label="필터">
-          {allCategories.map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              role="tab"
-              aria-selected={filter === tag}
-              className={`chip${filter === tag ? ' is-active' : ''}`}
-              onClick={() => handleFilter(tag)}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-
-        <ol className="bento bento--projects">
-          {filtered.map((p) => (
-            <ProjectAccordionItem
+        <ul className="bento bento--projects">
+          {projects.map((p) => (
+            <ProjectCard
               key={p.title}
               project={p}
-              index={projects.indexOf(p)}
-              isOpen={openTitle === p.title}
-              onToggle={() => handleToggle(p.title)}
+              onOpen={setSelectedTitle}
             />
           ))}
-        </ol>
+        </ul>
       </div>
+
+      {selected && (
+        <ProjectDialog
+          project={selected}
+          onClose={() => setSelectedTitle(null)}
+        />
+      )}
     </section>
   )
 }

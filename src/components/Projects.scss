@@ -3,47 +3,19 @@
 
 .projects {
   @include section-padding;
-
-  &__filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
-
-    .chip {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-      border-radius: 999px;
-      background: $color-card;
-      color: $color-muted;
-      border: 1px solid $color-line;
-      transition:
-        color 0.2s $ease-out,
-        background-color 0.2s $ease-out,
-        border-color 0.2s $ease-out;
-
-      &:hover {
-        color: $color-ink;
-        border-color: $color-soft;
-      }
-
-      &.is-active {
-        background: $color-blue;
-        color: #fff;
-        border-color: $color-blue;
-      }
-    }
-  }
 }
 
 .bento--projects {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   list-style: none;
   padding: 0;
   margin: 0;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pacc {
@@ -51,15 +23,30 @@
   --accent-soft: #{$color-blue-soft};
 
   @include tile;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 1.5rem;
+  text-align: left;
   background: $color-card;
+  border: 0;
+  color: $color-ink;
+  cursor: pointer;
   transition:
-    background-color 0.32s $ease-out,
+    background 0.32s $ease-out,
+    transform 0.2s $ease-out,
     box-shadow 0.25s $ease-out;
 
-  &.is-open {
-    --accent: #{$color-blue};
-    --accent-soft: #{$color-blue-soft};
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem 1.5rem;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
     background: linear-gradient(180deg, $color-blue-soft, $color-card);
+    box-shadow: $shadow-md;
   }
 
   &--blue {
@@ -87,34 +74,6 @@
     --accent-soft: #{$color-coral-soft};
   }
 
-  &__header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 1.5rem 2rem;
-    text-align: left;
-    background: transparent;
-    border: 0;
-    color: $color-ink;
-    cursor: pointer;
-    transition: background-color 0.2s $ease-out;
-
-    @media (max-width: $breakpoint-mobile) {
-      padding: 1rem 1.5rem;
-      gap: 12px;
-    }
-
-    &:hover {
-      background: linear-gradient(180deg, $color-blue-soft, $color-card);
-    }
-  }
-
-  &.is-open &__header,
-  &.is-open &__header:hover {
-    background: transparent;
-  }
-
   &__head-body {
     flex: 1;
     min-width: 0;
@@ -136,6 +95,10 @@
     letter-spacing: -0.02em;
     color: $color-ink;
     margin: 0;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   &__year {
@@ -150,7 +113,7 @@
     flex-wrap: wrap;
   }
 
-  &__role {
+  &__subtitle {
     font-size: 0.875rem;
     color: $color-muted;
   }
@@ -161,71 +124,124 @@
     line-height: 1.5;
     color: $color-ink-2;
   }
+}
 
-  &__cats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.pdialog {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 
-    li {
-      padding: 0.25rem 0.5rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      background: $color-line-soft;
-      color: $color-muted;
-      transition: background-color 0.25s $ease-out;
-    }
-  }
+  --accent: #{$color-blue};
 
-  &.is-open &__cats li {
-    background: $color-card;
-  }
+  &--blue { --accent: #{$color-blue}; }
+  &--pink { --accent: #{$color-pink}; }
+  &--mint { --accent: #{$color-mint}; }
+  &--yellow { --accent: #{$color-yellow}; }
+  &--purple { --accent: #{$color-purple}; }
+  &--coral { --accent: #{$color-coral}; }
 
-  &__chevron {
-    width: 2rem;
-    height: 2rem;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    color: $color-soft;
-    transition:
-      transform 0.25s $ease-out,
-      color 0.25s $ease-out;
-  }
-
-  &.is-open &__chevron {
-    transform: rotate(180deg);
-    color: var(--accent);
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(25, 31, 40, 0.5);
+    backdrop-filter: saturate(140%) blur(4px);
+    -webkit-backdrop-filter: saturate(140%) blur(4px);
+    animation: pdialog-fade 0.2s $ease-out;
   }
 
   &__panel {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.32s $ease-out;
-  }
-
-  &.is-open &__panel {
-    grid-template-rows: 1fr;
-  }
-
-  &__panel-clip {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: $color-card;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
     overflow: hidden;
-    min-height: 0;
+    animation: pdialog-pop 0.32s $ease-spring;
   }
 
-  &__panel-content {
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid $color-line-soft;
+  }
+
+  &__head-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__year {
+    @include label;
+    color: $color-soft;
+  }
+
+  &__title {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: $color-ink;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $color-muted;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    background: $color-line-soft;
+    border: 0;
+    border-radius: 50%;
+    color: $color-muted;
+    cursor: pointer;
+    transition:
+      background-color 0.2s $ease-out,
+      color 0.2s $ease-out;
+
+    &:hover {
+      background: $color-line;
+      color: $color-ink;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 0 2rem 1.5rem;
+  }
 
-    @media (max-width: $breakpoint-mobile) {
-      padding: 0 1.5rem 1.5rem;
-    }
+  &__summary {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $color-ink-2;
+    font-weight: 500;
   }
 
   &__desc {
@@ -282,6 +298,7 @@
     gap: 8px;
     padding: 0.5rem 1rem;
     margin-top: 8px;
+    border: 1px solid $color-line;
     border-radius: 999px;
     background: $color-card;
     color: $color-ink;
@@ -291,6 +308,7 @@
     box-shadow: $shadow-sm;
     transition:
       background-color 0.2s $ease-out,
+      border-color 0.2s $ease-out,
       color 0.2s $ease-out,
       box-shadow 0.2s $ease-out;
 
@@ -299,7 +317,8 @@
     }
 
     &:hover {
-      background: var(--accent);
+      background: $color-blue;
+      border-color: $color-blue;
       color: #fff;
       box-shadow: $shadow-md;
 
@@ -307,5 +326,43 @@
         transform: translateX(2px);
       }
     }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0;
+    align-items: flex-end;
+
+    &__panel {
+      max-height: 85vh;
+      border-radius: $radius-lg $radius-lg 0 0;
+      animation: pdialog-slide 0.32s $ease-out;
+    }
+  }
+}
+
+@keyframes pdialog-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pdialog-pop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pdialog-slide {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
