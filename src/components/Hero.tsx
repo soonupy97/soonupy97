@@ -5,6 +5,7 @@ import { certs } from '../data/certs'
 import { skillGroups } from '../data/skills'
 import { usePointerSpot } from '../hooks/usePointerSpot'
 import { useTilt } from '../hooks/useTilt'
+import RotatingText from './RotatingText'
 import soonupyLogo from '../assets/icons/soonupy.svg'
 import './Hero.scss'
 
@@ -39,7 +40,8 @@ function NameTile() {
       <span className="tile__eyebrow">Design · Web Publisher · Frontend</span>
       <h1>
         Hi, I'm <em>{profile.name}</em>.
-        <br />I craft <span className="hl">accessible</span>
+        <br />I craft{' '}
+<span className="hl">accessible</span>
         <br />
         UI from clean markup.
       </h1>
