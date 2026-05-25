@@ -1,4 +1,3 @@
-import DarkVeil from './components/DarkVeil'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -11,9 +10,6 @@ import Footer from './components/Footer'
 function App() {
   return (
     <>
-      <div className="dark-veil-bg" aria-hidden="true">
-        <DarkVeil hueShift={25} />
-      </div>
       <Header />
       <main>
         <Hero />
