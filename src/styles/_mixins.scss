@@ -22,8 +22,8 @@
 @mixin tile {
   position: relative;
   border-radius: $radius-lg;
-  background: $color-card;
-  box-shadow: $shadow-sm;
+  background: var(--color-card);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition:
     transform 0.2s $ease-out,
@@ -34,7 +34,7 @@
 @mixin tile-hover {
   &:hover {
     transform: translateY(-2px);
-    box-shadow: $shadow-md;
+    box-shadow: var(--shadow-md);
   }
 }
 
@@ -44,7 +44,7 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: $color-soft;
+  color: var(--color-soft);
 }
 
 @mixin display-xl {
@@ -76,6 +76,6 @@
   font-size: 0.75rem;
   font-weight: 600;
   border-radius: 999px;
-  background: $color-line-soft;
-  color: $color-muted;
+  background: var(--color-line-soft);
+  color: var(--color-muted);
 }

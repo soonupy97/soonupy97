@@ -61,7 +61,7 @@
     font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: -0.01em;
-    color: $color-ink;
+    color: var(--color-ink);
     word-break: break-all;
   }
 
@@ -71,7 +71,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: $color-ink;
+    color: var(--color-ink);
     font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -86,7 +86,7 @@
   }
 
   &--cta {
-    background: linear-gradient(135deg, $color-blue 0%, #4f6df8 100%);
+    background: linear-gradient(135deg, var(--color-blue) 0%, #4f6df8 100%);
     color: #fff;
     overflow: hidden;
     padding: 3rem;
@@ -106,10 +106,10 @@
       margin-block: 2rem;
 
       .hl {
-        background: linear-gradient(180deg, transparent 60%, rgba(251, 191, 36) 0);
+        background: linear-gradient(180deg, transparent 60%, var(--color-yellow) 0);
         padding: 0 0.5rem;
         border-radius: 0.5rem;
-        color: $color-ink;
+        color: var(--color-ink);
       }
     }
     p {
@@ -135,16 +135,16 @@
   &--notion:hover,
   &--instagram:hover,
   &--email:hover {
-    background: linear-gradient(180deg, $color-blue-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   }
 }
 
 @keyframes pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.18);
+    box-shadow: 0 0 0 4px rgba(var(--color-mint-rgb), 0.18);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(0, 200, 150, 0);
+    box-shadow: 0 0 0 8px rgba(var(--color-mint-rgb), 0);
   }
 }

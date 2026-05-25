@@ -1,0 +1,85 @@
+:root {
+  --color-bg: #f4f6f8;
+  --color-bg-2: #eef1f4;
+  --color-card: #ffffff;
+  --color-ink: #191f28;
+  --color-ink-2: #333d4b;
+  --color-muted: #4e5968;
+  --color-soft: #8b95a1;
+  --color-line: #e5e8eb;
+  --color-line-soft: #f2f4f6;
+
+  --color-blue: #007aff;
+  --color-blue-soft: #e5f1ff;
+  --color-blue-dark: #0062cc;
+  --color-yellow: #fbbf24;
+  --color-yellow-soft: #fef3c7;
+  --color-mint: #00c896;
+  --color-mint-soft: #d6f5ec;
+  --color-pink: #ff6b8a;
+  --color-pink-soft: #ffe4ea;
+  --color-purple: #8b5cf6;
+  --color-purple-soft: #ede9fe;
+  --color-coral: #ff8a65;
+  --color-coral-soft: #ffe6dc;
+
+  --color-blue-rgb: 0, 122, 255;
+  --color-mint-rgb: 0, 200, 150;
+  --color-yellow-rgb: 251, 191, 36;
+  --color-ink-rgb: 25, 31, 40;
+
+  --shadow-sm: 0 1px 2px rgba(25, 31, 40, 0.04);
+  --shadow-md: 0 1px 2px rgba(25, 31, 40, 0.04), 0 8px 24px rgba(25, 31, 40, 0.06);
+  --shadow-lg: 0 1px 2px rgba(25, 31, 40, 0.04), 0 12px 36px rgba(25, 31, 40, 0.1);
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-solid: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(229, 232, 235, 0.7);
+
+  --backdrop-bg: rgba(25, 31, 40, 0.5);
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --color-bg: #111318;
+  --color-bg-2: #1a1d23;
+  --color-card: #1e2128;
+  --color-ink: #edf0f5;
+  --color-ink-2: #c5cad3;
+  --color-muted: #8b95a1;
+  --color-soft: #636d7a;
+  --color-line: #2e333b;
+  --color-line-soft: #252930;
+
+  --color-blue: #3395ff;
+  --color-blue-soft: #172640;
+  --color-blue-dark: #5babff;
+  --color-yellow: #fbbf24;
+  --color-yellow-soft: #2d2615;
+  --color-mint: #00d6a0;
+  --color-mint-soft: #0d2920;
+  --color-pink: #ff7d9a;
+  --color-pink-soft: #2d1720;
+  --color-purple: #a078ff;
+  --color-purple-soft: #1e1730;
+  --color-coral: #ff9d7d;
+  --color-coral-soft: #2d1c15;
+
+  --color-blue-rgb: 51, 149, 255;
+  --color-mint-rgb: 0, 214, 160;
+  --color-yellow-rgb: 251, 191, 36;
+  --color-ink-rgb: 237, 240, 245;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 36px rgba(0, 0, 0, 0.5);
+
+  --glass-bg: rgba(30, 33, 40, 0.7);
+  --glass-bg-solid: rgba(30, 33, 40, 0.92);
+  --glass-border: rgba(46, 51, 59, 0.7);
+
+  --backdrop-bg: rgba(0, 0, 0, 0.6);
+
+  color-scheme: dark;
+}

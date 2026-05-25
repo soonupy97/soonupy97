@@ -165,12 +165,12 @@
 
   &__eyebrow {
     @include label;
-    color: $color-blue;
+    color: var(--color-blue);
   }
   &__hint {
     @include label;
     margin-top: auto;
-    color: $color-mint;
+    color: var(--color-mint);
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -179,8 +179,8 @@
       width: 0.5rem;
       height: 0.5rem;
       border-radius: 50%;
-      background: $color-mint;
-      box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.18);
+      background: var(--color-mint);
+      box-shadow: 0 0 0 4px rgba(var(--color-mint-rgb), 0.18);
       animation: pulse 1.6s $ease-out infinite;
     }
   }
@@ -197,10 +197,10 @@
   background:
     radial-gradient(
       circle 320px at var(--mx, 50%) var(--my, 50%),
-      rgba(0, 122, 255, 0.18),
+      rgba(var(--color-blue-rgb), 0.18),
       transparent 60%
     ),
-    linear-gradient(180deg, $color-card, $color-bg);
+    linear-gradient(180deg, var(--color-card), var(--color-bg));
   padding: 2rem;
 
   .spot {
@@ -208,7 +208,7 @@
     inset: 0;
     background: radial-gradient(
       circle 240px at var(--mx, 50%) var(--my, 50%),
-      rgba(0, 122, 255, 0.1),
+      rgba(var(--color-blue-rgb), 0.1),
       transparent 50%
     );
     pointer-events: none;
@@ -227,12 +227,13 @@
 
     em {
       font-style: normal;
-      color: $color-blue;
+      color: var(--color-blue);
     }
     .hl {
-      background: linear-gradient(180deg, transparent 60%, rgba(251, 191, 36) 0);
+      background: linear-gradient(180deg, transparent 60%, var(--color-yellow) 0);
       padding: 0 0.25rem;
       border-radius: 0.5rem;
+      vertical-align: baseline;
     }
   }
 
@@ -243,7 +244,7 @@
 
 // 2) GitHub tile
 .tile--github {
-  background: linear-gradient(180deg, $color-blue-soft, $color-card);
+  background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   perspective: 800px;
   align-items: center;
   justify-content: center;
@@ -264,14 +265,14 @@
       width: 17.5rem;
       height: 17.5rem;
       margin: -140px 0 0 -140px;
-      border: 1px dashed rgba($color-blue, 0.22);
+      border: 1px dashed rgba(var(--color-blue-rgb), 0.22);
       animation: orbit-spin 90s linear infinite;
     }
     &--inner {
       width: 12.5rem;
       height: 12.5rem;
       margin: -100px 0 0 -100px;
-      border: 1px solid rgba($color-blue, 0.14);
+      border: 1px solid rgba(var(--color-blue-rgb), 0.14);
       animation: orbit-spin 60s linear infinite reverse;
     }
   }
@@ -286,18 +287,18 @@
     border-radius: 50%;
 
     &--1 {
-      background: $color-blue;
-      box-shadow: 0 0 0 4px rgba($color-blue, 0.16);
+      background: var(--color-blue);
+      box-shadow: 0 0 0 4px rgba(var(--color-blue-rgb), 0.16);
       animation: orbit-1 22s linear infinite;
     }
     &--2 {
-      background: $color-mint;
-      box-shadow: 0 0 0 4px rgba($color-mint, 0.16);
+      background: var(--color-mint);
+      box-shadow: 0 0 0 4px rgba(var(--color-mint-rgb), 0.16);
       animation: orbit-2 34s linear infinite reverse;
     }
     &--3 {
-      background: $color-yellow;
-      box-shadow: 0 0 0 4px rgba($color-yellow, 0.16);
+      background: var(--color-yellow);
+      box-shadow: 0 0 0 4px rgba(var(--color-yellow-rgb), 0.16);
       animation: orbit-3 28s linear infinite;
     }
   }
@@ -333,7 +334,7 @@
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: -0.01em;
-      color: $color-ink;
+      color: var(--color-ink);
     }
     span {
       @include label;
@@ -347,7 +348,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $color-blue;
+        color: var(--color-blue);
         opacity: 0;
         transform: translateX(-4px);
         transition:
@@ -413,7 +414,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    border-right: 1px solid $color-line-soft;
+    border-right: 1px solid var(--color-line-soft);
 
     &:last-child {
       border-right: 0;
@@ -423,7 +424,7 @@
       font-size: 1.5rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: $color-ink;
+      color: var(--color-ink);
       transition: color 0.2s $ease-out;
     }
     span {
@@ -432,7 +433,7 @@
     }
 
     &:hover span {
-      color: $color-ink;
+      color: var(--color-ink);
     }
 
     &--figma:hover strong {
@@ -450,7 +451,7 @@
 // 4) Clock tile
 .tile--clock {
   padding: 1.5rem;
-  background: $color-blue;
+  background: var(--color-blue);
   color: #fff;
 
   strong {
@@ -498,7 +499,7 @@
   justify-content: space-between;
 
   &:hover {
-    background: linear-gradient(180deg, $color-blue-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   }
 
   .ticker {
@@ -522,8 +523,8 @@
       flex-shrink: 0;
       padding: 0.5rem 1rem;
       border-radius: 999px;
-      background: $color-line-soft;
-      color: $color-ink;
+      background: var(--color-line-soft);
+      color: var(--color-ink);
       font-size: 0.875rem;
       font-weight: 600;
     }
@@ -536,7 +537,7 @@
   cursor: pointer;
 
   &:hover {
-    background: linear-gradient(180deg, $color-blue-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   }
 
   .career-list {
@@ -555,7 +556,7 @@
       top: 8px;
       bottom: 8px;
       width: 0.0625rem;
-      background: rgba($color-blue, 0.3);
+      background: rgba(var(--color-blue-rgb), 0.3);
     }
 
     li {
@@ -570,15 +571,15 @@
         height: 0.6875rem;
         margin-top: 4px;
         border-radius: 50%;
-        background: $color-card;
-        border: 2px solid rgba($color-blue, 0.45);
+        background: var(--color-card);
+        border: 2px solid rgba(var(--color-blue-rgb), 0.45);
         z-index: 1;
       }
 
       &.is-current .dot {
-        background: $color-blue;
-        border-color: $color-blue;
-        box-shadow: 0 0 0 4px rgba($color-blue, 0.18);
+        background: var(--color-blue);
+        border-color: var(--color-blue);
+        box-shadow: 0 0 0 4px rgba(var(--color-blue-rgb), 0.18);
       }
 
       > div {
@@ -593,13 +594,13 @@
         font-weight: 700;
         line-height: 1.3;
         letter-spacing: -0.01em;
-        color: $color-ink;
+        color: var(--color-ink);
       }
 
       span {
         font-size: 0.75rem;
         font-weight: 500;
-        color: $color-muted;
+        color: var(--color-muted);
         font-variant-numeric: tabular-nums;
       }
     }
@@ -612,7 +613,7 @@
   padding: 1.5rem;
 
   &:hover {
-    background: linear-gradient(180deg, $color-blue-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   }
 
   .cert-list {
@@ -628,7 +629,7 @@
       flex-direction: column;
       gap: 4px;
       padding-bottom: 1rem;
-      border-bottom: 1px solid $color-line;
+      border-bottom: 1px solid var(--color-line);
 
       &:last-child {
         padding-bottom: 0;
@@ -640,13 +641,13 @@
         font-weight: 700;
         line-height: 1.3;
         letter-spacing: -0.01em;
-        color: $color-ink;
+        color: var(--color-ink);
       }
 
       span {
         font-size: 0.75rem;
         font-weight: 500;
-        color: $color-muted;
+        color: var(--color-muted);
         font-variant-numeric: tabular-nums;
       }
     }
@@ -656,10 +657,10 @@
 @keyframes pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.18);
+    box-shadow: 0 0 0 4px rgba(var(--color-mint-rgb), 0.18);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(0, 200, 150, 0);
+    box-shadow: 0 0 0 8px rgba(var(--color-mint-rgb), 0);
   }
 }
 

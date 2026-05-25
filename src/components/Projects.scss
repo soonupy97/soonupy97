@@ -19,8 +19,8 @@
 }
 
 .pacc {
-  --accent: #{$color-blue};
-  --accent-soft: #{$color-blue-soft};
+  --accent: var(--color-blue);
+  --accent-soft: var(--color-blue-soft);
 
   @include tile;
   width: 100%;
@@ -30,9 +30,9 @@
   gap: 16px;
   padding: 1.5rem;
   text-align: left;
-  background: $color-card;
+  background: var(--color-card);
   border: 0;
-  color: $color-ink;
+  color: var(--color-ink);
   cursor: pointer;
   transition:
     background 0.32s $ease-out,
@@ -45,33 +45,33 @@
 
   &:hover {
     transform: translateY(-2px);
-    background: linear-gradient(180deg, $color-blue-soft, $color-card);
-    box-shadow: $shadow-md;
+    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
+    box-shadow: var(--shadow-md);
   }
 
   &--blue {
-    --accent: #{$color-blue};
-    --accent-soft: #{$color-blue-soft};
+    --accent: var(--color-blue);
+    --accent-soft: var(--color-blue-soft);
   }
   &--pink {
-    --accent: #{$color-pink};
-    --accent-soft: #{$color-pink-soft};
+    --accent: var(--color-pink);
+    --accent-soft: var(--color-pink-soft);
   }
   &--mint {
-    --accent: #{$color-mint};
-    --accent-soft: #{$color-mint-soft};
+    --accent: var(--color-mint);
+    --accent-soft: var(--color-mint-soft);
   }
   &--yellow {
-    --accent: #{$color-yellow};
-    --accent-soft: #{$color-yellow-soft};
+    --accent: var(--color-yellow);
+    --accent-soft: var(--color-yellow-soft);
   }
   &--purple {
-    --accent: #{$color-purple};
-    --accent-soft: #{$color-purple-soft};
+    --accent: var(--color-purple);
+    --accent-soft: var(--color-purple-soft);
   }
   &--coral {
-    --accent: #{$color-coral};
-    --accent-soft: #{$color-coral-soft};
+    --accent: var(--color-coral);
+    --accent-soft: var(--color-coral-soft);
   }
 
   &__head-body {
@@ -93,7 +93,7 @@
     font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: $color-ink;
+    color: var(--color-ink);
     margin: 0;
 
     &::first-letter {
@@ -103,7 +103,7 @@
 
   &__year {
     @include label;
-    color: $color-soft;
+    color: var(--color-soft);
   }
 
   &__meta-row {
@@ -115,14 +115,14 @@
 
   &__subtitle {
     font-size: 0.875rem;
-    color: $color-muted;
+    color: var(--color-muted);
   }
 
   &__summary {
     margin: 0;
     font-size: 0.875rem;
     line-height: 1.5;
-    color: $color-ink-2;
+    color: var(--color-ink-2);
   }
 }
 
@@ -135,19 +135,19 @@
   justify-content: center;
   padding: 1.5rem;
 
-  --accent: #{$color-blue};
+  --accent: var(--color-blue);
 
-  &--blue { --accent: #{$color-blue}; }
-  &--pink { --accent: #{$color-pink}; }
-  &--mint { --accent: #{$color-mint}; }
-  &--yellow { --accent: #{$color-yellow}; }
-  &--purple { --accent: #{$color-purple}; }
-  &--coral { --accent: #{$color-coral}; }
+  &--blue { --accent: var(--color-blue); }
+  &--pink { --accent: var(--color-pink); }
+  &--mint { --accent: var(--color-mint); }
+  &--yellow { --accent: var(--color-yellow); }
+  &--purple { --accent: var(--color-purple); }
+  &--coral { --accent: var(--color-coral); }
 
   &__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(25, 31, 40, 0.5);
+    background: var(--backdrop-bg);
     backdrop-filter: saturate(140%) blur(4px);
     -webkit-backdrop-filter: saturate(140%) blur(4px);
     animation: pdialog-fade 0.2s $ease-out;
@@ -160,9 +160,9 @@
     max-height: 90vh;
     display: flex;
     flex-direction: column;
-    background: $color-card;
+    background: var(--color-card);
     border-radius: $radius-lg;
-    box-shadow: $shadow-lg;
+    box-shadow: var(--shadow-lg);
     overflow: hidden;
     animation: pdialog-pop 0.32s $ease-spring;
   }
@@ -172,7 +172,7 @@
     align-items: flex-start;
     gap: 16px;
     padding: 1.5rem 1.5rem 1rem;
-    border-bottom: 1px solid $color-line-soft;
+    border-bottom: 1px solid var(--color-line-soft);
   }
 
   &__head-body {
@@ -185,7 +185,7 @@
 
   &__year {
     @include label;
-    color: $color-soft;
+    color: var(--color-soft);
   }
 
   &__title {
@@ -197,13 +197,13 @@
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: $color-ink;
+    color: var(--color-ink);
   }
 
   &__subtitle {
     font-size: 0.875rem;
     font-weight: 500;
-    color: $color-muted;
+    color: var(--color-muted);
   }
 
   &__close {
@@ -212,18 +212,18 @@
     height: 2.5rem;
     display: grid;
     place-items: center;
-    background: $color-line-soft;
+    background: var(--color-line-soft);
     border: 0;
     border-radius: 50%;
-    color: $color-muted;
+    color: var(--color-muted);
     cursor: pointer;
     transition:
       background-color 0.2s $ease-out,
       color 0.2s $ease-out;
 
     &:hover {
-      background: $color-line;
-      color: $color-ink;
+      background: var(--color-line);
+      color: var(--color-ink);
     }
   }
 
@@ -240,7 +240,7 @@
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
-    color: $color-ink-2;
+    color: var(--color-ink-2);
     font-weight: 500;
   }
 
@@ -248,7 +248,7 @@
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
-    color: $color-ink-2;
+    color: var(--color-ink-2);
   }
 
   &__highlights {
@@ -258,7 +258,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    color: $color-ink-2;
+    color: var(--color-ink-2);
     font-size: 0.875rem;
     line-height: 1.6;
 
@@ -298,14 +298,14 @@
     gap: 8px;
     padding: 0.5rem 1rem;
     margin-top: 8px;
-    border: 1px solid $color-line;
+    border: 1px solid var(--color-line);
     border-radius: 999px;
-    background: $color-card;
-    color: $color-ink;
+    background: var(--color-card);
+    color: var(--color-ink);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: -0.01em;
-    box-shadow: $shadow-sm;
+    box-shadow: var(--shadow-sm);
     transition:
       background-color 0.2s $ease-out,
       border-color 0.2s $ease-out,
@@ -317,10 +317,10 @@
     }
 
     &:hover {
-      background: $color-blue;
-      border-color: $color-blue;
+      background: var(--color-blue);
+      border-color: var(--color-blue);
       color: #fff;
-      box-shadow: $shadow-md;
+      box-shadow: var(--shadow-md);
 
       svg {
         transform: translateX(2px);

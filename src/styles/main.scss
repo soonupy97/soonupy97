@@ -1,19 +1,17 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 @use 'reset';
+@use 'theme';
 
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
-:root {
-  color-scheme: light;
-}
-
 body {
   font-family: $font-sans;
   font-size: 1rem;
-  color: $color-ink;
-  background: $color-bg;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  transition: background-color 0.3s $ease-out;
 }
 
 .container {
@@ -41,26 +39,39 @@ body {
   }
 
   &--primary {
-    background: $color-blue;
+    background: var(--color-blue);
     color: #fff;
     font-family: $font-mono;
-    box-shadow: 0 6px 18px -8px rgba(0, 122, 255, 0.6);
+    box-shadow: 0 6px 18px -8px rgba(var(--color-blue-rgb), 0.6);
 
     &:hover {
-      background: $color-blue-dark;
-      box-shadow: 0 10px 24px -10px rgba(0, 122, 255, 0.8);
+      background: var(--color-blue-dark);
+      box-shadow: 0 10px 24px -10px rgba(var(--color-blue-rgb), 0.8);
     }
   }
 
   &--ghost {
-    background: $color-card;
-    color: $color-ink;
+    background: var(--color-card);
+    color: var(--color-ink);
     font-family: $font-mono;
-    border: 1px solid $color-line;
+    border: 1px solid var(--color-line);
 
     &:hover {
-      background: $color-line-soft;
+      background: var(--color-line-soft);
     }
+  }
+}
+
+section.scroll-reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.7s $ease-out,
+    transform 0.7s $ease-out;
+
+  &.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -72,7 +83,7 @@ body {
 
   .eyebrow {
     @include label;
-    color: $color-blue;
+    color: var(--color-blue);
   }
 
   &__body {
@@ -86,7 +97,7 @@ body {
   }
 
   p {
-    color: $color-muted;
+    color: var(--color-muted);
     font-size: 1rem;
   }
 }

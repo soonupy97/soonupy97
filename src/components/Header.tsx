@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import soonupyLogo from '../assets/icons/soonupy.svg'
+import useTheme from '../hooks/useTheme'
 import './Header.scss'
 
 const NAV = [
@@ -16,6 +17,7 @@ function Header() {
   const [activeHref, setActiveHref] = useState<string>('')
   const navRef = useRef<HTMLElement | null>(null)
   const toggleRef = useRef<HTMLButtonElement | null>(null)
+  const { theme, toggle } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -89,6 +91,15 @@ function Header() {
             ))}
           </ul>
         </nav>
+
+        <button
+          type="button"
+          className={`site-header__theme${theme === 'dark' ? ' is-dark' : ''}`}
+          aria-label={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
+          onClick={toggle}
+        >
+          <span className="site-header__theme-thumb" />
+        </button>
 
         <button
           ref={toggleRef}

@@ -3,7 +3,7 @@
 
 .site-footer {
   padding-block: 1rem;
-  border-top: 1px solid $color-line;
+  border-top: 1px solid var(--color-line);
 
   &__inner {
     display: flex;
@@ -18,7 +18,7 @@
   }
 
   .copy {
-    color: $color-muted;
+    color: var(--color-muted);
     font-size: 0.875rem;
     flex: 1;
     min-width: 0;
@@ -36,11 +36,11 @@
   display: grid;
   place-items: center;
 
-  background: $color-card;
-  color: $color-ink;
-  border: 1px solid $color-line;
+  background: var(--color-card);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
   border-radius: 999px;
-  box-shadow: $shadow-md;
+  box-shadow: var(--shadow-md);
   transition: transform 0.2s $ease-out;
 
   &:hover &__tooltip {
@@ -60,8 +60,8 @@
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
     white-space: nowrap;
-    color: #fff;
-    background: $color-ink;
+    color: var(--color-bg);
+    background: var(--color-ink);
     border-radius: 0.5rem;
 
     opacity: 0;

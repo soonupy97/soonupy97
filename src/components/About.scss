@@ -57,41 +57,41 @@
       font-size: 1.5rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: $color-ink;
+      color: var(--color-ink);
     }
 
     p {
-      color: $color-muted;
+      color: var(--color-muted);
       font-size: 1rem;
     }
   }
 
   &--blue {
-    background: linear-gradient(180deg, $color-blue-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
     .vtile__icon {
-      background: $color-blue;
+      background: var(--color-blue);
       color: #fff;
     }
   }
   &--pink {
-    background: linear-gradient(180deg, $color-pink-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-pink-soft), var(--color-card));
     .vtile__icon {
-      background: $color-pink;
+      background: var(--color-pink);
       color: #fff;
     }
   }
   &--mint {
-    background: linear-gradient(180deg, $color-mint-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-mint-soft), var(--color-card));
     .vtile__icon {
-      background: $color-mint;
+      background: var(--color-mint);
       color: #fff;
     }
   }
   &--yellow {
-    background: linear-gradient(180deg, $color-yellow-soft, $color-card);
+    background: linear-gradient(180deg, var(--color-yellow-soft), var(--color-card));
     .vtile__icon {
-      background: $color-yellow;
-      color: $color-ink;
+      background: var(--color-yellow);
+      color: var(--color-ink);
     }
   }
 }

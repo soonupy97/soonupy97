@@ -9,6 +9,9 @@
       content="웹 퍼블리셔 포트폴리오 — 시맨틱 마크업, 반응형 UI, 웹 접근성"
     />
     <title>soonupy Portfolio</title>
+    <script>
+      (function(){var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})()
+    </script>
   </head>
   <body>
     <div id="root"></div>
