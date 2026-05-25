@@ -1,5 +1,6 @@
 import { profile } from '../data/portfolio'
 import { useTilt } from '../hooks/useTilt'
+import useScrollReveal from '../hooks/useScrollReveal'
 import './About.scss'
 
 const VALUES = [
@@ -55,8 +56,9 @@ function ValueTile({
 }
 
 function About() {
+  const revealRef = useScrollReveal<HTMLElement>()
   return (
-    <section id="about" className="about">
+    <section ref={revealRef} id="about" className="about scroll-reveal">
       <div className="container">
         <div className="section-title">
           <span className="eyebrow">About</span>

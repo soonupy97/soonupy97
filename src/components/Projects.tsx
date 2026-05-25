@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { projects, type Project } from '../data/portfolio'
+import useScrollReveal from '../hooks/useScrollReveal'
 import './Projects.scss'
 
 function splitDescription(desc: string): { summary: string; rest: string } {
@@ -172,8 +173,9 @@ function Projects() {
   const [selectedTitle, setSelectedTitle] = useState<string | null>(null)
   const selected = projects.find((p) => p.title === selectedTitle) ?? null
 
+  const revealRef = useScrollReveal<HTMLElement>()
   return (
-    <section id="projects" className="projects">
+    <section ref={revealRef} id="projects" className="projects scroll-reveal">
       <div className="container">
         <div className="section-title">
           <span className="eyebrow">Projects</span>

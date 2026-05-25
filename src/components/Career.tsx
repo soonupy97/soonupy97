@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { careers } from '../data/career'
 import { certs } from '../data/certs'
+import useScrollReveal from '../hooks/useScrollReveal'
 import './Career.scss'
 
 type Tab = 'career' | 'certs'
@@ -19,8 +20,9 @@ function Career() {
     return () => window.removeEventListener('career:tab', handler)
   }, [])
 
+  const revealRef = useScrollReveal<HTMLElement>()
   return (
-    <section id="career" className="career">
+    <section ref={revealRef} id="career" className="career scroll-reveal">
       <div className="container">
         <div className="section-title">
           <span className="eyebrow">Career</span>

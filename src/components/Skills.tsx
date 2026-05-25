@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { skillGroups } from '../data/skills'
+import useScrollReveal from '../hooks/useScrollReveal'
 import './Skills.scss'
 
 function Skills() {
@@ -14,8 +15,9 @@ function Skills() {
   const [active, setActive] = useState(0)
   const activeGroup = tabs[active]
 
+  const revealRef = useScrollReveal<HTMLElement>()
   return (
-    <section id="skills" className="skills">
+    <section ref={revealRef} id="skills" className="skills scroll-reveal">
       <div className="container">
         <div className="section-title">
           <span className="eyebrow">Skills</span>

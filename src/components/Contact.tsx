@@ -1,10 +1,12 @@
 import { profile } from '../data/portfolio'
 import soonupyLogo from '../assets/icons/soonupy.svg'
+import useScrollReveal from '../hooks/useScrollReveal'
 import './Contact.scss'
 
 function Contact() {
+  const revealRef = useScrollReveal<HTMLElement>()
   return (
-    <section id="contact" className="contact">
+    <section ref={revealRef} id="contact" className="contact scroll-reveal">
       <div className="container">
         <div className="bento bento--contact">
           <div className="ctile ctile--cta">
