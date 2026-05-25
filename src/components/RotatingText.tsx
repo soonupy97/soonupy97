@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence, type Transition, type TargetAndTransition } from 'motion/react'
 import './RotatingText.scss'
 
 function cn(...classes: (string | undefined | false)[]) {
@@ -15,10 +15,10 @@ function cn(...classes: (string | undefined | false)[]) {
 
 export type RotatingTextProps = {
   texts: string[]
-  transition?: Record<string, unknown>
-  initial?: Record<string, unknown>
-  animate?: Record<string, unknown>
-  exit?: Record<string, unknown>
+  transition?: Transition
+  initial?: TargetAndTransition
+  animate?: TargetAndTransition
+  exit?: TargetAndTransition
   animatePresenceMode?: 'wait' | 'sync' | 'popLayout'
   animatePresenceInitial?: boolean
   rotationInterval?: number

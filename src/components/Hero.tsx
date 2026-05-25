@@ -41,7 +41,13 @@ function NameTile() {
       <h1>
         Hi, I'm <em>{profile.name}</em>.
         <br />I craft{' '}
-<span className="hl">accessible</span>
+        <RotatingText
+          texts={['accessible', 'semantic', 'responsive', 'pixel-perfect']}
+          mainClassName="hl"
+          staggerFrom="last"
+          staggerDuration={0.025}
+          rotationInterval={3000}
+        />
         <br />
         UI from clean markup.
       </h1>
