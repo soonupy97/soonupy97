@@ -63,33 +63,41 @@ function Career() {
           <ol
             id="career-panel-career"
             role="tabpanel"
-            className="bento bento--career"
+            className="ctimeline"
           >
             {careers.map((c) => (
-              <li key={c.company} className="ccard">
-                <div className="ccard__head">
-                  <span className="ccard__period">{c.period}</span>
-                  {c.current && <span className="ccard__badge">재직 중</span>}
+              <li
+                key={c.company}
+                className={`ctitem${c.current ? ' is-current' : ''}`}
+              >
+                <span className="ctitem__dot" aria-hidden="true" />
+                <div className="ctitem__body">
+                  <div className="ctitem__head">
+                    <span className="ctitem__period">{c.period}</span>
+                    {c.current && (
+                      <span className="ctitem__badge">재직 중</span>
+                    )}
+                  </div>
+
+                  <h3 className="ctitem__company">
+                    {c.company}
+                    <span className="ctitem__role">{c.role}</span>
+                  </h3>
+
+                  <p className="ctitem__summary">{c.summary}</p>
+
+                  <ul className="ctitem__highlights">
+                    {c.highlights.map((h) => (
+                      <li key={h}>{h}</li>
+                    ))}
+                  </ul>
+
+                  <ul className="ctitem__stack">
+                    {c.stack.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
+                  </ul>
                 </div>
-
-                <h3 className="ccard__company">
-                  {c.company}
-                  <span className="ccard__role">{c.role}</span>
-                </h3>
-
-                <p className="ccard__summary">{c.summary}</p>
-
-                <ul className="ccard__highlights">
-                  {c.highlights.map((h) => (
-                    <li key={h}>{h}</li>
-                  ))}
-                </ul>
-
-                <ul className="ccard__stack">
-                  {c.stack.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
               </li>
             ))}
           </ol>

@@ -24,7 +24,7 @@
         background-color 0.2s $ease-out,
         border-color 0.2s $ease-out;
 
-      &:hover {
+      @include hover {
         color: var(--color-ink);
         border-color: var(--color-soft);
       }
@@ -35,13 +35,6 @@
         border-color: var(--color-blue);
       }
     }
-  }
-
-  .bento--career,
-  .bento--certs {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   }
 
   .bento--certs {
@@ -78,17 +71,64 @@
   }
 }
 
-.ccard {
-  @include tile;
-  @include tile-hover;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background: var(--color-card);
+/* =========================
+ * Career timeline
+ * ========================= */
+$ctimeline-dot: 16px;
+$ctimeline-line: 2px;
+$ctimeline-indent: 32px;
 
-  @media (max-width: $breakpoint-mobile) {
-    padding: 1.5rem;
+.ctimeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ctitem {
+  position: relative;
+  padding-left: $ctimeline-indent;
+  padding-bottom: 40px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc((#{$ctimeline-dot} - #{$ctimeline-line}) / 2);
+    top: 8px;
+    bottom: 0;
+    width: $ctimeline-line;
+    background: var(--color-line);
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &__dot {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: $ctimeline-dot;
+    height: $ctimeline-dot;
+    border-radius: 50%;
+    background: var(--color-card);
+    border: 2px solid var(--color-line);
+    z-index: 1;
+  }
+
+  &.is-current &__dot {
+    background: var(--color-blue);
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 4px var(--color-blue-soft);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   &__head {
@@ -113,13 +153,8 @@
     color: var(--color-blue-dark);
   }
 
-  &__index {
-    @include label;
-    margin-inline-start: auto;
-    color: var(--color-soft);
-  }
-
   &__company {
+    margin: 0;
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -128,25 +163,33 @@
     align-items: baseline;
     gap: 8px;
     flex-wrap: wrap;
-  }
 
-  &__dot {
-    color: var(--color-soft);
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 1.25rem;
+    }
   }
 
   &__role {
     font-size: 1rem;
     font-weight: 600;
     color: var(--color-muted);
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.875rem;
+    }
   }
 
   &__summary {
+    margin: 0;
     color: var(--color-muted);
     font-size: 1rem;
     line-height: 1.6;
   }
 
   &__highlights {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -169,6 +212,9 @@
   }
 
   &__stack {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
