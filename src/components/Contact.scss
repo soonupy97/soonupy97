@@ -30,11 +30,7 @@
     }
 
     @media (max-width: $breakpoint-mobile) {
-      .ctile--cta,
-      .ctile--git,
-      .ctile--notion,
-      .ctile--instagram,
-      .ctile--email {
+      .ctile--cta {
         flex: 1 1 100%;
       }
     }
@@ -44,10 +40,12 @@
 .ctile {
   @include tile;
   @include tile-hover;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  min-height: 11.25rem;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 8rem;
   transition:
     transform 0.2s $ease-out,
     box-shadow 0.2s $ease-out,
@@ -55,34 +53,60 @@
 
   &__label {
     @include label;
+    color: var(--color-blue);
+  }
+
+  &__icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-ink);
+    opacity: 0.7;
+    transition:
+      color 0.2s $ease-out,
+      opacity 0.2s $ease-out,
+      transform 0.25s $ease-out;
+    pointer-events: none;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   strong {
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
     letter-spacing: -0.01em;
     color: var(--color-ink);
     word-break: break-all;
   }
 
-  &__cta {
-    margin-top: auto;
-    align-self: flex-start;
+  &__meta {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-muted);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    color: var(--color-ink);
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    gap: 6px;
 
     svg {
       transition: transform 0.25s $ease-out;
     }
   }
 
-  &:hover &__cta svg {
-    transform: translateX(4px);
+  &:hover &__meta svg {
+    transform: translateX(3px);
   }
 
   &--cta {
@@ -131,11 +155,19 @@
     }
   }
 
-  &--git:hover,
-  &--notion:hover,
-  &--instagram:hover,
-  &--email:hover {
-    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
+  @media (hover: hover) and (pointer: fine) {
+    &--git:hover,
+    &--notion:hover,
+    &--instagram:hover,
+    &--email:hover {
+      background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
+
+      .ctile__icon {
+        color: var(--color-blue);
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+    }
   }
 }
 
