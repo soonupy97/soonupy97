@@ -156,7 +156,7 @@ export const projects: Project[] = [
     categories: ['Publishing', 'Design'],
 
     year: '2025 ~',
-    link: 'https://web.cadian.com',
+    link: 'https://drawing.cadian.com',
     accent: 'mint',
     highlights: [
       '리본 메뉴 프리 드로우(스케치) 항목 추가 및 아이콘 디자인',
