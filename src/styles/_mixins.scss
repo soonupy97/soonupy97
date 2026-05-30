@@ -31,8 +31,16 @@
   isolation: isolate;
 }
 
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
 @mixin tile-hover {
-  &:hover {
+  @include hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }

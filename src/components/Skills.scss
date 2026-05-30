@@ -24,7 +24,7 @@
         background-color 0.2s $ease-out,
         border-color 0.2s $ease-out;
 
-      &:hover {
+      @include hover {
         color: var(--color-ink);
         border-color: var(--color-soft);
       }
@@ -72,10 +72,12 @@
     }
   }
 
-  &__item:hover &__logo {
-    transform: translateY(-4px);
-    border-color: var(--color-line);
-    box-shadow: var(--shadow-md);
+  @media (hover: hover) and (pointer: fine) {
+    &__item:hover &__logo {
+      transform: translateY(-4px);
+      border-color: var(--color-line);
+      box-shadow: var(--shadow-md);
+    }
   }
 
   &__name {

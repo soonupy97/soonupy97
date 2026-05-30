@@ -80,14 +80,13 @@
       height: 2.5rem;
 
 
-      &:hover {
+      @include hover {
         color: var(--color-ink);
         background: var(--color-line-soft);
       }
     }
 
-    li.is-active a,
-    li.is-active a:hover {
+    li.is-active a {
       color: #fff;
       background: var(--color-blue);
     }

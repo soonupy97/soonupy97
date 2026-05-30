@@ -43,9 +43,11 @@
   box-shadow: var(--shadow-md);
   transition: transform 0.2s $ease-out;
 
-  &:hover &__tooltip {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover &__tooltip {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
   }
 
   &:active {

@@ -359,12 +359,14 @@
     }
   }
 
-  &:hover .tile__caption span {
-    color: transparent;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .tile__caption span {
+      color: transparent;
 
-    &::after {
-      opacity: 1;
-      transform: translateX(0);
+      &::after {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   }
 }
@@ -432,18 +434,20 @@
       transition: color 0.2s $ease-out;
     }
 
-    &:hover span {
-      color: var(--color-ink);
-    }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover span {
+        color: var(--color-ink);
+      }
 
-    &--figma:hover strong {
-      color: #f24e1e;
-    }
-    &--scss:hover strong {
-      color: #cc6699;
-    }
-    &--react:hover strong {
-      color: #61dafb;
+      &--figma:hover strong {
+        color: #f24e1e;
+      }
+      &--scss:hover strong {
+        color: #cc6699;
+      }
+      &--react:hover strong {
+        color: #61dafb;
+      }
     }
   }
 }
@@ -498,7 +502,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  &:hover {
+  @include hover {
     background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   }
 
@@ -536,7 +540,7 @@
   padding: 1.5rem;
   cursor: pointer;
 
-  &:hover {
+  @include hover {
     background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   }
 
@@ -612,7 +616,7 @@
 .tile--certs {
   padding: 1.5rem;
 
-  &:hover {
+  @include hover {
     background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
   }
 
