@@ -11,6 +11,17 @@ $font-sans:
 $font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 $font-display: $font-sans;
 
+// Spacing (4px grid @ 16px root — 모바일 14px 루트에서 비례 축소)
+// 토큰명 $space-N 의 N = px / 4 (예: $space-4 = 16px)
+$space-1: 0.25rem; // 4
+$space-2: 0.5rem; // 8
+$space-4: 1rem; // 16
+$space-6: 1.5rem; // 24
+$space-8: 2rem; // 32
+$space-10: 2.5rem; // 40
+$space-12: 3rem; // 48
+$space-16: 4rem; // 64
+
 // Layout
 $container-max: 80rem;
 $radius-sm: 0.75rem;

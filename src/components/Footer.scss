@@ -8,7 +8,7 @@
   &__inner {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: $space-6;
     flex-wrap: wrap;
 
     @media (max-width: $breakpoint-mobile) {

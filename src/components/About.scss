@@ -7,7 +7,7 @@
   .bento--values {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: $space-4;
   }
 }
 
@@ -32,7 +32,7 @@
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: $space-4;
     transform: rotateY(var(--tx, 0deg)) rotateX(var(--ty, 0deg));
     transition: transform 0.25s $ease-out;
     transform-style: preserve-3d;
@@ -51,7 +51,7 @@
     margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: $space-4;
 
     h3 {
       font-size: 1.5rem;
