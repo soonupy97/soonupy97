@@ -8,12 +8,47 @@ export type ProjectAccent =
 
 export type ProjectCategory = 'Design' | 'Publishing' | 'Frontend'
 
+// 제품 유형(메인 필터) / 접근 권한 / 상태(카드 배지)
+export type ProjectType = 'console' | 'devtool' | 'marketing' | 'viewer'
+export type ProjectAccess = 'public' | 'auth' | 'private'
+export type ProjectStatus = 'live' | 'wip' | 'maintenance'
+
+export const PROJECT_TYPE_ORDER: ProjectType[] = [
+  'console',
+  'devtool',
+  'marketing',
+  'viewer',
+]
+
+export const PROJECT_TYPE_LABELS: Record<ProjectType, string> = {
+  console: 'SaaS 콘솔',
+  devtool: '개발자·시스템',
+  marketing: '마케팅·홈페이지',
+  viewer: '뷰어·도구',
+}
+
+export const PROJECT_ACCESS_LABELS: Record<ProjectAccess, string> = {
+  public: '공개',
+  auth: '로그인 필요', // 사내 전용이 아니라 회원가입 후 누구나 이용 가능
+  private: '비공개',
+}
+
+export const PROJECT_STATUS_LABELS: Record<ProjectStatus, string> = {
+  live: '운영 중',
+  wip: '진행 중',
+  maintenance: '유지보수',
+}
+
 export type Project = {
   title: string
   description: string
   categories: ProjectCategory[]
+  type: ProjectType
+  access: ProjectAccess
+  status: ProjectStatus
   year: string
   link?: string
+  caseStudy?: string // 케이스 스터디(Notion 등) URL — 로그인 게이트 프로젝트의 메인 CTA
   accent?: ProjectAccent
   highlights?: string[]
   stack?: string[]
@@ -38,6 +73,9 @@ export const projects: Project[] = [
     description:
       'Cadian 공통 UI 라이브러리를 Figma 기반으로 단독 설계·구현. Foundations·Atoms·Blocks·Overlays·Pages 전 영역을 BEM 기반 SCSS와 디자인 토큰 시스템으로 구축.',
     categories: ['Design', 'Publishing'],
+    type: 'devtool',
+    access: 'public',
+    status: 'wip',
 
     year: '2026 ~',
     link: 'https://design.cadian.com',
@@ -55,6 +93,9 @@ export const projects: Project[] = [
     description:
       'Cadian 조직 관리 콘솔의 프론트엔드를 처음부터 구축. 그룹·멤버 관리, SSO 인증, 시리얼·활동 로그, i18n까지 전 기능을 단일 SPA로 구현.',
     categories: ['Design', 'Publishing', 'Frontend'],
+    type: 'console',
+    access: 'auth',
+    status: 'live',
 
     year: '2024 — 2026',
     link: 'https://organization.cadian.com',
@@ -72,6 +113,9 @@ export const projects: Project[] = [
     description:
       'Web CAD SDK인 ViewQ의 공식 개발자 문서 사이트 구축. WASM 연동 환경 위에 API 예제 25종을 인터랙티브하게 퍼블리싱하고, ESLint·Prettier·Husky 사내 표준을 자동화.',
     categories: ['Design', 'Publishing', 'Frontend'],
+    type: 'devtool',
+    access: 'public',
+    status: 'live',
 
     year: '2025 — 2026',
     link: 'https://developers.cadian.com',
@@ -89,6 +133,9 @@ export const projects: Project[] = [
     description:
       'Cadian 파일 컨버터 서비스의 UI 퍼블리싱과 기능 개선. 업로드 UX·글로벌 네비게이션·다국어 텍스트와 아이콘 정비로 한/영 서비스 일관성 확보.',
     categories: ['Publishing'],
+    type: 'viewer',
+    access: 'public',
+    status: 'live',
 
     year: '2025 ~',
     link: 'https://converter.cadian.com',
@@ -106,6 +153,9 @@ export const projects: Project[] = [
     description:
       '마이페이지 조직 생성·초대·권한 관리 UI 구현 및 API 연동. 3단계 위자드, 도메인 debounce 검증, rolecode 권한 표기, SSO authorize 연동까지 담당.',
     categories: ['Publishing', 'Frontend'],
+    type: 'console',
+    access: 'auth',
+    status: 'live',
 
     year: '2025 ~',
     link: 'https://mypage.cadian.com',
@@ -123,6 +173,9 @@ export const projects: Project[] = [
     description:
       'Cadian 드라이브 서비스에 Polaris Office 기반 문서 뷰어를 연동. 드라이브 내 뷰어 환경 초기 구축 완료, 현재 Polaris 뷰어 통합 작업 진행 중.',
     categories: ['Frontend', 'Publishing'],
+    type: 'viewer',
+    access: 'auth',
+    status: 'wip',
 
     year: '2026 ~',
     link: 'https://file.cadian.com',
@@ -138,6 +191,9 @@ export const projects: Project[] = [
     description:
       '캐디안 공식 홈페이지의 콘텐츠 업데이트와 UI 유지보수. GNB·CEO 인사말·제품 비교표 등 다국어 콘텐츠 정비와 모바일 햄버거 메뉴 버그 대응.',
     categories: ['Publishing'],
+    type: 'marketing',
+    access: 'public',
+    status: 'maintenance',
 
     year: '2024 ~',
     link: 'https://www.cadian.com',
@@ -154,6 +210,9 @@ export const projects: Project[] = [
     description:
       'Cadian 웹 CAD 뷰어의 UI 개선과 다국어 번역 정비. 리본 메뉴(스케치) 항목 추가·아이콘 디자인, MTEXT 영역 디자인 수정, 한/영 번역 오류 수정 담당.',
     categories: ['Publishing', 'Design'],
+    type: 'viewer',
+    access: 'public',
+    status: 'live',
 
     year: '2025 ~',
     link: 'https://drawing.cadian.com',
@@ -170,6 +229,9 @@ export const projects: Project[] = [
     description:
       '이메일/뉴스레터·이벤트 프로모션용 EDM 페이지를 단독 제작. Figma 레이아웃을 이메일 클라이언트 호환 마크업으로 구현하고, cadian-ui 디자인 토큰과 일관성 유지.',
     categories: ['Design', 'Publishing'],
+    type: 'marketing',
+    access: 'private',
+    status: 'wip',
 
     year: '2024 ~',
     accent: 'coral',

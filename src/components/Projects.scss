@@ -6,12 +6,70 @@
 }
 
 /* =========================
+ * Type filter tabs
+ * ========================= */
+.projects__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: 40px;
+
+  @media (max-width: $breakpoint-mobile) {
+    gap: $space-1;
+    margin-bottom: 24px;
+  }
+}
+
+.projects__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: 8px 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-card);
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition:
+    color 0.2s $ease-out,
+    border-color 0.2s $ease-out,
+    background-color 0.2s $ease-out;
+
+  @include hover {
+    color: var(--color-ink);
+    border-color: var(--color-soft);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--color-blue);
+    color: var(--color-blue);
+  }
+
+  &.is-active {
+    background: var(--color-blue);
+    border-color: var(--color-blue);
+    color: #fff;
+  }
+}
+
+.projects__filter-count {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.55;
+}
+
+/* =========================
  * Desktop: 2-column (list + detail)
  * ========================= */
 .projects__split {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: 64px;
+  gap: $space-16;
   align-items: start;
 
   @media (max-width: $breakpoint-mobile) {
@@ -34,7 +92,7 @@
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: $space-2;
   margin-top: 16px;
   padding: 8px 0;
   background: transparent;
@@ -76,7 +134,7 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 16px;
+  gap: $space-4;
   padding: 24px 0;
   background: transparent;
   border: 0;
@@ -148,14 +206,14 @@
 .pdetail {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: $space-6;
   animation: pdetail-fade 0.32s $ease-out;
 }
 
 .pdetail__head {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: $space-2;
 }
 
 .pdetail__title {
@@ -178,10 +236,61 @@
   font-weight: 500;
 }
 
+.pdetail__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-1;
+  margin-top: 4px;
+}
+
+.pbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: 4px 8px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-bg-2);
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* status: 컬러 도트로 구분 */
+.pbadge--status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.pbadge--live::before {
+  background: var(--color-mint);
+}
+.pbadge--wip::before {
+  background: var(--color-yellow);
+}
+.pbadge--maintenance::before {
+  background: var(--color-soft);
+}
+
+/* access: 로그인 필요만 coral로 강조 (브랜드 블루·상태 민트/옐로와 구분) */
+.pbadge--auth {
+  background: var(--color-coral-soft);
+  border-color: var(--color-coral);
+  color: var(--color-ink-2);
+}
+
+.pbadge__lock {
+  flex-shrink: 0;
+  color: var(--color-coral);
+}
+
 .pdetail__body {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: $space-4;
 }
 
 .pdetail__summary {
@@ -202,7 +311,7 @@
 .pdetail__highlights {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: $space-2;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -227,7 +336,7 @@
 .pdetail__stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: $space-1;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -239,13 +348,18 @@
   }
 }
 
+.pdetail__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: 8px;
+}
+
 .pdetail__visit {
-  align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: $space-2;
   padding: 8px 16px;
-  margin-top: 8px;
   border: 1px solid var(--color-line);
   border-radius: 999px;
   background: var(--color-card);
@@ -275,6 +389,13 @@
       transform: translateX(2px);
     }
   }
+}
+
+/* 케이스 스터디 = 메인 CTA (채워진 블루) */
+.pdetail__visit--primary {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: #fff;
 }
 
 /* =========================
@@ -321,7 +442,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: $space-4;
   padding: 20px 0;
   background: transparent;
   border: 0;
