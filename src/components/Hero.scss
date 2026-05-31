@@ -253,6 +253,12 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
+
+    // 궤도 반지름이 px 고정이라 작은 타일에서는 overflow:hidden에 잘림.
+    // 중앙 기준으로 전체를 균일 축소해 모바일에서도 원형 궤도 유지.
+    @media (max-width: $breakpoint-mobile) {
+      transform: scale(0.7);
+    }
   }
 
   .orbit__ring {
@@ -261,16 +267,18 @@
     left: 50%;
     border-radius: 50%;
 
+    // 도트 궤도가 px(translateX) 기준이라 링도 px로 맞춰 동기화.
+    // rem이면 모바일 루트 폰트(14px) 축소 시 링만 줄어 중심·반지름이 어긋남.
     &--outer {
-      width: 17.5rem;
-      height: 17.5rem;
+      width: 280px;
+      height: 280px;
       margin: -140px 0 0 -140px;
       border: 1px dashed rgba(var(--color-blue-rgb), 0.22);
       animation: orbit-spin 90s linear infinite;
     }
     &--inner {
-      width: 12.5rem;
-      height: 12.5rem;
+      width: 200px;
+      height: 200px;
       margin: -100px 0 0 -100px;
       border: 1px solid rgba(var(--color-blue-rgb), 0.14);
       animation: orbit-spin 60s linear infinite reverse;
@@ -397,10 +405,10 @@
 
 @keyframes orbit-3 {
   from {
-    transform: rotate(240deg) translateX(132px);
+    transform: rotate(240deg) translateX(140px);
   }
   to {
-    transform: rotate(600deg) translateX(132px);
+    transform: rotate(600deg) translateX(140px);
   }
 }
 
