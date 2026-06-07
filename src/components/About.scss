@@ -8,90 +8,18 @@
     display: flex;
     flex-wrap: wrap;
     gap: $space-4;
-  }
-}
 
-.vtile {
-  @include tile;
-  @include tile-hover;
-  perspective: 800px;
-  padding: 0;
-  flex: 1;
-  min-width: 0;
+    // 카드 자체 스타일은 공통 .info-tile, 여기선 레이아웃(폭)만.
+    .info-tile {
+      flex: 1;
+      min-width: 0;
 
-  @media (max-width: $breakpoint-tablet) {
-    flex: 1 1 calc(50% - 8px);
-  }
-  @media (max-width: $breakpoint-mobile) {
-    flex: 1 1 100%;
-    aspect-ratio: auto;
-  }
-
-  &__inner {
-    height: 100%;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: $space-4;
-    transform: rotateY(var(--tx, 0deg)) rotateX(var(--ty, 0deg));
-    transition: transform 0.25s $ease-out;
-    transform-style: preserve-3d;
-  }
-
-  &__icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 0.5rem;
-    display: grid;
-    place-items: center;
-    font-size: 1.25rem;
-  }
-
-  &__body {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: $space-4;
-
-    h3 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--color-ink);
-    }
-
-    p {
-      color: var(--color-muted);
-      font-size: 1rem;
-    }
-  }
-
-  &--blue {
-    background: linear-gradient(180deg, var(--color-blue-soft), var(--color-card));
-    .vtile__icon {
-      background: var(--color-blue);
-      color: #fff;
-    }
-  }
-  &--pink {
-    background: linear-gradient(180deg, var(--color-pink-soft), var(--color-card));
-    .vtile__icon {
-      background: var(--color-pink);
-      color: #fff;
-    }
-  }
-  &--mint {
-    background: linear-gradient(180deg, var(--color-mint-soft), var(--color-card));
-    .vtile__icon {
-      background: var(--color-mint);
-      color: #fff;
-    }
-  }
-  &--yellow {
-    background: linear-gradient(180deg, var(--color-yellow-soft), var(--color-card));
-    .vtile__icon {
-      background: var(--color-yellow);
-      color: var(--color-ink);
+      @media (max-width: $breakpoint-tablet) {
+        flex: 1 1 calc(50% - 8px);
+      }
+      @media (max-width: $breakpoint-mobile) {
+        flex: 1 1 100%;
+      }
     }
   }
 }

@@ -50,7 +50,6 @@
 
 .ccert {
   @include tile;
-  @include tile-hover;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -132,7 +131,6 @@ $ctimeline-indent: 32px;
   &__body {
     display: flex;
     flex-direction: column;
-    gap: $space-4;
   }
 
   &__head {
@@ -158,7 +156,7 @@ $ctimeline-indent: 32px;
   }
 
   &__company {
-    margin: 0;
+    margin: $space-2 0 0;
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -184,7 +182,7 @@ $ctimeline-indent: 32px;
   }
 
   &__summary {
-    margin: 0;
+    margin: $space-4 0 0;
     color: var(--color-muted);
     font-size: 1rem;
     line-height: 1.6;
@@ -192,7 +190,7 @@ $ctimeline-indent: 32px;
 
   &__highlights {
     list-style: none;
-    margin: 0;
+    margin: $space-4 0 0;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -222,7 +220,7 @@ $ctimeline-indent: 32px;
     display: flex;
     flex-wrap: wrap;
     gap: $space-1;
-    margin-top: 8px;
+    margin-top: $space-6;
 
     li {
       @include chip;
