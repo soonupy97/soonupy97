@@ -5,9 +5,9 @@ import './Header.scss'
 
 const NAV = [
   { href: '#about', label: 'About' },
-  { href: '#career', label: 'Career' },
   { href: '#skills', label: 'Skills' },
   { href: '#projects', label: 'Projects' },
+  { href: '#career', label: 'Career' },
   { href: '#contact', label: 'Contact' },
 ]
 
