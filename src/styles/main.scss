@@ -62,16 +62,73 @@ body {
   }
 }
 
-section.scroll-reveal {
-  opacity: 0;
-  transform: translateY(48px);
-  transition:
-    opacity 0.7s $ease-out,
-    transform 0.7s $ease-out;
+// ===== Scroll reveal =====
+// 섹션이 화면(-15% 경계)에 들어오면 .container 안 블록들이
+// 아래에서 위로, 0.08s씩 가벼운 시차(stagger)를 두고 떠오른다.
+// transition 기반이라 탭 전환 등 재마운트 시엔 재생되지 않는다(최초 등장만).
+$reveal-dist: 20px; // 짧게 — 은은하게 자리잡는 느낌
+$reveal-dur: 0.8s; // 살짝 느긋하면서 부드러운 속도
+$reveal-step: 0.08s; // 블록 간 미세 시차
+$reveal-items: 6; // 한 섹션의 직계 블록 최대 개수
 
-  &.revealed {
+section.scroll-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.scroll-reveal .container > * {
+  opacity: 0;
+  transform: translateY($reveal-dist);
+  transition:
+    opacity $reveal-dur $ease-out,
+    transform $reveal-dur $ease-out;
+}
+
+.scroll-reveal.revealed .container > * {
+  opacity: 1;
+  transform: none;
+}
+
+@for $i from 1 through $reveal-items {
+  .scroll-reveal.revealed .container > *:nth-child(#{$i}) {
+    transition-delay: #{($i - 1) * $reveal-step};
+  }
+}
+
+// Contact는 .container 직계가 단일 래퍼(.bento--contact)라
+// 래퍼는 멈춰 두고, 안쪽 타일들이 시차로 떠오른다.
+.contact.scroll-reveal .container > * {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.contact.scroll-reveal .bento--contact > * {
+  opacity: 0;
+  transform: translateY($reveal-dist);
+  transition:
+    opacity $reveal-dur $ease-out,
+    transform $reveal-dur $ease-out;
+}
+
+.contact.scroll-reveal.revealed .bento--contact > * {
+  opacity: 1;
+  transform: none;
+}
+
+@for $i from 1 through $reveal-items {
+  .contact.scroll-reveal.revealed .bento--contact > *:nth-child(#{$i}) {
+    transition-delay: #{($i - 1) * $reveal-step};
+  }
+}
+
+// 모션 최소화 선호 사용자는 시차 없이 즉시 표시
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal .container > *,
+  .contact.scroll-reveal .bento--contact > * {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    transition: none;
   }
 }
 
