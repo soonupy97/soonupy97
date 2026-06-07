@@ -274,6 +274,9 @@
 .pbadge--maintenance::before {
   background: var(--color-soft);
 }
+.pbadge--ondemand::before {
+  background: var(--color-purple);
+}
 
 /* access: 로그인 필요만 coral로 강조 (브랜드 블루·상태 민트/옐로와 구분) */
 .pbadge--auth {
