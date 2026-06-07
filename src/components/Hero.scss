@@ -166,6 +166,12 @@
   &__eyebrow {
     @include label;
     color: var(--color-blue);
+
+    // 보조 문구는 muted로 — '퍼블리셔'를 단일 주연으로, bridging은 조연으로.
+    // (label 타이포는 부모에서 상속, 색만 낮춤)
+    &-sub {
+      color: var(--color-muted);
+    }
   }
   &__hint {
     @include label;
@@ -203,6 +209,11 @@
     linear-gradient(180deg, var(--color-card), var(--color-bg));
   padding: 2rem;
 
+  @include hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
   .spot {
     position: absolute;
     inset: 0;
@@ -234,6 +245,18 @@
       padding: 0 0.25rem;
       border-radius: 0.5rem;
       vertical-align: baseline;
+    }
+  }
+
+  .tile__lede {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+    word-break: keep-all;
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.875rem;
     }
   }
 
@@ -419,6 +442,11 @@
   gap: 0;
   padding: 0;
 
+  @include hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
   .stat {
     padding: 1.5rem;
     display: flex;
@@ -465,6 +493,11 @@
   padding: 1.5rem;
   background: var(--color-blue);
   color: #fff;
+
+  @include hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
 
   strong {
     font-family: $font-mono;

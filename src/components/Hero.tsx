@@ -36,14 +36,19 @@ function NameTile() {
       className="tile tile--hero"
     >
       <div className="spot" aria-hidden="true" />
-      <span className="tile__eyebrow">Design · Web Publisher · Frontend</span>
+      <span className="tile__eyebrow">
+        Web Publisher
+        <span className="tile__eyebrow-sub"> · between design &amp; frontend</span>
+      </span>
       <h1>
-        Hi, I'm <em>{profile.name}</em>.
-        <br />I craft{' '}
-        <span className="hl">accessible</span>
-        <br />
-        UI from clean markup.
+        I craft <span className="hl">accessible</span> UI
+        <br />from clean markup.
       </h1>
+      <p className="tile__lede">
+        웹 표준과 접근성을 지키는 마크업으로 디자인을 구현합니다.
+        <br />
+        보기 좋게 끝내기보다, 오래 가는 구조를 먼저 설계합니다.
+      </p>
       <div className="tile__actions">
         <a className="btn btn--primary" href="#projects">
           See projects
