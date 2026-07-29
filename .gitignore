@@ -25,3 +25,8 @@ dist-ssr
 
 # Claude Code
 .claude/
+
+# 내부 정보 포함 문서 (공개 레포이므로 커밋 금지)
+# - 내부 dev 도메인, 로그인 세션 파일명, 계정 정보가 담긴 스크립트 경로 등
+md context/시연영상_수정요청.md
+md context/포트폴리오_수정요청.md

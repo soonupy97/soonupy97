@@ -16,9 +16,19 @@ const VALUES = [
     desc: "BEM · ITCSS · 토큰으로 일관된 스타일 아키텍처.",
   },
   {
+    label: "Motion",
+    title: "절제된 인터랙션",
+    desc: "꼭 필요한 곳에만 움직이고, 원치 않는 사용자에겐 멈춥니다.",
+  },
+  {
     label: "Collaboration",
     title: "협업 친화",
     desc: "디자이너와 개발자 사이를 매끄럽게 잇는 가교 역할.",
+  },
+  {
+    label: "AI Workflow",
+    title: "에이전트 워크플로우",
+    desc: "Claude Code · MCP로 릴리즈와 문서를 자동화, 판단은 직접.",
   },
   {
     label: "Quality",

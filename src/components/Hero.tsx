@@ -27,17 +27,12 @@ function useSeoulClock() {
 }
 
 function NameTile() {
-  const spot = usePointerSpot<HTMLDivElement>()
+  const { ref, handlers, style } = usePointerSpot<HTMLDivElement>()
   return (
-    <div
-      ref={spot.ref}
-      {...spot.handlers}
-      style={spot.style}
-      className="tile tile--hero"
-    >
+    <div ref={ref} {...handlers} style={style} className="tile tile--hero">
       <div className="spot" aria-hidden="true" />
       <span className="tile__eyebrow">
-        Web Publisher
+        Web Publisher / UI Developer
         <span className="tile__eyebrow-sub"> · between design &amp; frontend</span>
       </span>
       <h1>
@@ -72,16 +67,16 @@ function NameTile() {
 }
 
 function GithubTile() {
-  const tilt = useTilt<HTMLAnchorElement>(5)
+  const { ref, handlers } = useTilt<HTMLAnchorElement>(5)
   return (
     <a
-      ref={tilt.ref}
-      {...tilt.handlers}
+      ref={ref}
+      {...handlers}
       className="tile tile--github"
       href={profile.github}
       target="_blank"
       rel="noreferrer"
-      aria-label="GitHub @soonupy"
+      aria-label="GitHub @soonupy97"
     >
       <div className="orbit" aria-hidden="true">
         <span className="orbit__ring orbit__ring--outer" />
@@ -126,7 +121,7 @@ function ClockTile() {
     <div className="tile tile--clock">
       <strong>{time}</strong>
       <span className="tile__hint">
-        <span className="dot" /> Available for briefs
+        <span className="dot" /> Open to new opportunities
       </span>
     </div>
   )

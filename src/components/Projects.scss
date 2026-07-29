@@ -296,6 +296,205 @@
   gap: $space-4;
 }
 
+/* =========================
+ * Demo video (로그인 게이트 프로젝트)
+ * ========================= */
+.pmedia {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+/* 콘텐츠 비율은 ProjectMedia가 인라인으로 지정 — 영상마다 다를 수 있어 고정하지 않는다.
+ *
+ * 테두리는 border가 아니라 ::after로 그린다. box-sizing: border-box 아래서
+ * border를 쓰면 aspect-ratio가 테두리를 포함한 박스에 걸려 안쪽 영역이 16:10보다
+ * 미세하게 넓어지고, cover가 구워 넣은 여백을 80px보다 덜 잘라내 검은 실선이 남는다. */
+.pmedia__frame {
+  position: relative;
+  border-radius: $radius-md;
+  background: var(--color-bg-2);
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--color-line);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* 영상 파일(16:9)에 구워 넣은 좌우 여백을 cover로 되잘라낸다. 프레임이 콘텐츠
+ * 비율(16:10)을 잡고 있으므로 잘려나가는 건 그 여백뿐 — 콘텐츠는 손실이 없다.
+ *
+ * 영상을 패딩 없이 다시 뽑으면 이 블록은 height: auto로 되돌릴 것.
+ * 배경은 ProjectMedia의 DEFAULT_RATIO 주석 참고. */
+.pmedia__video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--color-bg-2);
+}
+
+/* 음소거 미리보기 — 포스터 버튼 아래 레이어. 본재생(.pmedia__video)과 같은
+ * cover 크롭으로 구워 넣은 좌우 여백을 잘라낸다. */
+.pmedia__preview {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--color-bg-2);
+}
+
+.pmedia__poster {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-4;
+  border: 0;
+  cursor: pointer;
+  background: linear-gradient(
+    140deg,
+    var(--color-blue-soft),
+    var(--color-bg-2) 70%
+  );
+  color: var(--color-ink-2);
+  transition: background 0.2s $ease-out;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @include hover {
+    background: linear-gradient(
+      140deg,
+      var(--color-blue-soft),
+      var(--color-card) 70%
+    );
+
+    .pmedia__play {
+      transform: scale(1.08);
+      background: var(--color-blue);
+      color: #fff;
+    }
+  }
+
+  /* 미리보기 중 — 그라데이션을 걷어 아래 영상만 보이게 한다.
+   * 재생 칩·라벨은 TSX에서 아예 렌더하지 않는다 (버튼 이름은 aria-label로 유지). */
+  &.is-previewing {
+    background: none;
+  }
+}
+
+/* 미리보기 우하단 음소거 배지. 영상 화면이 대부분 밝아 다크 스크림 고정 —
+ * 프레임 호버 시 안내 문구가 옆으로 펼쳐진다 */
+/* 접힌 상태는 32×24 알약형 — 아이콘 16 + 좌우 패딩 8. gap 대신 텍스트
+ * margin-left를 쓰는 이유: gap은 max-width:0인 텍스트에도 끼어들어
+ * 접힌 배지 폭이 4px 어긋난다. */
+.pmedia__mute {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.62);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+
+  svg {
+    flex: none;
+  }
+}
+
+.pmedia__mute-text {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-left: 0;
+  transition:
+    max-width 0.25s $ease-out,
+    margin-left 0.25s $ease-out,
+    opacity 0.2s $ease-out;
+}
+
+.pmedia__poster.is-previewing:hover .pmedia__mute-text,
+.pmedia__poster.is-previewing:focus-visible .pmedia__mute-text {
+  max-width: 176px;
+  margin-left: 4px;
+  opacity: 1;
+}
+
+.pmedia__play {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-card);
+  color: var(--color-blue);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.2s $ease-out,
+    background 0.2s $ease-out,
+    color 0.2s $ease-out;
+
+  svg {
+    margin-left: 2px;
+  }
+}
+
+.pmedia__label {
+  position: relative;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.pmedia__caption {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pmedia__poster,
+  .pmedia__play,
+  .pmedia__mute-text {
+    transition: none;
+  }
+
+  .pmedia__poster:hover .pmedia__play {
+    transform: none;
+  }
+}
+
 .pdetail__summary {
   margin: 0;
   font-size: 16px;
@@ -355,50 +554,60 @@
   display: flex;
   flex-wrap: wrap;
   gap: $space-2;
-  margin-top: 8px;
 }
 
+/* 미디어 바로 뒤에 올 때는 아래를 벌려 설명 블록과 끊는다 (body gap 16 기준
+ * 위 16 / 아래 24). 위를 더 좁히면 같은 12px인 pmedia__caption과 붙어
+ * 캡션의 일부처럼 읽힌다 */
+.pmedia + .pdetail__cta {
+  margin-bottom: $space-2;
+}
+
+/* 사이트 방문 = 보조 CTA. 버튼 형태를 걷고 텍스트 링크로 둔다 — 링크색과
+ * 화살표만으로 클릭 대상임을 알리고, 호버에서 밑줄이 붙는다.
+ * 색은 --color-blue가 아니라 --color-blue-dark: 12px 작은 글씨라
+ * 흰 배경 위 #007aff는 대비 3.6:1로 AA에 못 미친다 */
 .pdetail__visit {
   display: inline-flex;
   align-items: center;
   gap: $space-2;
-  padding: 8px 16px;
-  border: 1px solid var(--color-line);
-  border-radius: 999px;
-  background: var(--color-card);
-  color: var(--color-ink);
+  padding: $space-1 0; // 텍스트만으로는 탭 타깃이 얕아 세로만 확보
+  color: var(--color-blue-dark);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  box-shadow: var(--shadow-sm);
-  transition:
-    background-color 0.2s $ease-out,
-    border-color 0.2s $ease-out,
-    color 0.2s $ease-out,
-    box-shadow 0.2s $ease-out;
   text-decoration: none;
 
   svg {
-    transition: transform 0.3s $ease-out;
+    opacity: 0.6;
+    transition:
+      transform 0.3s $ease-out,
+      opacity 0.2s $ease-out;
   }
 
   @include hover {
-    background: var(--color-blue);
-    border-color: var(--color-blue);
-    color: #fff;
-    box-shadow: var(--shadow-md);
+    text-decoration: underline;
+    text-underline-offset: 3px;
 
     svg {
+      opacity: 1;
       transform: translateX(2px);
     }
   }
 }
 
-/* 케이스 스터디 = 메인 CTA (채워진 블루) */
+/* 케이스 스터디 = 메인 CTA. 로그인 게이트라 사이트 방문이 막힌 프로젝트의
+ * 유일한 진입점이라, 여기만 채워진 버튼 형태를 유지한다 */
 .pdetail__visit--primary {
+  padding: 8px 16px;
+  border-radius: 999px;
   background: var(--color-blue);
-  border-color: var(--color-blue);
   color: #fff;
+
+  @include hover {
+    background: var(--color-blue-dark);
+    text-decoration: none;
+  }
 }
 
 /* =========================

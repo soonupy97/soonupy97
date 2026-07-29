@@ -11,7 +11,7 @@ const tiles = [
     href: profile.github,
     icon: <IconGitHub />,
     label: "GitHub",
-    handle: "@soonupy",
+    handle: "@soonupy97",
     action: "방문하기",
     external: true,
   },
@@ -56,9 +56,8 @@ function Contact() {
             <span className="hl">함께 만들어요.</span>
           </h2>
           <p>
-            기획 단계의 가벼운 자문부터 풀 마크업·프론트엔드 작업까지
-            환영합니다. 작업 문의는 Email, 그 외 작업 기록과 일상은 아래
-            채널에서 편하게 만나주세요.
+            채용·협업 제안을 환영합니다. 작업 문의는 Email로, 작업 기록과 일상은
+            아래 채널에서 만나주세요.
           </p>
           <img className="emoji" src={soonupyLogo} alt="" aria-hidden="true" />
         </div>

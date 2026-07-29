@@ -10,6 +10,8 @@ import {
 } from "../data/portfolio";
 import Section from "./ui/Section";
 import SectionTitle from "./ui/SectionTitle";
+import ProjectMedia from "./ProjectMedia";
+import useLeaveViewport from "../hooks/useLeaveViewport";
 import "./Projects.scss";
 
 type TypeFilter = ProjectType | "all";
@@ -32,7 +34,15 @@ function splitTitle(title: string): { main: string; subtitle: string } {
   };
 }
 
-function ProjectDetail({ project }: { project: Project }) {
+function ProjectDetail({
+  project,
+  active = true,
+  preview = false,
+}: {
+  project: Project;
+  active?: boolean;
+  preview?: boolean;
+}) {
   const { summary, rest } = splitDescription(project.description);
   const { main: titleMain, subtitle } = splitTitle(project.title);
 
@@ -76,25 +86,15 @@ function ProjectDetail({ project }: { project: Project }) {
       </div>
 
       <div className="pdetail__body">
-        {summary && <p className="pdetail__summary">{summary}</p>}
-        {rest && <p className="pdetail__desc">{rest}</p>}
-
-        {project.highlights && project.highlights.length > 0 && (
-          <ul className="pdetail__highlights">
-            {project.highlights.map((h) => (
-              <li key={h}>{h}</li>
-            ))}
-          </ul>
+        {project.media && (
+          <ProjectMedia
+            media={project.media}
+            title={titleMain}
+            active={active}
+            preview={preview}
+          />
         )}
-
-        {project.stack && project.stack.length > 0 && (
-          <ul className="pdetail__stack">
-            {project.stack.map((s) => (
-              <li key={s}>{s}</li>
-            ))}
-          </ul>
-        )}
-
+        {/* 데모를 본 직후가 방문 의향이 가장 높아 CTA를 미디어 바로 뒤에 둔다 */}
         {(project.caseStudy || project.link) && (
           <div className="pdetail__cta">
             {project.caseStudy && (
@@ -151,6 +151,25 @@ function ProjectDetail({ project }: { project: Project }) {
             )}
           </div>
         )}
+
+        {summary && <p className="pdetail__summary">{summary}</p>}
+        {rest && <p className="pdetail__desc">{rest}</p>}
+
+        {project.highlights && project.highlights.length > 0 && (
+          <ul className="pdetail__highlights">
+            {project.highlights.map((h) => (
+              <li key={h}>{h}</li>
+            ))}
+          </ul>
+        )}
+
+        {project.stack && project.stack.length > 0 && (
+          <ul className="pdetail__stack">
+            {project.stack.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
@@ -163,6 +182,12 @@ function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [openMobileIndex, setOpenMobileIndex] = useState<number | null>(0);
   const [expanded, setExpanded] = useState(false);
+  // 리스트 호버로 켜지는 음소거 미리보기. 끄는 건 split 영역을 벗어날 때 —
+  // 버튼 mouseleave에서 끄면 리스트→상세 패널로 이동하는 동안 포스터로
+  // 되돌아가 깜빡이기 때문이다.
+  const [previewing, setPreviewing] = useState(false);
+  // 마우스를 둔 채 스크롤로 지나가면 mouseleave가 안 나므로 뷰포트로도 끈다
+  const splitRef = useLeaveViewport<HTMLDivElement>(() => setPreviewing(false));
 
   const filteredProjects =
     activeType === "all"
@@ -228,7 +253,11 @@ function Projects() {
         })}
       </div>
 
-      <div className="projects__split">
+      <div
+        className="projects__split"
+        ref={splitRef}
+        onMouseLeave={() => setPreviewing(false)}
+      >
         <div className="projects__list-wrap">
           <ul className="projects__list" role="tablist">
             {visibleProjects.map((p, i) => {
@@ -241,8 +270,14 @@ function Projects() {
                     role="tab"
                     aria-selected={isActive}
                     className={`projects__list-btn${isActive ? " is-active" : ""}`}
-                    onMouseEnter={() => setActiveIndex(i)}
-                    onFocus={() => setActiveIndex(i)}
+                    onMouseEnter={() => {
+                      setActiveIndex(i);
+                      setPreviewing(true);
+                    }}
+                    onFocus={() => {
+                      setActiveIndex(i);
+                      setPreviewing(true);
+                    }}
                     onClick={() => setActiveIndex(i)}
                   >
                     <span className="projects__list-title">{main}</span>
@@ -282,7 +317,12 @@ function Projects() {
         </div>
 
         <div className="projects__detail" role="tabpanel">
-          <ProjectDetail project={activeProject} />
+          {/* key로 재마운트 — 없으면 다른 프로젝트로 넘어갈 때 재생 상태가 남아 바로 재생된다 */}
+          <ProjectDetail
+            key={activeProject.title}
+            project={activeProject}
+            preview={previewing}
+          />
         </div>
       </div>
 
@@ -317,7 +357,7 @@ function Projects() {
               </button>
               <div className="projects__acc-panel">
                 <div className="projects__acc-panel-inner">
-                  <ProjectDetail project={p} />
+                  <ProjectDetail project={p} active={isOpen} />
                 </div>
               </div>
             </li>

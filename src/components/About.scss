@@ -4,22 +4,22 @@
 .about {
   @include section-padding;
 
+  // 카드 자체 스타일은 공통 .info-tile, 여기선 레이아웃(열 수)만.
+  //
+  // flex가 아니라 grid인 이유: 열 수를 명시해야 타일 개수와 무관하게 행이
+  // 고르게 찬다. 타일 6개는 3·2·1열 모두에서 나누어떨어져 어느 폭에서도
+  // 마지막 행이 혼자 남지 않는다. 개수를 바꾼다면 6의 약수 구성을 유지할 것.
   .bento--values {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: $space-4;
 
-    // 카드 자체 스타일은 공통 .info-tile, 여기선 레이아웃(폭)만.
-    .info-tile {
-      flex: 1;
-      min-width: 0;
-
-      @media (max-width: $breakpoint-tablet) {
-        flex: 1 1 calc(50% - 8px);
-      }
-      @media (max-width: $breakpoint-mobile) {
-        flex: 1 1 100%;
-      }
+    // minmax(0, 1fr) — 긴 단어가 트랙을 밀어내지 않게 (구 min-width: 0 역할)
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 }

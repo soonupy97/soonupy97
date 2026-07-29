@@ -67,7 +67,7 @@ export const skillGroups: SkillGroup[] = [
     title: 'AI',
     items: [
       {
-        name: 'Claude',
+        name: 'Claude Code',
         slug: 'claude',
         url: 'https://api.iconify.design/logos:claude-icon.svg',
       },
