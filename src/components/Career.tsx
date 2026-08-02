@@ -74,7 +74,12 @@ function Career() {
                   <span className="ctitem__role">{c.role}</span>
                 </h3>
 
-                <p className="ctitem__summary">{c.summary}</p>
+                {/* 마침표로 끝나는 문장마다 줄을 나눠 보여준다 */}
+                <p className="ctitem__summary">
+                  {c.summary.split(/(?<=\.)\s+/).map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </p>
 
                 <ul className="ctitem__highlights">
                   {c.highlights.map((h) => (

@@ -186,6 +186,11 @@ $ctimeline-indent: 32px;
     color: var(--color-muted);
     font-size: 1rem;
     line-height: 1.6;
+
+    // 문장(마침표) 단위로 줄을 나눈다 — Career.tsx에서 span으로 분리
+    span {
+      display: block;
+    }
   }
 
   &__highlights {
