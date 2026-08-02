@@ -1,0 +1,8 @@
+{
+  "name": "recording-src",
+  "private": true,
+  "description": "claude-workflow GIF 캡처 도구 — 루트 앱과 무관한 로컬 전용 패키지 (type:module 아님 = capture-*.js는 CommonJS)",
+  "dependencies": {
+    "puppeteer-core": "^25.4.0"
+  }
+}

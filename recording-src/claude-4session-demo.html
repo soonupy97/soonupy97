@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Claude Code ×4 세션 워크플로 데모</title>
+<style>
+  :root {
+    --bg: #0c0c0c;
+    --tabbar: #17181c;
+    --gap: #26282e;
+    --rule: #3a3d45;
+    --text: #cfd2d9;
+    --dim: #9aa0ab;
+    --faint: #676d78;
+    --code: #6cb6ff;
+    --orange: #ff7f6e;
+    --focus: #3f8cff;
+    --green: #53d17a;
+    --mono: "Cascadia Code", "Cascadia Mono", Consolas, "D2Coding", monospace;
+    --sans: "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---- Windows Terminal 탭바 ---- */
+  .tabs {
+    flex: none;
+    height: 36px;
+    background: var(--tabbar);
+    display: flex;
+    align-items: flex-end;
+    padding: 0 8px;
+    gap: 4px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--dim);
+    user-select: none;
+  }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg);
+    color: var(--text);
+    border-radius: 7px 7px 0 0;
+    padding: 7px 12px;
+    max-width: 260px;
+  }
+
+  .tab .tico {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: #0f3a8f;
+    color: #fff;
+    font: 700 8px/14px var(--mono);
+    text-align: center;
+    flex: none;
+  }
+  .tab .tico::before { content: ">_"; }
+
+  .tab .tt { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .tab .x { color: var(--faint); margin-left: 4px; }
+  .tabs .plus, .tabs .chevd { padding: 7px 8px; color: var(--faint); }
+  .tabs .wc { margin-left: auto; display: flex; color: var(--faint); align-self: center; }
+  .tabs .wc span { padding: 4px 14px; font-size: 11px; }
+
+  /* ---- 2×2 페인 ---- */
+  .grid {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px;
+    background: var(--gap);
+  }
+
+  .pane {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    position: relative;
+  }
+
+  .pane.focus { outline: 1px solid var(--focus); outline-offset: -1px; z-index: 1; }
+
+  .scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px 16px 8px;
+  }
+
+  .scroll::-webkit-scrollbar { width: 9px; }
+  .scroll::-webkit-scrollbar-thumb { background: #23252b; border-radius: 5px; }
+
+  .lines { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; line-height: 1.62; }
+
+  .ln { white-space: pre-wrap; word-break: break-word; animation: in 0.15s ease-out; }
+  @keyframes in { from { opacity: 0; } to { opacity: 1; } }
+
+  .ln .c { color: var(--code); }
+  .ln b { font-weight: 600; }
+
+  .ln-u { color: var(--faint); margin-top: 10px; }
+  .ln-u::before { content: "> "; }
+
+  /* PowerShell 부트 시퀀스 */
+  .ln-ps { color: var(--dim); }
+  .ln-ps .cmd { color: #e5c07b; }
+  .ln-ps .psp { color: var(--text); }
+
+  /* Claude Code 웰컴 박스 */
+  .ln-box {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: var(--dim);
+    display: inline-block;
+    margin-top: 8px;
+  }
+  .ln-box .st { color: #d97757; }
+  .ln-box b { color: var(--text); }
+
+  .ln-txt { color: var(--text); margin-top: 6px; }
+  .ln-tool { color: var(--text); margin-top: 6px; }
+  .ln-tool::before { content: "⏺ "; color: var(--green); }
+  .ln-sub { color: var(--faint); }
+  .ln-sub::before { content: "  ⎿  "; }
+
+  .ln-foot { color: var(--text); margin-top: 6px; }
+  .ln-done { color: var(--faint); margin-top: 6px; }
+  .ln-recap { color: var(--faint); font-style: italic; margin-top: 6px; }
+  .ln-meta { color: var(--faint); text-align: right; }
+
+  /* ---- 하단 입력부 ---- */
+  .inbox { flex: none; padding: 0 16px 8px; font-size: 12.5px; }
+  .inbox .rule { border-top: 1px solid var(--rule); }
+
+  .inbox .in {
+    display: flex;
+    align-items: baseline;
+    padding: 7px 0;
+    min-height: 32px;
+    color: var(--text);
+  }
+
+  .inbox .chev { color: var(--text); font-weight: 700; margin-right: 8px; }
+  .inbox .typed { white-space: pre-wrap; word-break: break-word; }
+  .inbox .cur { color: var(--text); animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .perm { padding-top: 6px; font-size: 12px; color: var(--faint); }
+  .perm .pp { color: var(--orange); }
+
+  /* ---- 플로팅 컨트롤 ---- */
+  .ctrl {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    translate: -50% 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(23, 24, 28, 0.92);
+    border: 1px solid var(--gap);
+    border-radius: 99px;
+    padding: 8px 14px;
+    font-family: var(--sans);
+    z-index: 10;
+    transition: opacity 0.4s;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+  }
+
+  .ctrl.faded { opacity: 0.1; }
+  .ctrl:hover, .ctrl:focus-within { opacity: 1; }
+
+  .btn {
+    background: none;
+    border: 1px solid var(--gap);
+    color: var(--text);
+    border-radius: 99px;
+    font: 600 12px var(--sans);
+    padding: 5px 13px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn:hover { border-color: var(--faint); }
+  .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .btn--play { background: var(--focus); border-color: var(--focus); color: #fff; min-width: 84px; }
+
+  .progress { width: 130px; height: 4px; background: var(--gap); border-radius: 2px; overflow: hidden; }
+  .progress i { display: block; height: 100%; width: 0%; background: var(--focus); }
+
+  .clock { font: 500 11px var(--mono); color: var(--faint); font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 860px) {
+    body { overflow: auto; }
+    .grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, minmax(260px, 1fr)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ln, .inbox .cur { animation: none; }
+  }
+</style></head>
+<body>
+
+<div class="tabs">
+  <div class="tab"><span class="tico"></span><span class="tt">Windows PowerShell</span><span class="x">✕</span></div>
+  <span class="plus">＋</span><span class="chevd">⌄</span>
+  <div class="wc" aria-hidden="true"><span>─</span><span>□</span><span>✕</span></div>
+</div>
+
+<div class="grid" id="grid" role="img" aria-label="Claude Code 4개 세션이 퍼블리싱 업무를 병렬로 처리하는 터미널 데모"></div>
+
+<div class="ctrl" id="ctrl">
+  <button class="btn btn--play" id="play">▶ 재생</button>
+  <button class="btn" id="restart">↺</button>
+  <button class="btn" id="speed">1×</button>
+  <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+  <span class="clock" id="clock">00:00</span>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var PANES = 4;
+  var TOTAL = 43;
+  var CPS = 34; /* 초당 타이핑 글자수 */
+
+  /* ---- PowerShell 부트 시퀀스: 배너 → PS 프롬프트에서 claude 실행 → 웰컴 박스 ---- */
+  var CWD = [
+    "C:\\soonupy\\project",
+    "C:\\soonupy\\project",
+    "C:\\soonupy\\project",
+    "C:\\soonupy\\project"
+  ];
+
+  var BOOT = [];
+  CWD.forEach(function (cwd, i) {
+    var base = 0.15 + i * 0.12;
+    BOOT.push({ t: base, p: i, k: "ps", x: "Windows PowerShell\nCopyright (C) Microsoft Corporation. All rights reserved.\n\nInstall the latest PowerShell for new features and improvements! https://aka.ms/PSWindows\n" });
+    BOOT.push({ t: base + 0.55, p: i, k: "ps", x: "<span class='psp'>PS " + cwd + "&gt;</span> <span class='cmd'>claude</span>" });
+    BOOT.push({ t: base + 1.15, p: i, k: "box", x: "<span class='st'>✻</span> Welcome to <b>Claude Code</b>!\n\n  /help for help, /status for your current setup\n\n  cwd: " + cwd });
+  });
+
+  /* k: type(입력창 타이핑→제출) · tool · sub · txt · foot · done · recap · meta  (x는 HTML 허용) */
+  var MAIN = [
+    { t: 1.0,  p: 0, k: "type", x: "메인 비주얼 배너가 1280 아래에서 깨져 보여 — 2단으로 접히게 반응형 처리해줘" },
+    { t: 2.2,  p: 1, k: "type", x: "하드코딩된 색상 전부 CSS 변수로 토큰화하고 다크모드까지 대응해줘" },
+
+    { t: 3.6,  p: 0, k: "tool", x: "<b>Read</b>(index.html)" },
+    { t: 4.1,  p: 0, k: "sub",  x: "배너 마크업 확인 — 3컬럼 고정 grid" },
+
+    { t: 4.6,  p: 2, k: "type", x: "모달이랑 드롭다운 키보드 접근성 점검해줘 — 포커스 트랩·aria·Esc 닫기" },
+
+    { t: 5.0,  p: 1, k: "tool", x: "<b>Grep</b>(#[0-9a-fA-F]{3,6})" },
+    { t: 5.5,  p: 1, k: "sub",  x: "하드코딩 HEX 47곳 · 12개 파일" },
+
+    { t: 5.6,  p: 0, k: "tool", x: "<b>Edit</b>(css/main.css)" },
+    { t: 6.1,  p: 0, k: "sub",  x: "repeat(3,1fr) → auto-fit minmax(18rem,1fr) + 1280 쿼리" },
+
+    { t: 6.8,  p: 3, k: "type", x: "사파리에서 sticky 헤더가 스크롤할 때 떨리는데 원인 좀 찾아줘" },
+
+    { t: 7.2,  p: 1, k: "tool", x: "<b>Edit</b>(css/tokens.css)" },
+    { t: 7.7,  p: 1, k: "sub",  x: "팔레트 18토큰 정의 + [data-theme=dark] 재정의" },
+
+    { t: 7.6,  p: 0, k: "txt",  x: "● 배너 그리드를 고정 3컬럼에서 <span class='c'>auto-fit</span> + <span class='c'>minmax(18rem, 1fr)</span>로 바꿔 1280 이하 2단, 768 이하 1단으로 접히게 했습니다. 이미지에는 <span class='c'>max-width: 100%</span>로 넘침을 막았습니다." },
+
+    { t: 8.8,  p: 2, k: "tool", x: "<b>Read</b>(js/modal.js · js/dropdown.js)" },
+    { t: 9.3,  p: 2, k: "sub",  x: "포커스 이동·aria 상태·키 핸들러 추적" },
+
+    { t: 9.4,  p: 1, k: "tool", x: "<b>Edit</b>(components.css 외 11개 파일)" },
+    { t: 9.9,  p: 1, k: "sub",  x: "47곳 var() 치환 — 렌더 결과 동일" },
+
+    { t: 10.0, p: 0, k: "foot", x: "📌 질문: 배너 반응형 대응\n✅ 결론: auto-fit 그리드로 1280/768 구간 접힘 완료\n👉 권장: 아이패드 가로 모드 실기기 확인" },
+    { t: 10.8, p: 3, k: "tool", x: "<b>Read</b>(css/header.css)" },
+    { t: 11.3, p: 3, k: "sub",  x: "backdrop-filter + transform 동시 사용 확인" },
+    { t: 11.4, p: 0, k: "done", x: "✻ Cooked for 42s" },
+    { t: 12.2, p: 0, k: "recap", x: "※ recap: 메인 배너 반응형 정리 — 두 구간(1280·768)만 브라우저에서 확인하시면 됩니다. (disable recaps in /config)" },
+
+    { t: 12.4, p: 2, k: "txt",  x: "● 점검 결과 3건 — ① 모달 열릴 때 포커스가 본문에 남음 ② <span class='c'>aria-expanded</span> 미갱신 ③ 드롭다운이 Esc로 안 닫힘" },
+
+    { t: 13.2, p: 3, k: "txt",  x: "● 원인은 <span class='c'>backdrop-filter</span>와 스크롤 합성 레이어 충돌입니다. 사파리는 blur 영역을 매 프레임 다시 그리면서 서브픽셀 오프셋이 생깁니다." },
+
+    { t: 13.8, p: 1, k: "txt",  x: "● 색상은 이제 <span class='c'>--color-*</span> 토큰만 씁니다. 다크모드는 <span class='c'>[data-theme=dark]</span>에서 토큰만 재정의하므로 컴포넌트 CSS 수정 없이 전환됩니다." },
+
+    { t: 14.8, p: 2, k: "tool", x: "<b>Edit</b>(js/modal.js)" },
+    { t: 15.3, p: 2, k: "sub",  x: "포커스 트랩 + 닫힐 때 트리거 버튼으로 복귀" },
+
+    { t: 15.6, p: 3, k: "tool", x: "<b>Edit</b>(css/header.css)" },
+    { t: 16.1, p: 3, k: "sub",  x: "translateZ(0) 레이어 승격 + -webkit- 프리픽스" },
+
+    { t: 16.4, p: 1, k: "foot", x: "📌 질문: 색상 토큰화 + 다크모드\n✅ 결론: HEX 47곳 → 18토큰, 토큰 재정의로 다크 대응\n👉 권장: 신규 코드 HEX 금지 린트 규칙 추가" },
+    { t: 17.2, p: 1, k: "done", x: "✻ Crunched for 1m 12s" },
+    { t: 18.0, p: 1, k: "recap", x: "※ recap: 토큰 체계 정리 완료 — 이후 색 변경은 tokens.css 한 곳만 만지면 됩니다." },
+
+    { t: 17.6, p: 2, k: "tool", x: "<b>Edit</b>(js/dropdown.js)" },
+    { t: 18.1, p: 2, k: "sub",  x: "aria-expanded 동기화 · Esc 닫기" },
+
+    { t: 18.4, p: 3, k: "txt",  x: "● iOS 시뮬레이터 기준 떨림 없이 고정되는 것 확인했습니다. 크롬·엣지는 영향 없습니다." },
+
+    { t: 19.6, p: 2, k: "foot", x: "📌 질문: 모달·드롭다운 키보드 접근성\n✅ 결론: 지적 3건 모두 수정 — Tab 순환·Esc·aria 정상\n👉 권장: NVDA로 낭독 순서 확인" },
+    { t: 20.4, p: 2, k: "done", x: "✻ Churned for 56s" },
+    { t: 21.2, p: 2, k: "recap", x: "※ recap: 오버레이 UI 접근성 보강 — 포커스 복귀까지 넣어 키보드만으로 완주 가능합니다." },
+
+    { t: 20.6, p: 3, k: "foot", x: "📌 질문: 사파리 sticky 헤더 떨림\n✅ 결론: 합성 레이어 승격으로 해결\n👉 권장: iOS 16·17 실기기 재확인" },
+    { t: 21.6, p: 3, k: "done", x: "✻ Worked for 38s" },
+
+    /* ---- 2라운드 ---- */
+    { t: 22.6, p: 0, k: "type", x: "카드 리스트 그리드도 같은 방식으로 통일해줘" },
+    { t: 24.4, p: 0, k: "tool", x: "<b>Edit</b>(css/card.css)" },
+    { t: 24.9, p: 0, k: "sub",  x: "동일 auto-fit 패턴 적용 — 페이지 전용 미디어쿼리 2개 제거" },
+
+    { t: 24.0, p: 1, k: "type", x: "[Q] 웹폰트 프리로드 걸면 CLS 개선될까?" },
+    { t: 26.0, p: 1, k: "txt",  x: "● <span class='c'>[Q]</span> 분석만 — 현재 FOUT 구간이 0.3s라 <span class='c'>preload</span> + <span class='c'>font-display: optional</span> 조합이면 CLS 0.08 → 0.01 수준까지 기대됩니다. 적용은 별도로 지시 주세요." },
+
+    { t: 25.4, p: 2, k: "type", x: "본문 바로가기(스킵 내비게이션)도 추가해줘" },
+    { t: 27.4, p: 2, k: "tool", x: "<b>Edit</b>(index.html 외 5개)" },
+    { t: 27.9, p: 2, k: "sub",  x: "skip-link + main id 연결 — :focus 시에만 노출" },
+
+    { t: 26.8, p: 3, k: "type", x: "이미지 lazy loading이랑 srcset 정리해서 LCP 줄여줘" },
+    { t: 29.0, p: 3, k: "tool", x: "<b>Grep</b>(&lt;img) — 63개 · loading 속성 없음 41개" },
+    { t: 30.2, p: 3, k: "tool", x: "<b>Edit</b>(템플릿 7개)" },
+    { t: 30.7, p: 3, k: "sub",  x: "히어로 제외 lazy + srcset 2배수 · fetchpriority=high 1곳" },
+
+    { t: 27.0, p: 0, k: "txt",  x: "● 카드 리스트도 같은 패턴으로 통일했고, 중복 미디어쿼리 2개를 지워 코드가 12줄 줄었습니다." },
+    { t: 29.0, p: 0, k: "foot", x: "📌 질문: 카드 그리드 통일\n✅ 결론: auto-fit 패턴 공용화 — 코드 12줄 감소\n👉 권장: 다른 목록형 섹션도 순차 적용" },
+    { t: 29.8, p: 0, k: "done", x: "✻ Cooked for 28s" },
+
+    { t: 29.2, p: 1, k: "foot", x: "📌 질문: 폰트 프리로드 효과\n✅ 결론: preload+optional로 CLS 개선 여지 큼 (분석만)\n👉 권장: 서브셋 woff2 만든 뒤 적용" },
+    { t: 30.0, p: 1, k: "done", x: "✻ Pondered for 19s" },
+
+    { t: 30.6, p: 2, k: "foot", x: "📌 질문: 스킵 내비게이션\n✅ 결론: 전 페이지 공통 적용 (포커스 시 표시)\n👉 권장: 첫 Tab에서 노출 위치 확인" },
+    { t: 31.4, p: 2, k: "done", x: "✻ Sparkled for 24s" },
+
+    { t: 32.6, p: 3, k: "txt",  x: "● LCP 후보(히어로)만 <span class='c'>fetchpriority=\"high\"</span>로 남기고 나머지는 lazy 처리했습니다. 라이트하우스 LCP 3.1s → 2.2s." },
+    { t: 34.6, p: 3, k: "foot", x: "📌 질문: 이미지 로딩 최적화\n✅ 결론: lazy 41곳 + srcset 정리 — LCP 0.9s 단축\n👉 권장: WebP 변환까지 하면 추가 이득" },
+    { t: 35.6, p: 3, k: "done", x: "✻ Optimized for 47s" },
+    { t: 36.4, p: 3, k: "recap", x: "※ recap: 이미지 로딩 전략 정리 — 히어로 우선순위 유지한 채 나머지 지연 로드로 전환했습니다." },
+    { t: 37.6, p: 3, k: "meta", x: "new task? /clear to save 121k tokens" },
+
+    { t: 33.0, p: 0, k: "type", x: "[log] 오늘 작업 CHANGELOG에 정리해줘" },
+    { t: 35.0, p: 0, k: "tool", x: "<b>Edit</b>(CHANGELOG.md)" },
+    { t: 35.5, p: 0, k: "sub",  x: "v1.4.2 섹션 — Changed 2건 추가" },
+    { t: 36.6, p: 0, k: "done", x: "✻ Logged for 12s" }
+  ];
+
+  /* 중요도 순 재배치 — 시선이 먼저 가는 좌상단(0)부터 토큰화·다크모드 →
+     접근성 → 반응형 → 디버깅·성능. 끝까지 보지 않는 시청자를 위해
+     타이핑 시작 순서도 같아지도록 스트림별 오프셋으로 원래 스태거
+     (1.0 / 2.2 / 4.6 / 6.8)를 새 위치에 맞춰 재사용한다. */
+  var ORDER  = { 1: 0, 2: 1, 0: 2, 3: 3 }; /* 원본 p → 새 페인 */
+  var OFFSET = { 1: -1.2, 2: -2.4, 0: 3.6, 3: 0 };
+
+  var SHIFT = 2.0; /* 부트 시퀀스 이후 본편 시작 */
+  var EV = BOOT.concat(MAIN.map(function (e) {
+    return { t: e.t + SHIFT + OFFSET[e.p], p: ORDER[e.p], k: e.k, x: e.x };
+  })).sort(function (a, b) { return a.t - b.t; });
+
+  var grid = document.getElementById("grid");
+  var panes = [];
+  for (var i = 0; i < PANES; i++) {
+    var sec = document.createElement("section");
+    sec.className = "pane";
+    sec.innerHTML =
+      "<div class='scroll'><div class='lines'></div></div>" +
+      "<div class='inbox'>" +
+        "<div class='rule'></div>" +
+        "<div class='in'><span class='chev'>❯</span><span class='typed'></span><span class='cur'>▍</span></div>" +
+        "<div class='rule'></div>" +
+        "<div class='perm'><span class='pp'>▶▶ bypass permissions on</span> <span>(shift+tab to cycle) · ← for agents</span></div>" +
+      "</div>";
+    grid.appendChild(sec);
+    panes.push({
+      el: sec,
+      lines: sec.querySelector(".lines"),
+      scroll: sec.querySelector(".scroll"),
+      typed: sec.querySelector(".typed")
+    });
+  }
+
+  var playBtn = document.getElementById("play");
+  var speedBtn = document.getElementById("speed");
+  var ctrl = document.getElementById("ctrl");
+  var progEl = document.getElementById("prog");
+  var clockEl = document.getElementById("clock");
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SPEEDS = [1, 1.5, 2];
+  var spdIdx = 0;
+  var playing = false;
+  var time = 0;
+  var next = 0;
+  var typers = [];
+  var last = null;
+
+  function fmt(s) {
+    s = Math.max(0, Math.min(TOTAL, s));
+    return ("0" + Math.floor(s / 60)).slice(-2) + ":" + ("0" + Math.floor(s % 60)).slice(-2);
+  }
+
+  function setFocus(p) {
+    panes.forEach(function (pn, i) { pn.el.classList.toggle("focus", i === p); });
+  }
+
+  function addLine(p, cls, html, asText) {
+    var el = document.createElement("div");
+    el.className = "ln " + cls;
+    if (asText) el.textContent = html;
+    else el.innerHTML = html;
+    panes[p].lines.appendChild(el);
+    panes[p].scroll.scrollTop = panes[p].scroll.scrollHeight;
+    return el;
+  }
+
+  function fire(ev) {
+    if (ev.k === "type") {
+      setFocus(ev.p);
+      if (reduced) {
+        addLine(ev.p, "ln-u", ev.x, true);
+      } else {
+        typers.push({ p: ev.p, text: ev.x, start: time });
+      }
+      return;
+    }
+    var map = { tool: "ln-tool", sub: "ln-sub", txt: "ln-txt", foot: "ln-foot", done: "ln-done", recap: "ln-recap", meta: "ln-meta", ps: "ln-ps", box: "ln-box" };
+    var asText = ev.k === "foot" || ev.k === "done" || ev.k === "recap" || ev.k === "meta";
+    addLine(ev.p, map[ev.k] || "ln-txt", ev.x, asText);
+  }
+
+  function tickTypers() {
+    for (var i = typers.length - 1; i >= 0; i--) {
+      var t = typers[i];
+      var n = Math.floor((time - t.start) * CPS);
+      if (n >= t.text.length) {
+        panes[t.p].typed.textContent = "";
+        addLine(t.p, "ln-u", t.text, true);
+        typers.splice(i, 1);
+      } else {
+        panes[t.p].typed.textContent = t.text.slice(0, n);
+      }
+    }
+  }
+
+  function frame(now) {
+    if (playing) {
+      var dt = last === null ? 0 : (now - last) / 1000;
+      last = now;
+      time += dt * SPEEDS[spdIdx];
+
+      while (next < EV.length && EV[next].t <= time) fire(EV[next++]);
+      tickTypers();
+
+      progEl.style.width = (time / TOTAL) * 100 + "%";
+      clockEl.textContent = fmt(time);
+
+      if (time >= TOTAL) {
+        playing = false;
+        playBtn.textContent = "▶ 다시";
+        ctrl.classList.remove("faded");
+        setFocus(-1);
+      }
+    } else {
+      last = now;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function reset() {
+    time = 0;
+    next = 0;
+    typers = [];
+    panes.forEach(function (p) { p.lines.innerHTML = ""; p.typed.textContent = ""; });
+    setFocus(-1);
+    progEl.style.width = "0%";
+    clockEl.textContent = fmt(0);
+  }
+
+  playBtn.addEventListener("click", function () {
+    if (time >= TOTAL) reset();
+    playing = !playing;
+    playBtn.textContent = playing ? "⏸" : "▶ 재생";
+    ctrl.classList.toggle("faded", playing);
+  });
+
+  document.getElementById("restart").addEventListener("click", function () {
+    reset();
+    playing = true;
+    playBtn.textContent = "⏸";
+    ctrl.classList.add("faded");
+  });
+
+  speedBtn.addEventListener("click", function () {
+    spdIdx = (spdIdx + 1) % SPEEDS.length;
+    speedBtn.textContent = SPEEDS[spdIdx] + "×";
+  });
+
+  clockEl.textContent = fmt(0);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body></html>
