@@ -83,7 +83,7 @@ export const profile = {
     '시맨틱·SCSS·접근성을 기본기로, 디자인과 개발 사이의 빈틈을 메웁니다. 모든 프로젝트에 Claude 등 AI 도구를 적극 활용해 반복 작업을 자동화하고, 판단과 검증은 직접 합니다.',
   email: 'soonupy97@naver.com',
   github: 'https://github.com/soonupy97',
-  notion: 'https://www.notion.so/226d8b3c5b6e803780e9f5e769a06f8d',
+  notion: 'https://app.notion.com/p/Web-Publisher-Portfolio-9e9d8b3c5b6e827487cb81496e061f9e',
   instagram: 'https://www.instagram.com/soonupy',
   location: 'Seoul, Korea',
 }
@@ -101,6 +101,7 @@ export const projects: Project[] = [
     link: 'https://dev-design.cadian.com',
     media: {
       src: '/media/cadian-ui.mp4',
+      ratio: '16 / 9',
       caption: '@cadian/ui 문서 사이트 기능 투어',
     },
     accent: 'purple',
@@ -128,6 +129,7 @@ export const projects: Project[] = [
     link: 'https://dev-admin-design.cadian.com',
     media: {
       src: '/media/cadian-ui-admin.mp4',
+      ratio: '16 / 9',
       caption: '@cadian/ui-admin 문서 사이트 기능 투어',
     },
     accent: 'blue',
@@ -150,16 +152,16 @@ export const projects: Project[] = [
     access: 'auth',
     status: 'live',
 
-    year: '2024 — 2026',
+    year: '2026',
     link: 'https://organization.cadian.com',
     media: {
       src: '/media/organization.mp4',
+      ratio: '16 / 9',
       caption: '조직 관리 콘솔 기능 투어',
     },
     accent: 'mint',
     highlights: [
-      '이슈 400여 건 규모의 콘솔 구축에 참여 — 조직 관리 전 기능을 단일 SPA로 구현',
-      '그룹·멤버 관리, SSO 인증, 시리얼 관리, 활동 로그, i18n 핵심 기능 구현',
+      '그룹·멤버 관리, SSO 인증, 시리얼 관리, 활동 로그, i18n 등 콘솔 전 기능 UI 구축',
       '화면 전반을 자체 디자인 시스템(@cadian/ui 0.1.x) 기반으로 구축 — 초기 버전부터 실서비스에 적용한 사례',
       'rolecode 기반 Owner / Admin / Member 권한 UX 차별화',
       'QA 테스트 케이스 100건 이상 수정·반영',
@@ -178,6 +180,7 @@ export const projects: Project[] = [
     link: 'https://developers.cadian.com',
     media: {
       src: '/media/developers.mp4',
+      ratio: '16 / 9',
       caption: 'ViewQ SDK 개발자 문서 사이트 기능 투어',
     },
     accent: 'pink',
@@ -201,6 +204,7 @@ export const projects: Project[] = [
     link: 'https://converter.cadian.com',
     media: {
       src: '/media/file-converter.mp4',
+      ratio: '16 / 9',
       caption: '파일 컨버터 기능 투어',
     },
     accent: 'coral',
@@ -224,6 +228,7 @@ export const projects: Project[] = [
     link: 'https://mypage.cadian.com',
     media: {
       src: '/media/mypage.mp4',
+      ratio: '16 / 9',
       caption: '마이페이지 조직 관리 기능 투어',
     },
     accent: 'blue',
@@ -246,6 +251,7 @@ export const projects: Project[] = [
     year: '2024 — 2026',
     media: {
       src: '/media/admin-sso.mp4',
+      ratio: '16 / 9',
       caption: 'SSO 어드민 기능 투어',
     },
     accent: 'purple',
@@ -262,7 +268,7 @@ export const projects: Project[] = [
   {
     title: 'help admin — 헬프센터 운영자 콘솔',
     description:
-      '헬프센터 도움말 문서를 운영하는 CMS 콘솔의 프론트엔드를 구축. 대시보드·통계·그룹·게시물 관리 4개 화면을 @cadian/ui-admin 기반으로 퍼블리싱하고, 카테고리 트리와 초안→발행 워크플로 UI를 담당.',
+      '헬프센터 도움말 문서를 운영하는 CMS 콘솔에 @cadian/ui-admin 공급자로 협업. 팀원이 주도하는 개발에 맞춰 RichTextEditor를 CMS 에디터 수준으로 확장하고, 요청·이슈를 당일~익일 릴리즈로 대응하며 대시보드·통계·그룹·게시물 관리 화면의 UI 기반을 책임.',
     type: 'admin',
     access: 'private',
     status: 'live',
@@ -270,15 +276,16 @@ export const projects: Project[] = [
     year: '2026',
     media: {
       src: '/media/admin-help.mp4',
+      ratio: '16 / 9',
       caption: '헬프센터 운영자 콘솔 기능 투어',
     },
     accent: 'blue',
     highlights: [
-      '대시보드 — 도움됨/도움 안 됨 비율 Top10, 조회수 Top10, 일·주·월 및 날짜 지정 필터에 반응하는 조회수 추이 차트',
-      '게시물 통계 — 조회수·피드백(네/아니오)·네 비율·공유·발행일을 정렬 가능한 테이블로 제공, 기간·그룹·태그 필터 연동',
-      '그룹 관리 — L1/L2 계층 카테고리 트리, 드래그 정렬(순위), 공개 여부 토글, 하위그룹·아티클·발행 수 집계 표시',
-      '게시물 관리 — 초안/발행 상태 배지, 그룹·키워드 검색, 신규 작성과 리치 텍스트 문서 편집 화면 구현',
-      '@cadian/ui-admin 컴포넌트를 적용해 라이브러리와 동일한 인터랙션·다크모드 규칙 유지',
+      '@cadian/ui-admin을 UI 기반으로 공급 — 대시보드·통계·그룹·게시물 관리 화면이 라이브러리 컴포넌트로 구축되도록 지원',
+      'RichTextEditor를 CMS 에디터 수준으로 확장 — 콜아웃·아코디언·표 커스텀 노드, 이미지 업로드·리사이즈, 구문강조',
+      'Sortable 교차 컨테이너 드래그(트리 부모 변경) 구현 — L1/L2 카테고리 트리 정렬 요구 대응',
+      '개발 담당 팀원의 요청·이슈 14건을 당일~익일 릴리즈로 해소',
+      '라이브러리와 동일한 인터랙션·다크모드 규칙이 콘솔 전 화면에 유지되도록 동기화',
     ],
     stack: ['React', 'TypeScript', 'SCSS', '@cadian/ui-admin'],
   },
@@ -293,6 +300,7 @@ export const projects: Project[] = [
     year: '2025 — 2026',
     media: {
       src: '/media/admin-webcad.mp4',
+      ratio: '16 / 9',
       caption: '웹캐드 운영 관리자 기능 투어',
     },
     accent: 'coral',
@@ -335,12 +343,13 @@ export const projects: Project[] = [
       '클라우드 파일 드라이브 서비스의 UI 구조를 초기부터 설계·퍼블리싱하고, 2026년에는 직접 만든 디자인 시스템 @cadian/ui를 전면 적용. 레이아웃·헤더·사이드바·테이블·모달·대시보드·파일 화면을 재구축하며 Polaris Office 기반 문서 뷰어 연동까지 대응.',
     type: 'viewer',
     access: 'auth',
-    status: 'wip',
+    status: 'live',
 
-    year: '2024 ~',
+    year: '2024 — 2026',
     link: 'https://file.cadian.com',
     media: {
       src: '/media/file-drive.mp4',
+      ratio: '16 / 9',
       caption: 'CADian Drive 기능 투어',
     },
     accent: 'yellow',
@@ -350,7 +359,7 @@ export const projects: Project[] = [
       '@cadian/ui 전면 적용 마이그레이션 — 레이아웃·헤더·사이드바·테이블·모달·대시보드·파일 화면 재구축',
       '@cadian/ui 2.8 → 2.10 연속 업그레이드 대응 — 직접 만든 라이브러리를 실서비스에 적용하며 Claude Code로 변경분 추적·일괄 치환 자동화',
       '드라이브 시스템 내 문서 뷰어 연동 프로젝트 초기 구축 (완료)',
-      'Polaris Office 뷰어 통합 작업 진행 중',
+      'Polaris Office 뷰어 통합 대응',
     ],
     stack: ['React', 'TypeScript', 'SCSS', '@cadian/ui', '다국어'],
   },
@@ -366,6 +375,7 @@ export const projects: Project[] = [
     link: 'https://www.cadian.com',
     media: {
       src: '/media/homepage.mp4',
+      ratio: '16 / 9',
       caption: '공식 홈페이지 기능 투어',
     },
     accent: 'pink',
@@ -388,6 +398,7 @@ export const projects: Project[] = [
     link: 'https://dev-help-v2.cadian.com/ko/',
     media: {
       src: '/media/help-center.mp4',
+      ratio: '16 / 9',
       caption: '헬프센터 기능 투어',
     },
     accent: 'mint',
@@ -403,7 +414,7 @@ export const projects: Project[] = [
   {
     title: 'web cad — 웹 CAD 뷰어 (ViewQ)',
     description:
-      'Cadian 웹 CAD 뷰어 ViewQ의 UI 개선과 다국어 번역 정비. developers 사이트가 문서화한 ViewQ SDK의 뷰어 제품으로, 리본 메뉴(스케치) 항목 추가·아이콘 디자인, MTEXT 영역 디자인 수정, 한/영 번역 오류 수정을 담당.',
+      'Cadian WebCAD 뷰어&에디터 ViewQ의 전체 화면 디자인·퍼블리싱. developers 사이트가 문서화한 ViewQ SDK의 뷰어 제품으로, 리본 메뉴 아이콘 체계부터 도면 뷰어 전용 인터랙션 UI까지 담당.',
     type: 'viewer',
     access: 'public',
     status: 'live',
@@ -412,13 +423,16 @@ export const projects: Project[] = [
     link: 'https://drawing.cadian.com',
     media: {
       src: '/media/web-cad.mp4',
+      ratio: '16 / 9',
       caption: 'ViewQ 웹 CAD 뷰어 기능 투어',
     },
     accent: 'mint',
     highlights: [
-      '리본 메뉴 프리 드로우(스케치) 항목 추가 및 아이콘 디자인',
-      'MTEXT(다중행 문자) text area 디자인 수정',
-      '웹 브라우저 한/영 번역 오류 수정',
+      '서비스 전체 화면 디자인·퍼블리싱 — 리본 메뉴 아이콘 체계 제작',
+      '레이어 토글·줌·팬 등 도면 뷰어 전용 인터랙션 UI 구현',
+      'PDF Plot/Export UI, 카메라 컨트롤 커서 등 CAD 특화 요소 디자인',
+      '모바일 가로모드 등 해상도 대응',
+      '리본 메뉴 프리 드로우(스케치) 항목 추가, MTEXT 영역 디자인·한/영 번역 오류 수정',
     ],
     stack: ['React', 'TypeScript', 'SCSS', 'SVG', '다국어'],
   },
