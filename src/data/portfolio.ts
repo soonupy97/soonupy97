@@ -139,10 +139,37 @@ export const projects: Project[] = [
       '소비 서비스(헬프센터 어드민 CMS) 개발자 요청·이슈 14건을 요청 당일~익일 릴리즈로 해소',
       'RichTextEditor 확장 — JSON 출력, 콜아웃·아코디언·표 커스텀 노드, 이미지 업로드·리사이즈, 하이퍼링크, 구문강조',
       'Sortable 교차 컨테이너 드래그(트리 부모 변경), TreeSelect · Transfer · Command 팔레트 구현',
+      '실서비스 적용 — 헬프센터 어드민 CMS에 UI 기반으로 공급하고, 위즈코어 운영자 어드민·goCAD 운영자 어드민은 직접 @cadian/ui-admin 기반으로 구축',
       '다크모드 · 한/영 다국어 문서 사이트 운영, v* 태그 기반 CI 자동 게시 파이프라인',
       'Claude Code + MCP 기반 릴리즈 워크플로우로 단독 운영 — 이슈 생성 → 커밋·머지 → npm 게시 → 배포 검증 → 팀 공유(릴리즈 노트)',
     ],
     stack: ['React', 'TypeScript', 'SCSS', 'npm', 'Claude Code'],
+  },
+  {
+    title: 'wizcore.ai — 위즈코어 통합 홈페이지',
+    description:
+      '위즈코어(구 캐디안)의 상호 변경 이후 신규 구축된 통합 홈페이지의 프론트엔드 퍼블리싱·UI를 담당. 회사소개·CI·연혁·사업영역·ESG·IR·뉴스 등 공개 페이지의 마크업·스타일링을 맡고, 마케팅본부 피드백 라운드를 반영해 콘텐츠 시인성·인터랙션을 다듬었다. 백엔드·API는 별도 개발자가 담당.',
+    type: 'marketing',
+    access: 'public',
+    status: 'wip', // 정식 도메인(wizcore.ai) DNS 미연결 — 오픈 시 live로 교체하고 link도 정식 도메인으로
+
+    year: '2026',
+    link: 'https://dev.wizcore.ai',
+    media: {
+      src: '/media/wizcore.mp4',
+      ratio: '16 / 9',
+      caption: '위즈코어 통합 홈페이지 기능 투어',
+    },
+    accent: 'blue',
+    highlights: [
+      '회사소개·CI 소개 페이지 신규 구축, 사업영역 문안·카드 시인성 개선, GNB에 ESG 메뉴 추가',
+      '연혁 페이지 — 통합 법인 트랙(분기 레일·합류점) 스크롤 연출 구현(Motion 기반), 헤딩 타입 램프·pinned-scene 안무 정리',
+      'IR 테이블 UI 복원, 뉴스 이전/다음 내비게이션, 알림 화면 레이아웃·헤더 진행률 바',
+      '검색 필드 UI·컨트롤 사이징 통일·모바일 툴바, 개인정보처리방침 개정본(2026.09) 반영',
+      '반복 UI 블록을 공용 컴포넌트·SCSS 믹스인으로 분리, 접근성·폼 동작 수정',
+      '약 3주간 MR 18건 규모의 프론트 작업(홈페이지·운영자 어드민 합산) — 저장소에 Claude Code 설정을 두고 AI 도구를 활용해 진행',
+    ],
+    stack: ['Next.js', 'React', 'TypeScript', 'SCSS', 'Radix Primitives', 'Motion', '다국어', 'Claude Code'],
   },
   {
     title: 'organization — 조직 관리 콘솔',
@@ -239,6 +266,54 @@ export const projects: Project[] = [
       'SSO authorize 연동 + token 미전달 버그 수정',
     ],
     stack: ['React', 'TypeScript', 'SCSS', '다국어'],
+  },
+  {
+    title: 'wizcore-admin — 위즈코어 운영자 어드민',
+    description:
+      '위즈코어 통합 홈페이지의 콘텐츠와 문의를 관리하는 운영자 콘솔의 프론트엔드 UI를 직접 만든 어드민 디자인 시스템 @cadian/ui-admin 기반으로 구축. 같은 모노레포에서 홈페이지 퍼블리싱과 병행하며 관리자 화면의 컴포넌트 구조와 스타일을 정리하고, 분석 대시보드·목록·다이얼로그 등 운영 화면을 구성. 백엔드·API는 별도 개발자가 담당.',
+    type: 'admin',
+    access: 'private',
+    status: 'wip', // 정식 도메인 오픈 시 live로 교체 (운영 주소 dev-admin.wizcore.ai)
+
+    year: '2026',
+    media: {
+      src: '/media/wizcore-admin.mp4',
+      ratio: '16 / 9',
+      caption: '위즈코어 운영자 어드민 기능 투어',
+    },
+    accent: 'purple',
+    highlights: [
+      '화면 전반을 자체 어드민 디자인 시스템(@cadian/ui-admin) 기반으로 구축 — 직접 만든 라이브러리를 실서비스 어드민에 적용한 사례',
+      '관리자 화면 컴포넌트 분리·클래스 네이밍 정리, 사이드 메뉴 구조 정리',
+      '분석 대시보드 — 문의 접수 현황·방문 통계 지표 카드와 차트 UI',
+      '목록 페이지네이션, 토스트·셀렉트·다이얼로그 수정, admin 색상 토큰 정리',
+      '홈페이지와 같은 저장소에서 Claude Code 설정을 두고 AI 도구를 활용해 진행',
+    ],
+    stack: ['Next.js', 'React', 'TypeScript', 'SCSS', '@cadian/ui-admin', 'Claude Code'],
+  },
+  {
+    title: 'gocad-admin — goCAD 운영자 어드민',
+    description:
+      'CAD 커뮤니티 goCAD의 운영자 콘솔 UI를 직접 만든 어드민 디자인 시스템 @cadian/ui-admin 기반으로 구축. 대시보드·게시글·회원·광고·문의·감사 로그 등 커뮤니티 운영 화면을 라이브러리 컴포넌트로 구성. 백엔드·API는 별도 개발자가 담당.',
+    type: 'admin',
+    access: 'private',
+    status: 'wip',
+
+    year: '2026',
+    media: {
+      src: '/media/gocad-admin.mp4',
+      ratio: '16 / 9',
+      caption: 'goCAD 운영자 어드민 기능 투어',
+    },
+    accent: 'mint',
+    highlights: [
+      '화면 전반을 자체 어드민 디자인 시스템(@cadian/ui-admin) 기반으로 구축 — 사이드 내비게이션·테이블·필터·다이얼로그를 라이브러리 컴포넌트로 구성',
+      '대시보드 — 방문·페이지뷰·신규 가입 추이를 기간·보기 단위로 조회하는 지표 카드와 차트, CSV·Excel 내보내기',
+      '회원 관리 — 가입자 목록·검색과 상태·제재 이력 조회 화면',
+      '게시글·댓글·공지·인기글, 아티클·배너 광고·광고 신청, 문의 관리, eDM 발송 등 운영 메뉴 화면 구성',
+      '감사 로그 — 관리자 작업 이력을 유형·대상별로 추적하는 목록 화면',
+    ],
+    stack: ['React', 'TypeScript', 'SCSS', '@cadian/ui-admin'],
   },
   {
     title: 'sso admin — 계정·라이선스 통합 관리 콘솔',
@@ -435,6 +510,31 @@ export const projects: Project[] = [
       '리본 메뉴 프리 드로우(스케치) 항목 추가, MTEXT 영역 디자인·한/영 번역 오류 수정',
     ],
     stack: ['React', 'TypeScript', 'SCSS', 'SVG', '다국어'],
+  },
+  {
+    // 범위 한정 카드 — 공개 웹 UI·반응형 퍼블리싱 참여만 서술한다.
+    // 아티클 봇·API·3D 뷰어·구글 로그인은 다른 팀원 담당이라 이 카드의 공으로 쓰지 않는다.
+    // 운영자 어드민은 별도 카드(gocad-admin)에서 다룬다.
+    title: 'goCAD — CAD 커뮤니티 (퍼블리싱 참여)',
+    description:
+      'CAD 사용자 커뮤니티 goCAD 공개 웹의 UI·반응형 퍼블리싱에 참여. 게시글·댓글·광고 배너 영역과 전역 링크·버튼 호버 스타일을 정리하고, 태블릿 이하 화면의 반응형 처리를 담당. 아티클 봇·3D 뷰어·로그인 등 기능 개발은 다른 팀원이 담당하며, 운영자 어드민은 별도 카드로 정리.',
+    type: 'marketing',
+    access: 'public',
+    status: 'wip',
+
+    year: '2026',
+    media: {
+      src: '/media/gocad.mp4',
+      ratio: '16 / 9',
+      caption: 'goCAD 커뮤니티 기능 투어',
+    },
+    accent: 'mint',
+    highlights: [
+      '게시글·댓글·추천/스크랩 영역과 광고 배너 영역 스타일 정리',
+      '전역 링크·버튼 호버 스타일 정리',
+      '태블릿 이하 반응형 — 사이드 배너 미노출, 콘텐츠 폭 768px 처리',
+    ],
+    stack: ['CSS'],
   },
   {
     title: 'News Letter Edm — 이메일 마크업',
